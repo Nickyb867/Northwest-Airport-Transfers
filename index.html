@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northwest Airport Transfers</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    nav {
+      background: #003366;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    h2 {
+      color: #004080;
+      margin-bottom: 1rem;
+    }
+    .booking-form {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .booking-form input, .booking-form select, .booking-form button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .booking-form button {
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-whatsapp {
+      background: #25d366;
+    }
+    .btn-email {
+      background: #007bff;
+    }
+    .success-message {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .review {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .call-btn {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Northwest Airport Transfers</h1>
+    <p>Reliable • Comfortable • On Time</p>
+  </header>
+
+  <nav>
+    <a href="#booking">Book Transfer</a>
+    <a href="#about">About Us</a>
+    <a href="#reviews">Reviews</a>
+    <a href="tel:+441234567890">Call Us</a>
+  </nav>
+
+  <section id="booking">
+    <h2>Book an Airport Transfer</h2>
+    <form id="bookingForm" class="booking-form" onsubmit="return false;">
+      <label for="pickup">Pickup Location</label>
+      <input type="text" id="pickup" name="pickup" required>
+
+      <label for="dropoff">Dropoff Location</label>
+      <input type="text" id="dropoff" name="dropoff" required>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="passengers">Passengers</label>
+      <select id="passengers" name="passengers">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4+</option>
+      </select>
+
+      <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
+      <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
+    </form>
+
+    <div id="successMessage" class="success-message">
+      ✅ Your booking request has been prepared! Please check WhatsApp or Email to send it.
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Northwest Airport Transfers, we pride ourselves on offering a reliable and professional transfer service to and from all major airports. Our drivers are friendly, punctual, and dedicated to making your journey stress-free. Whether you’re traveling for business or leisure, we ensure comfort and peace of mind.</p>
+  </section>
+
+  <section id="reviews">
+    <h2>Customer Reviews</h2>
+    <div class="reviews">
+      <div class="review">
+        <p>"Excellent service! Driver was on time and very professional. Highly recommend!"</p>
+        <strong>- Sarah J.</strong>
+      </div>
+      <div class="review">
+        <p>"Smooth and comfortable ride to the airport. Will definitely use again."</p>
+        <strong>- David M.</strong>
+      </div>
+      <div class="review">
+        <p>"Great value for money and excellent communication throughout."</p>
+        <strong>- Emma R.</strong>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Northwest Airport Transfers | All Rights Reserved</p>
+    <a class="call-btn" href="tel:+441234567890">📞 Call Us Now</a>
+  </footer>
+
+  <script>
+    function getBookingDetails() {
+      const pickup = document.getElementById("pickup").value;
+      const dropoff = document.getElementById("dropoff").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const passengers = document.getElementById("passengers").value;
+
+      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A📅 Date: ${date}%0A⏰ Time: ${time}%0A👥 Passengers: ${passengers}`;
+    }
+
+    function clearFormAndShowMessage() {
+      document.getElementById("bookingForm").reset();
+      const successMessage = document.getElementById("successMessage");
+      successMessage.style.display = "block";
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 5000); // hide after 5 seconds
+    }
+
+    function sendToWhatsApp() {
+      const message = getBookingDetails();
+      const phone = "447123456789"; // replace with your WhatsApp number
+      const url = `https://wa.me/${phone}?text=${message}`;
+      if (confirm("Send booking request via WhatsApp?")) {
+        window.open(url, "_blank");
+        clearFormAndShowMessage();
+      }
+    }
+
+    function sendToEmail() {
+      const message = getBookingDetails().replace(/%0A/g, '\n'); // line breaks for email
+      const email = "bookings@northwestairporttransfers.com"; // replace with your email
+      const subject = "Airport Transfer Booking Request";
+      const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      if (confirm("Send booking request via Email?")) {
+        window.location.href = mailto;
+        clearFormAndShowMessage();
+      }
+    }
+  </script>
+
+</body>
+</html>
