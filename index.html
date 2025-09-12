@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Northwest Airport Transfers</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <style>
     :root {
       --primary: #0A2239;
@@ -253,10 +254,38 @@
     <h2>Book an Airport Transfer</h2>
     <form id="bookingForm" class="booking-form" onsubmit="return false;">
       <label for="pickup">Pickup Location</label>
-      <input type="text" id="pickup" name="pickup" required>
+      <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required>
 
       <label for="dropoff">Dropoff Location</label>
-      <input type="text" id="dropoff" name="dropoff" required>
+      <select id="dropoff" name="dropoff" required style="width:100%;">
+        <option value="">-- Select Airport --</option>
+        <option>Manchester Airport (MAN)</option>
+        <option>Liverpool John Lennon Airport (LPL)</option>
+        <option>Aberdeen Airport (ABZ)</option>
+        <option>Belfast City Airport (BHD)</option>
+        <option>Belfast International Airport (BFS)</option>
+        <option>Birmingham Airport (BHX)</option>
+        <option>Bournemouth Airport (BOH)</option>
+        <option>Bristol Airport (BRS)</option>
+        <option>Cardiff Airport (CWL)</option>
+        <option>Doncaster Sheffield Airport (DSA)</option>
+        <option>East Midlands Airport (EMA)</option>
+        <option>Edinburgh Airport (EDI)</option>
+        <option>Exeter Airport (EXT)</option>
+        <option>Glasgow Airport (GLA)</option>
+        <option>Glasgow Prestwick Airport (PIK)</option>
+        <option>Inverness Airport (INV)</option>
+        <option>Leeds Bradford Airport (LBA)</option>
+        <option>London City Airport (LCY)</option>
+        <option>London Gatwick Airport (LGW)</option>
+        <option>London Heathrow Airport (LHR)</option>
+        <option>London Luton Airport (LTN)</option>
+        <option>London Southend Airport (SEN)</option>
+        <option>London Stansted Airport (STN)</option>
+        <option>Newcastle Airport (NCL)</option>
+        <option>Norwich Airport (NWI)</option>
+        <option>Southampton Airport (SOU)</option>
+      </select>
 
       <label for="pickupDate">Pickup Date</label>
       <input type="date" id="pickupDate" name="pickupDate" required>
@@ -328,7 +357,7 @@
         <p>Spacious 8-Seater Minibus</p>
       </a>
       <a href="#img2" class="gallery-item">
-        <img src="fleet-saloon.jpg" alt="Saloon Car">
+        <img src="fleet-saloon.png" alt="Saloon Car">
         <p>Comfortable Saloon Cars</p>
       </a>
     </div>
@@ -339,7 +368,7 @@
     <a href="#gallery"><img src="mercedes-minibus.png" alt="Mercedes Minibus"></a>
   </div>
   <div id="img2" class="lightbox">
-    <a href="#gallery"><img src="fleet-saloon.jpg" alt="Saloon Car"></a>
+    <a href="#gallery"><img src="fleet-saloon.png" alt="Saloon Car"></a>
   </div>
 
   <section id="reviews">
@@ -365,7 +394,27 @@
     <a class="call-btn" href="tel:+441234567890">📞 Call Us Now</a>
   </footer>
 
+  <!-- Scripts -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
+    function initAutocomplete() {
+      const pickupInput = document.getElementById("pickup");
+      const autocomplete = new google.maps.places.Autocomplete(pickupInput, {
+        types: ['address'],
+        componentRestrictions: { country: "uk" }
+      });
+    }
+    window.onload = initAutocomplete;
+
+    $(document).ready(function() {
+      $('#dropoff').select2({
+        placeholder: "Select or search for an airport",
+        allowClear: true
+      });
+    });
+
     function getBookingDetails() {
       const pickup = document.getElementById("pickup").value;
       const dropoff = document.getElementById("dropoff").value;
@@ -409,6 +458,5 @@
       }
     }
   </script>
-
 </body>
 </html>
