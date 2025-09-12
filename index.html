@@ -45,7 +45,7 @@
       color: var(--accent);
     }
     .hero {
-      background: url('20250911_1344_Black Mercedes at Airport_simple_compose_01k4wcr8xqfed9k2bymmn3crf7.png') center/cover no-repeat;
+      background: url('mercedes-minibus.png') center/cover no-repeat;
       color: white;
       text-align: center;
       padding: 8rem 2rem;
@@ -258,11 +258,17 @@
       <label for="dropoff">Dropoff Location</label>
       <input type="text" id="dropoff" name="dropoff" required>
 
-      <label for="date">Date</label>
-      <input type="date" id="date" name="date" required>
+      <label for="pickupDate">Pickup Date</label>
+      <input type="date" id="pickupDate" name="pickupDate" required>
+
+      <label for="collectionDate">Collection Date</label>
+      <input type="date" id="collectionDate" name="collectionDate">
 
       <label for="time">Time</label>
       <input type="time" id="time" name="time" required>
+
+      <label for="flight">Inbound Flight Number</label>
+      <input type="text" id="flight" name="flight">
 
       <label for="passengers">Passengers</label>
       <select id="passengers" name="passengers">
@@ -306,6 +312,11 @@
         <h3>Trusted Drivers</h3>
         <p>All drivers are <strong>DBS checked</strong> with excellent local knowledge of routes and airports for a stress-free journey.</p>
       </div>
+      <div class="service-card">
+        <i class="fas fa-clock"></i>
+        <h3>Flight Tracking</h3>
+        <p>We monitor inbound flights to adjust for delays, ensuring your driver is there when you land.</p>
+      </div>
     </div>
   </section>
 
@@ -313,29 +324,22 @@
     <h2>Our Fleet</h2>
     <div class="gallery-grid">
       <a href="#img1" class="gallery-item">
-        <img src="20250911_1344_Black Mercedes at Airport_simple_compose_01k4wcr8xqfed9k2bymmn3crf7.png" alt="Mercedes Minibus">
+        <img src="mercedes-minibus.png" alt="Mercedes Minibus">
         <p>Spacious 8-Seater Minibus</p>
       </a>
       <a href="#img2" class="gallery-item">
         <img src="fleet-saloon.jpg" alt="Saloon Car">
         <p>Comfortable Saloon Cars</p>
       </a>
-      <a href="#img3" class="gallery-item">
-        <img src="fleet-mpv.jpg" alt="MPV">
-        <p>Modern MPVs</p>
-      </a>
     </div>
   </section>
 
   <!-- Lightbox images -->
   <div id="img1" class="lightbox">
-    <a href="#gallery"><img src="20250911_1344_Black Mercedes at Airport_simple_compose_01k4wcr8xqfed9k2bymmn3crf7.png" alt="Mercedes Minibus"></a>
+    <a href="#gallery"><img src="mercedes-minibus.png" alt="Mercedes Minibus"></a>
   </div>
   <div id="img2" class="lightbox">
     <a href="#gallery"><img src="fleet-saloon.jpg" alt="Saloon Car"></a>
-  </div>
-  <div id="img3" class="lightbox">
-    <a href="#gallery"><img src="fleet-mpv.jpg" alt="MPV"></a>
   </div>
 
   <section id="reviews">
@@ -365,11 +369,13 @@
     function getBookingDetails() {
       const pickup = document.getElementById("pickup").value;
       const dropoff = document.getElementById("dropoff").value;
-      const date = document.getElementById("date").value;
+      const pickupDate = document.getElementById("pickupDate").value;
+      const collectionDate = document.getElementById("collectionDate").value;
       const time = document.getElementById("time").value;
+      const flight = document.getElementById("flight").value;
       const passengers = document.getElementById("passengers").value;
 
-      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A📅 Date: ${date}%0A⏰ Time: ${time}%0A👥 Passengers: ${passengers}`;
+      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A📅 Pickup Date: ${pickupDate}%0A📅 Collection Date: ${collectionDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}`;
     }
 
     function clearFormAndShowMessage(channel) {
