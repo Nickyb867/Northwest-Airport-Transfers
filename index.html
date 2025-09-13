@@ -140,7 +140,7 @@
     /* Journey Type Radios */
     .journey-options {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       margin: 0.5rem 0 1rem;
     }
     .journey-options label {
@@ -148,6 +148,7 @@
       align-items: center;
       font-weight: 500;
       cursor: pointer;
+      white-space: nowrap; /* keeps "One Way" together */
     }
     .journey-options input[type="radio"] {
       margin-right: 0.4rem;
@@ -387,6 +388,7 @@
       }
     }
   </script>
+  <!-- Replace YOUR_API_KEY with a valid key from Google Cloud Console -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
