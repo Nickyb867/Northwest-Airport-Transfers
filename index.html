@@ -137,6 +137,22 @@
       pointer-events: none;
     }
 
+    /* Journey Type Radios */
+    .journey-options {
+      display: flex;
+      gap: 1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .journey-options label {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .journey-options input[type="radio"] {
+      margin-right: 0.4rem;
+    }
+
     footer {
       background: var(--primary);
       color: white;
@@ -185,7 +201,7 @@
     <form id="bookingForm" class="booking-form" onsubmit="return false;">
       
       <label>Journey Type</label>
-      <div>
+      <div class="journey-options">
         <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
         <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
       </div>
