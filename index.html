@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Northwest Airport Transfers</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root {
       --primary: #0A2239;
@@ -123,91 +123,20 @@
       font-weight: bold;
       text-align: center;
     }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      text-align: center;
+
+    /* Smooth fade animations */
+    .fade {
+      opacity: 1;
+      max-height: 1000px;
+      transition: opacity 0.5s ease, max-height 0.5s ease;
+      overflow: hidden;
     }
-    .service-card {
-      background: #fff;
-      padding: 2rem 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
+    .fade.hidden {
+      opacity: 0;
+      max-height: 0;
+      pointer-events: none;
     }
-    .service-card:hover {
-      transform: translateY(-5px);
-    }
-    .service-card i {
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .gallery-item {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      text-align: center;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .gallery-item:hover {
-      transform: translateY(-5px);
-    }
-    .gallery-item img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-    .gallery-item p {
-      font-weight: 600;
-      color: var(--primary);
-    }
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      padding: 2rem;
-      left: 0; top: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 12px;
-    }
-    .lightbox:target {
-      display: flex;
-    }
-    .reviews {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .review {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      position: relative;
-    }
-    .review:before {
-      content: "★★★★★";
-      color: #ffc107;
-      font-size: 1.2rem;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-    }
+
     footer {
       background: var(--primary);
       color: white;
@@ -254,45 +183,56 @@
   <section id="booking">
     <h2>Book an Airport Transfer</h2>
     <form id="bookingForm" class="booking-form" onsubmit="return false;">
+      
+      <label>Journey Type</label>
+      <div>
+        <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
+        <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
+      </div>
+
       <label for="pickup">Pickup Location</label>
       <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required>
 
-      <label for="dropoff">Dropoff Location</label>
-      <select id="dropoff" name="dropoff" required style="width:100%;">
-        <option value="">-- Select Airport --</option>
-        <option>Manchester Airport (MAN)</option>
-        <option>Liverpool John Lennon Airport (LPL)</option>
-        <option>Aberdeen Airport (ABZ)</option>
-        <option>Belfast City Airport (BHD)</option>
-        <option>Belfast International Airport (BFS)</option>
-        <option>Birmingham Airport (BHX)</option>
-        <option>Bournemouth Airport (BOH)</option>
-        <option>Bristol Airport (BRS)</option>
-        <option>Cardiff Airport (CWL)</option>
-        <option>Doncaster Sheffield Airport (DSA)</option>
-        <option>East Midlands Airport (EMA)</option>
-        <option>Edinburgh Airport (EDI)</option>
-        <option>Exeter Airport (EXT)</option>
-        <option>Glasgow Airport (GLA)</option>
-        <option>Glasgow Prestwick Airport (PIK)</option>
-        <option>Inverness Airport (INV)</option>
-        <option>Leeds Bradford Airport (LBA)</option>
-        <option>London City Airport (LCY)</option>
-        <option>London Gatwick Airport (LGW)</option>
-        <option>London Heathrow Airport (LHR)</option>
-        <option>London Luton Airport (LTN)</option>
-        <option>London Southend Airport (SEN)</option>
-        <option>London Stansted Airport (STN)</option>
-        <option>Newcastle Airport (NCL)</option>
-        <option>Norwich Airport (NWI)</option>
-        <option>Southampton Airport (SOU)</option>
-      </select>
+      <!-- Dropoff for Return -->
+      <div id="dropoffReturn" class="fade">
+        <label for="dropoffAirport">Dropoff Location (Airport)</label>
+        <select id="dropoffAirport" name="dropoffAirport" style="width:100%;">
+          <option value="">-- Select Airport --</option>
+          <option>Manchester Airport (MAN)</option>
+          <option>Liverpool John Lennon Airport (LPL)</option>
+          <option>London Heathrow Airport (LHR)</option>
+          <option>London Gatwick Airport (LGW)</option>
+          <option>London Stansted Airport (STN)</option>
+          <option>Birmingham Airport (BHX)</option>
+          <option>Edinburgh Airport (EDI)</option>
+        </select>
+      </div>
+
+      <!-- Dropoff for One Way -->
+      <div id="dropoffOneWay" class="fade hidden">
+        <label for="dropoffAddress">Dropoff Address</label>
+        <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address">
+      </div>
+
+      <!-- Manchester Terminal -->
+      <div id="manchesterTerminal" class="fade hidden">
+        <label for="terminal">Select Manchester Terminal</label>
+        <select id="terminal" name="terminal">
+          <option value="">-- Select Terminal --</option>
+          <option>Terminal 1</option>
+          <option>Terminal 2</option>
+          <option>Terminal 3</option>
+        </select>
+      </div>
 
       <label for="pickupDate">Pickup Date</label>
       <input type="date" id="pickupDate" name="pickupDate" required>
 
-      <label for="collectionDate">Collection Date</label>
-      <input type="date" id="collectionDate" name="collectionDate">
+      <!-- Collection Date Wrapper -->
+      <div id="collectionDateWrapper" class="fade">
+        <label for="collectionDate">Collection Date</label>
+        <input type="date" id="collectionDate" name="collectionDate" required>
+      </div>
 
       <label for="time">Time</label>
       <input type="time" id="time" name="time" required>
@@ -317,115 +257,87 @@
     </div>
   </section>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">
-      At Northwest Airport Transfers, we pride ourselves on offering a reliable and professional transfer service to and from all major airports. Our drivers are friendly, punctual, and dedicated to making your journey stress-free. Whether you’re traveling for business or leisure, we ensure comfort and peace of mind.
-    </p>
-  </section>
-
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <i class="fas fa-plane-departure"></i>
-        <h3>Airport Transfers</h3>
-        <p>Transfers from <strong>Bolton & Wigan</strong> to <strong>Manchester</strong> and <strong>Liverpool</strong> airports with a reliable and punctual service.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-shuttle-van"></i>
-        <h3>Modern Fleet</h3>
-        <p>From sleek saloon cars to spacious <strong>8-seater minibuses</strong>, we have vehicles to suit every need.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-user-shield"></i>
-        <h3>Trusted Drivers</h3>
-        <p>All drivers are <strong>DBS checked</strong> with excellent local knowledge of routes and airports for a stress-free journey.</p>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-clock"></i>
-        <h3>Flight Tracking</h3>
-        <p>We monitor inbound flights to adjust for delays, ensuring your driver is there when you land.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="gallery">
-    <h2>Our Fleet</h2>
-    <div class="gallery-grid">
-      <a href="#img1" class="gallery-item">
-        <img src="mercedes-minibus.png" alt="Mercedes Minibus">
-        <p>Spacious 8-Seater Minibus</p>
-      </a>
-      <a href="#img2" class="gallery-item">
-        <img src="fleet-saloon.png" alt="Saloon Car">
-        <p>Comfortable Saloon Cars</p>
-      </a>
-    </div>
-  </section>
-
-  <!-- Lightbox images -->
-  <div id="img1" class="lightbox">
-    <a href="#gallery"><img src="mercedes-minibus.png" alt="Mercedes Minibus"></a>
-  </div>
-  <div id="img2" class="lightbox">
-    <a href="#gallery"><img src="fleet-saloon.png" alt="Saloon Car"></a>
-  </div>
-
-  <section id="reviews">
-    <h2>Customer Reviews</h2>
-    <div class="reviews">
-      <div class="review">
-        <p>"Excellent service! Driver was on time and very professional. Highly recommend!"</p>
-        <strong>- Sarah J.</strong>
-      </div>
-      <div class="review">
-        <p>"Smooth and comfortable ride to the airport. Will definitely use again."</p>
-        <strong>- David M.</strong>
-      </div>
-      <div class="review">
-        <p>"Great value for money and excellent communication throughout."</p>
-        <strong>- Emma R.</strong>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <p>&copy; 2025 Northwest Airport Transfers | All Rights Reserved</p>
     <a class="call-btn" href="tel:+441234567890">📞 Call Us Now</a>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZvAbw98xfM6VSYg3cw-cdzrQ0AIeZt_s&libraries=places"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
     function initAutocomplete() {
       const pickupInput = document.getElementById("pickup");
-      const autocomplete = new google.maps.places.Autocomplete(pickupInput, {
-        types: ['address'],
-        componentRestrictions: { country: "uk" }
-      });
+      if (pickupInput) {
+        new google.maps.places.Autocomplete(pickupInput, {
+          types: ['geocode'],
+          componentRestrictions: { country: "uk" }
+        });
+      }
     }
-    window.onload = initAutocomplete;
+
+    function toggleJourney() {
+      const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
+
+      if (journeyType === "oneway") {
+        document.getElementById("dropoffReturn").classList.add("hidden");
+        document.getElementById("dropoffOneWay").classList.remove("hidden");
+        document.getElementById("manchesterTerminal").classList.add("hidden");
+
+        document.getElementById("collectionDateWrapper").classList.add("hidden");
+        document.getElementById("collectionDate").required = false;
+
+        new google.maps.places.Autocomplete(document.getElementById("dropoffAddress"), {
+          types: ['geocode'],
+          componentRestrictions: { country: "uk" }
+        });
+
+      } else {
+        document.getElementById("dropoffReturn").classList.remove("hidden");
+        document.getElementById("dropoffOneWay").classList.add("hidden");
+        document.getElementById("manchesterTerminal").classList.add("hidden");
+
+        document.getElementById("collectionDateWrapper").classList.remove("hidden");
+        document.getElementById("collectionDate").required = true;
+      }
+    }
+
+    document.getElementById("pickup").addEventListener("change", function() {
+      const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
+      if (journeyType === "oneway" && this.value.toLowerCase().includes("manchester airport")) {
+        document.getElementById("manchesterTerminal").classList.remove("hidden");
+      } else {
+        document.getElementById("manchesterTerminal").classList.add("hidden");
+      }
+    });
 
     $(document).ready(function() {
-      $('#dropoff').select2({
+      $('#dropoffAirport').select2({
         placeholder: "Select or search for an airport",
         allowClear: true
       });
     });
 
     function getBookingDetails() {
+      const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       const pickup = document.getElementById("pickup").value;
-      const dropoff = document.getElementById("dropoff").value;
+      let dropoff = "";
+
+      if (journeyType === "return") {
+        dropoff = document.getElementById("dropoffAirport").value;
+      } else {
+        dropoff = document.getElementById("dropoffAddress").value;
+        const terminal = document.getElementById("terminal").value;
+        if (terminal) dropoff += " (Manchester " + terminal + ")";
+      }
+
       const pickupDate = document.getElementById("pickupDate").value;
       const collectionDate = document.getElementById("collectionDate").value;
       const time = document.getElementById("time").value;
       const flight = document.getElementById("flight").value;
       const passengers = document.getElementById("passengers").value;
 
-      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A📅 Pickup Date: ${pickupDate}%0A📅 Collection Date: ${collectionDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}`;
+      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A🚦 Journey Type: ${journeyType}%0A📅 Pickup Date: ${pickupDate}%0A📅 Collection Date: ${collectionDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}`;
     }
 
     function clearFormAndShowMessage(channel) {
@@ -459,5 +371,6 @@
       }
     }
   </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
