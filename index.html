@@ -86,14 +86,24 @@
     .booking-container {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 2rem;
       flex-wrap: wrap;
     }
     .booking-left {
       flex: 1;
       min-width: 250px;
-      padding-right: 1rem;
+      background: url('booking-bg.jpg') center/cover no-repeat;
+      border-radius: 12px;
+      padding: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .booking-left h2, .booking-left p {
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
     .booking-right {
       flex: 0 0 380px;
@@ -106,6 +116,7 @@
     }
     .booking-form input,
     .booking-form select,
+    .booking-form textarea,
     .booking-form button {
       width: 100% !important;
       box-sizing: border-box;
@@ -115,24 +126,20 @@
       border-radius: 8px;
       font-size: 1rem;
     }
+    .booking-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
     .booking-form button {
       color: white;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
     }
-    .btn-whatsapp {
-      background: #25d366;
-    }
-    .btn-whatsapp:hover {
-      background: #1ebe57;
-    }
-    .btn-email {
-      background: var(--accent);
-    }
-    .btn-email:hover {
-      background: #005bb5;
-    }
+    .btn-whatsapp { background: #25d366; }
+    .btn-whatsapp:hover { background: #1ebe57; }
+    .btn-email { background: var(--accent); }
+    .btn-email:hover { background: #005bb5; }
     .success-message {
       display: none;
       margin-top: 1rem;
@@ -301,6 +308,9 @@
             <option>4+</option>
           </select>
 
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="notes" placeholder="Enter any special requests..."></textarea>
+
           <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
           <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
         </form>
@@ -320,7 +330,6 @@
   <!-- Services -->
   <section id="services">
     <h2>Our Services</h2>
-    <p>We offer:</p>
     <ul>
       <li>Airport transfers from Bolton & Wigan to Manchester and Liverpool airports.</li>
       <li>A fleet of modern vehicles, from saloon cars to 8-seat minibuses.</li>
@@ -335,7 +344,7 @@
     <div class="gallery">
       <a href="mercedes-minibus.png" data-lightbox="fleet"><img src="mercedes-minibus.png" alt="Minibus"></a>
       <a href="saloon-car.png" data-lightbox="fleet"><img src="saloon-car.png" alt="Saloon Car"></a>
-    
+      <a href="mpv.png" data-lightbox="fleet"><img src="mpv.png" alt="MPV"></a>
     </div>
   </section>
 
@@ -343,18 +352,9 @@
   <section id="reviews">
     <h2>Reviews</h2>
     <div class="reviews">
-      <div class="review">
-        "Excellent service, always on time and very professional."
-        <strong>- Sarah J.</strong>
-      </div>
-      <div class="review">
-        "Friendly driver, clean car, and smooth ride to the airport!"
-        <strong>- James P.</strong>
-      </div>
-      <div class="review">
-        "The best transfer company I've used in years."
-        <strong>- Emma R.</strong>
-      </div>
+      <div class="review">"Excellent service, always on time and very professional."<strong>- Sarah J.</strong></div>
+      <div class="review">"Friendly driver, clean car, and smooth ride to the airport!"<strong>- James P.</strong></div>
+      <div class="review">"The best transfer company I've used in years."<strong>- Emma R.</strong></div>
     </div>
   </section>
 
@@ -388,14 +388,14 @@
     function toggleJourney() {
       const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       if (journeyType === "oneway") {
-        document.getElementById("dropoffReturn").classList.add("hidden");
-        document.getElementById("dropoffOneWay").classList.remove("hidden");
-        document.getElementById("returnDateWrapper").classList.add("hidden");
+        document.getElementById("dropoffReturn").style.display = "none";
+        document.getElementById("dropoffOneWay").style.display = "block";
+        document.getElementById("returnDateWrapper").style.display = "none";
         document.getElementById("returnDate").required = false;
       } else {
-        document.getElementById("dropoffReturn").classList.remove("hidden");
-        document.getElementById("dropoffOneWay").classList.add("hidden");
-        document.getElementById("returnDateWrapper").classList.remove("hidden");
+        document.getElementById("dropoffReturn").style.display = "block";
+        document.getElementById("dropoffOneWay").style.display = "none";
+        document.getElementById("returnDateWrapper").style.display = "block";
         document.getElementById("returnDate").required = true;
       }
     }
@@ -419,8 +419,9 @@
       const time = document.getElementById("time").value;
       const flight = document.getElementById("flight").value;
       const passengers = document.getElementById("passengers").value;
+      const notes = document.getElementById("notes").value;
 
-      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A🚦 Journey Type: ${journeyType}%0A📅 Pickup Date: ${pickupDate}%0A📅 Return Date: ${returnDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}`;
+      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A🚦 Journey Type: ${journeyType}%0A📅 Pickup Date: ${pickupDate}%0A📅 Return Date: ${returnDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}%0A📝 Notes: ${notes}`;
     }
 
     function clearFormAndShowMessage(channel) {
@@ -455,6 +456,6 @@
     }
   </script>
   <!-- Replace YOUR_API_KEY with your actual Google API key -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YAIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
