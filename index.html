@@ -20,6 +20,7 @@
       font-family: 'Poppins', sans-serif;
       background: var(--light);
       color: var(--text);
+      line-height: 1.6;
     }
     header {
       background: var(--primary);
@@ -31,22 +32,16 @@
       top: 0;
       z-index: 1000;
     }
-    header img {
-      height: 65px;
-    }
-    nav {
-      display: flex;
-      gap: 1.5rem;
-    }
+    header img { height: 60px; }
+    nav { display: flex; gap: 1.5rem; }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: var(--accent);
-    }
+    nav a:hover { color: var(--accent); }
+
     .hero {
       background: url('mercedes-minibus.png') center/cover no-repeat;
       color: white;
@@ -64,23 +59,11 @@
       position: relative;
       z-index: 2;
     }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.3rem;
-    }
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 3rem 1rem;
-    }
-    h2 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.3rem; }
+
+    section { max-width: 1100px; margin: auto; padding: 3rem 1rem; }
+    h2 { color: var(--primary); margin-bottom: 1.5rem; text-align: center; }
 
     /* Booking layout */
     .booking-container {
@@ -105,9 +88,7 @@
       color: white;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
-    .booking-right {
-      flex: 0 0 380px;
-    }
+    .booking-right { flex: 0 0 380px; }
     .booking-form {
       background: #fff;
       padding: 1.5rem;
@@ -126,11 +107,12 @@
       border-radius: 8px;
       font-size: 1rem;
     }
-    .booking-form textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
+    .booking-form textarea { resize: vertical; min-height: 80px; }
     .booking-form button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       color: white;
       font-weight: bold;
       cursor: pointer;
@@ -152,35 +134,28 @@
       text-align: center;
     }
 
-    /* Journey Type Radios */
-    .journey-options {
-      display: flex;
-      gap: 2rem;
-      margin: 0.5rem 0 1rem;
-    }
-    .journey-options label {
-      display: flex;
-      align-items: center;
-      font-weight: 500;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .journey-options input[type="radio"] {
-      margin-right: 0.4rem;
-    }
+    /* Journey radios */
+    .journey-options { display: flex; gap: 2rem; margin: 0.5rem 0 1rem; }
+    .journey-options label { display: flex; align-items: center; font-weight: 500; cursor: pointer; white-space: nowrap; }
+    .journey-options input[type="radio"] { margin-right: 0.4rem; }
 
     /* Select2 fixes */
     .select2-container--default .select2-selection--single {
       height: 42px !important;
-      line-height: 42px !important;
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1rem;
     }
-    .select2-selection__rendered {
-      line-height: 42px !important;
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      text-align: left !important;
+      padding-left: 8px !important;
+      padding-right: 30px !important;
+      color: #333 !important;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Gallery */
@@ -194,10 +169,11 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .gallery img:hover {
       transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
     }
 
     /* Reviews */
@@ -211,14 +187,9 @@
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-style: italic;
     }
-    .review strong {
-      display: block;
-      margin-top: 1rem;
-      font-style: normal;
-      color: var(--primary);
-    }
+    .stars { color: gold; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .review strong { display: block; margin-top: 1rem; color: var(--primary); }
 
     footer {
       background: var(--primary);
@@ -227,6 +198,14 @@
       padding: 2rem 1rem;
       margin-top: 2rem;
     }
+    footer .links { margin-top: 1rem; }
+    footer .links a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0 0.8rem;
+      transition: color 0.3s;
+    }
+    footer .links a:hover { color: var(--accent); }
     .call-btn {
       display: inline-block;
       background: var(--accent);
@@ -238,9 +217,7 @@
       margin-top: 1rem;
       transition: 0.3s;
     }
-    .call-btn:hover {
-      background: #005bb5;
-    }
+    .call-btn:hover { background: #005bb5; }
   </style>
 </head>
 <body>
@@ -316,17 +293,14 @@
 
           <label for="passengers">Passengers</label>
           <select id="passengers" name="passengers">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4+</option>
+            <option>1</option><option>2</option><option>3</option><option>4+</option>
           </select>
 
           <label for="notes">Notes (optional)</label>
           <textarea id="notes" name="notes" placeholder="Enter any special requests..."></textarea>
 
-          <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
-          <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
+          <button class="btn-whatsapp" onclick="sendToWhatsApp()">💬 Send via WhatsApp</button>
+          <button class="btn-email" onclick="sendToEmail()">✉️ Send via Email</button>
         </form>
         <div id="successMessage" class="success-message">
           ✅ Your booking request has been prepared! Please check WhatsApp or Email to send it.
@@ -366,14 +340,21 @@
   <section id="reviews">
     <h2>Reviews</h2>
     <div class="reviews">
-      <div class="review">"Excellent service, always on time and very professional."<strong>- Sarah J.</strong></div>
-      <div class="review">"Friendly driver, clean car, and smooth ride to the airport!"<strong>- James P.</strong></div>
-      <div class="review">"The best transfer company I've used in years."<strong>- Emma R.</strong></div>
+      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>"Excellent service, always on time and very professional."<strong>- Sarah J.</strong></div>
+      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>"Friendly driver, clean car, and smooth ride to the airport!"<strong>- James P.</strong></div>
+      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>"The best transfer company I've used in years."<strong>- Emma R.</strong></div>
     </div>
   </section>
 
   <footer>
     <p>&copy; 2025 Northwest Airport Transfers | All Rights Reserved</p>
+    <div class="links">
+      <a href="#booking">Book</a> | 
+      <a href="#about">About</a> | 
+      <a href="#services">Services</a> | 
+      <a href="#gallery">Fleet</a> | 
+      <a href="#reviews">Reviews</a>
+    </div>
     <a class="call-btn" href="#" id="callBtnFooter">📞 Call Us Now</a>
   </footer>
 
@@ -417,16 +398,8 @@
     function initAutocomplete() {
       const pickupInput = document.getElementById("pickup");
       const dropoffInput = document.getElementById("dropoffAddress");
-
-      const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
-        types: ['address'],
-        componentRestrictions: { country: "uk" }
-      });
-
-      const dropoffAutocomplete = new google.maps.places.Autocomplete(dropoffInput, {
-        types: ['address'],
-        componentRestrictions: { country: "uk" }
-      });
+      new google.maps.places.Autocomplete(pickupInput, { types: ['address'], componentRestrictions: { country: "uk" } });
+      new google.maps.places.Autocomplete(dropoffInput, { types: ['address'], componentRestrictions: { country: "uk" } });
     }
 
     $(document).ready(function() {
@@ -442,12 +415,9 @@
     function getBookingDetails() {
       const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       const pickup = document.getElementById("pickup").value;
-      let dropoff = "";
-      if (journeyType === "return") {
-        dropoff = document.getElementById("dropoffAirport").value;
-      } else {
-        dropoff = document.getElementById("dropoffAddress").value;
-      }
+      let dropoff = journeyType === "return"
+        ? document.getElementById("dropoffAirport").value
+        : document.getElementById("dropoffAddress").value;
       const pickupDate = document.getElementById("pickupDate").value;
       const returnDate = document.getElementById("returnDate").value;
       const time = document.getElementById("time").value;
@@ -463,33 +433,25 @@
       const successMessage = document.getElementById("successMessage");
       successMessage.innerText = `✅ Your booking request has been prepared for ${channel}! Please check ${channel} to send it.`;
       successMessage.style.display = "block";
-      setTimeout(() => {
-        successMessage.style.display = "none";
-      }, 5000);
+      setTimeout(() => successMessage.style.display = "none", 5000);
     }
 
     function sendToWhatsApp() {
       const message = getBookingDetails();
       const phone = "447123456789"; // replace with your WhatsApp number
-      const url = `https://wa.me/${phone}?text=${message}`;
-      if (confirm("Send booking request via WhatsApp?")) {
-        window.open(url, "_blank");
-        clearFormAndShowMessage("WhatsApp");
-      }
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+      clearFormAndShowMessage("WhatsApp");
     }
 
     function sendToEmail() {
       const message = getBookingDetails().replace(/%0A/g, '\n');
       const email = "bookings@northwestairporttransfers.com"; // replace with your email
       const subject = "Airport Transfer Booking Request";
-      const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-      if (confirm("Send booking request via Email?")) {
-        window.location.href = mailto;
-        clearFormAndShowMessage("Email");
-      }
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      clearFormAndShowMessage("Email");
     }
   </script>
   <!-- Replace YOUR_API_KEY with your actual Google API key -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
