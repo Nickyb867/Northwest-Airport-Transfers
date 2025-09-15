@@ -171,14 +171,16 @@
 
     /* Select2 fixes */
     .select2-container--default .select2-selection--single {
-      height: 42px;
-      padding: 6px 12px;
+      height: 42px !important;
+      line-height: 42px !important;
+      display: flex;
+      align-items: center;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1rem;
     }
-    .select2-container .select2-selection__rendered {
-      line-height: 28px;
+    .select2-selection__rendered {
+      line-height: 42px !important;
     }
 
     /* Gallery */
@@ -293,7 +295,7 @@
             </select>
           </div>
 
-          <div id="dropoffOneWay" class="fade hidden">
+          <div id="dropoffOneWay" style="display:none;">
             <label for="dropoffAddress">Dropoff Address</label>
             <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address">
           </div>
@@ -412,13 +414,29 @@
       }
     }
 
+    function initAutocomplete() {
+      const pickupInput = document.getElementById("pickup");
+      const dropoffInput = document.getElementById("dropoffAddress");
+
+      const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
+        types: ['address'],
+        componentRestrictions: { country: "uk" }
+      });
+
+      const dropoffAutocomplete = new google.maps.places.Autocomplete(dropoffInput, {
+        types: ['address'],
+        componentRestrictions: { country: "uk" }
+      });
+    }
+
     $(document).ready(function() {
       $('#dropoffAirport').select2({
         placeholder: "Select an airport",
         allowClear: true,
-        width: "resolve"
+        width: "100%"
       });
       setupCallLinks();
+      toggleJourney();
     });
 
     function getBookingDetails() {
@@ -472,6 +490,6 @@
     }
   </script>
   <!-- Replace YOUR_API_KEY with your actual Google API key -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
