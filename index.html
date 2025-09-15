@@ -80,16 +80,33 @@
       margin-bottom: 1.5rem;
       text-align: center;
     }
+
+    /* Booking layout */
+    .booking-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .booking-left {
+      flex: 1;
+      min-width: 250px;
+      padding-right: 1rem;
+    }
+    .booking-right {
+      flex: 0 0 380px;
+    }
     .booking-form {
       background: #fff;
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
     .booking-form input, .booking-form select, .booking-form button {
       width: 100%;
       padding: 0.8rem;
-      margin: 0.7rem 0;
+      margin: 0.6rem 0;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
@@ -217,80 +234,89 @@
   </div>
 
   <section id="booking">
-    <h2>Book an Airport Transfer</h2>
-    <form id="bookingForm" class="booking-form" onsubmit="return false;">
-      
-      <label>Journey Type</label>
-      <div class="journey-options">
-        <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
-        <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
+    <div class="booking-container">
+      <div class="booking-left">
+        <h2>Book an Airport Transfer</h2>
+        <p>Quick, reliable transfers from Bolton & Wigan to Manchester and Liverpool airports.</p>
       </div>
 
-      <label for="pickup">Pickup Location</label>
-      <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required>
-      <div id="pickupSuggestions" class="suggestions" style="display:none;"></div>
+      <div class="booking-right">
+        <form id="bookingForm" class="booking-form" onsubmit="return false;">
+          
+          <label>Journey Type</label>
+          <div class="journey-options">
+            <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
+            <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
+          </div>
 
-      <!-- Dropoff for Return -->
-      <div id="dropoffReturn" class="fade">
-        <label for="dropoffAirport">Dropoff Location (Airport)</label>
-        <select id="dropoffAirport" name="dropoffAirport" style="width:100%;">
-          <option value="">-- Select Airport --</option>
-          <option>Manchester Airport (MAN)</option>
-          <option>Liverpool John Lennon Airport (LPL)</option>
-          <option>London Heathrow Airport (LHR)</option>
-          <option>London Gatwick Airport (LGW)</option>
-          <option>London Stansted Airport (STN)</option>
-          <option>Birmingham Airport (BHX)</option>
-          <option>Edinburgh Airport (EDI)</option>
-        </select>
+          <label for="pickup">Pickup Location</label>
+          <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required>
+          <div id="pickupSuggestions" class="suggestions" style="display:none;"></div>
+
+          <!-- Dropoff for Return -->
+          <div id="dropoffReturn" class="fade">
+            <label for="dropoffAirport">Dropoff Location (Airport)</label>
+            <select id="dropoffAirport" name="dropoffAirport" style="width:100%;">
+              <option value="">-- Select Airport --</option>
+              <option>Manchester Airport (MAN)</option>
+              <option>Liverpool John Lennon Airport (LPL)</option>
+              <option>London Heathrow Airport (LHR)</option>
+              <option>London Gatwick Airport (LGW)</option>
+              <option>London Stansted Airport (STN)</option>
+              <option>Birmingham Airport (BHX)</option>
+              <option>Edinburgh Airport (EDI)</option>
+            </select>
+          </div>
+
+          <!-- Dropoff for One Way -->
+          <div id="dropoffOneWay" class="fade hidden">
+            <label for="dropoffAddress">Dropoff Address</label>
+            <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address">
+            <div id="dropoffSuggestions" class="suggestions" style="display:none;"></div>
+          </div>
+
+          <!-- Manchester Terminal -->
+          <div id="manchesterTerminal" class="fade hidden">
+            <label for="terminal">Select Manchester Terminal</label>
+            <select id="terminal" name="terminal">
+              <option value="">-- Select Terminal --</option>
+              <option>Terminal 1</option>
+              <option>Terminal 2</option>
+              <option>Terminal 3</option>
+            </select>
+          </div>
+
+          <label for="pickupDate">Pickup Date</label>
+          <input type="date" id="pickupDate" name="pickupDate" required>
+
+          <!-- Return Date Wrapper -->
+          <div id="returnDateWrapper" class="fade">
+            <label for="returnDate">Return Date</label>
+            <input type="date" id="returnDate" name="returnDate" required>
+          </div>
+
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time" required>
+
+          <label for="flight">Inbound Flight Number</label>
+          <input type="text" id="flight" name="flight">
+
+          <label for="passengers">Passengers</label>
+          <select id="passengers" name="passengers">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+
+          <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
+          <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
+        </form>
+
+        <div id="successMessage" class="success-message">
+          ✅ Your booking request has been prepared! Please check WhatsApp or Email to send it.
+        </div>
       </div>
-
-      <!-- Dropoff for One Way -->
-      <div id="dropoffOneWay" class="fade hidden">
-        <label for="dropoffAddress">Dropoff Address</label>
-        <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address">
-        <div id="dropoffSuggestions" class="suggestions" style="display:none;"></div>
-      </div>
-
-      <!-- Manchester Terminal -->
-      <div id="manchesterTerminal" class="fade hidden">
-        <label for="terminal">Select Manchester Terminal</label>
-        <select id="terminal" name="terminal">
-          <option value="">-- Select Terminal --</option>
-          <option>Terminal 1</option>
-          <option>Terminal 2</option>
-          <option>Terminal 3</option>
-        </select>
-      </div>
-
-      <label for="pickupDate">Pickup Date</label>
-      <input type="date" id="pickupDate" name="pickupDate" required>
-
-      <div id="collectionDateWrapper" class="fade">
-        <label for="collectionDate">Collection Date</label>
-        <input type="date" id="collectionDate" name="collectionDate" required>
-      </div>
-
-      <label for="time">Time</label>
-      <input type="time" id="time" name="time" required>
-
-      <label for="flight">Inbound Flight Number</label>
-      <input type="text" id="flight" name="flight">
-
-      <label for="passengers">Passengers</label>
-      <select id="passengers" name="passengers">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4+</option>
-      </select>
-
-      <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
-      <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
-    </form>
-
-    <div id="successMessage" class="success-message">
-      ✅ Your booking request has been prepared! Please check WhatsApp or Email to send it.
     </div>
   </section>
 
@@ -322,72 +348,19 @@
       });
     }
 
-    // Google Places init
-    function initAutocomplete() {
-      try {
-        const pickupInput = document.getElementById("pickup");
-        const dropoffInput = document.getElementById("dropoffAddress");
-
-        if (pickupInput) {
-          new google.maps.places.Autocomplete(pickupInput, { types: ['geocode'], componentRestrictions: { country: "uk" } });
-        }
-        if (dropoffInput) {
-          new google.maps.places.Autocomplete(dropoffInput, { types: ['geocode'], componentRestrictions: { country: "uk" } });
-        }
-      } catch (err) {
-        console.warn("Google API failed, fallback to OSM.");
-        setupOSMFallback("pickup");
-        setupOSMFallback("dropoffAddress");
-      }
-    }
-
-    // OSM Fallback
-    function setupOSMFallback(fieldId) {
-      const input = document.getElementById(fieldId);
-      const suggestionsBox = document.getElementById(fieldId + "Suggestions");
-
-      input.addEventListener("input", function() {
-        const query = this.value;
-        if (query.length < 3) {
-          suggestionsBox.style.display = "none";
-          return;
-        }
-
-        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
-          .then(res => res.json())
-          .then(data => {
-            suggestionsBox.innerHTML = "";
-            if (data.length > 0) {
-              data.forEach(place => {
-                const div = document.createElement("div");
-                div.innerText = place.display_name;
-                div.onclick = () => {
-                  input.value = place.display_name;
-                  suggestionsBox.style.display = "none";
-                };
-                suggestionsBox.appendChild(div);
-              });
-              suggestionsBox.style.display = "block";
-            } else {
-              suggestionsBox.style.display = "none";
-            }
-          });
-      });
-    }
-
-    // Booking logic unchanged
+    // Booking logic
     function toggleJourney() {
       const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       if (journeyType === "oneway") {
         document.getElementById("dropoffReturn").classList.add("hidden");
         document.getElementById("dropoffOneWay").classList.remove("hidden");
-        document.getElementById("collectionDateWrapper").classList.add("hidden");
-        document.getElementById("collectionDate").required = false;
+        document.getElementById("returnDateWrapper").classList.add("hidden");
+        document.getElementById("returnDate").required = false;
       } else {
         document.getElementById("dropoffReturn").classList.remove("hidden");
         document.getElementById("dropoffOneWay").classList.add("hidden");
-        document.getElementById("collectionDateWrapper").classList.remove("hidden");
-        document.getElementById("collectionDate").required = true;
+        document.getElementById("returnDateWrapper").classList.remove("hidden");
+        document.getElementById("returnDate").required = true;
       }
     }
 
@@ -395,9 +368,61 @@
       $('#dropoffAirport').select2({ placeholder: "Select an airport", allowClear: true, width: "100%" });
       setupCallLinks();
     });
-  </script>
 
-  <!-- Google Places API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places&callback=initAutocomplete" async defer></script>
+    function getBookingDetails() {
+      const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
+      const pickup = document.getElementById("pickup").value;
+      let dropoff = "";
+
+      if (journeyType === "return") {
+        dropoff = document.getElementById("dropoffAirport").value;
+      } else {
+        dropoff = document.getElementById("dropoffAddress").value;
+        const terminal = document.getElementById("terminal").value;
+        if (terminal) dropoff += " (Manchester " + terminal + ")";
+      }
+
+      const pickupDate = document.getElementById("pickupDate").value;
+      const returnDate = document.getElementById("returnDate").value;
+      const time = document.getElementById("time").value;
+      const flight = document.getElementById("flight").value;
+      const passengers = document.getElementById("passengers").value;
+
+      return `🚖 Airport Transfer Booking Request:%0A%0A📍 Pickup: ${pickup}%0A🏁 Dropoff: ${dropoff}%0A🚦 Journey Type: ${journeyType}%0A📅 Pickup Date: ${pickupDate}%0A📅 Return Date: ${returnDate}%0A⏰ Time: ${time}%0A✈️ Flight Number: ${flight}%0A👥 Passengers: ${passengers}`;
+    }
+
+    function clearFormAndShowMessage(channel) {
+      document.getElementById("bookingForm").reset();
+      const successMessage = document.getElementById("successMessage");
+      successMessage.innerText = `✅ Your booking request has been prepared for ${channel}! Please check ${channel} to send it.`;
+      successMessage.style.display = "block";
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 5000);
+    }
+
+    function sendToWhatsApp() {
+      const message = getBookingDetails();
+      const phone = "447123456789"; // replace with your WhatsApp number
+      const url = `https://wa.me/${phone}?text=${message}`;
+      if (confirm("Send booking request via WhatsApp?")) {
+        window.open(url, "_blank");
+        clearFormAndShowMessage("WhatsApp");
+      }
+    }
+
+    function sendToEmail() {
+      const message = getBookingDetails().replace(/%0A/g, '\n');
+      const email = "bookings@northwestairporttransfers.com"; // replace with your email
+      const subject = "Airport Transfer Booking Request";
+      const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      if (confirm("Send booking request via Email?")) {
+        window.location.href = mailto;
+        clearFormAndShowMessage("Email");
+      }
+    }
+  </script>
+  <!-- Replace YOUR_API_KEY with a valid Google Maps API key -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
