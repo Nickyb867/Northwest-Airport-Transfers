@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
   <style>
     :root {
       --primary: #0A2239;
@@ -103,8 +104,11 @@
       border-radius: 12px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
-    .booking-form input, .booking-form select, .booking-form button {
-      width: 100%;
+    .booking-form input,
+    .booking-form select,
+    .booking-form button {
+      width: 100% !important;
+      box-sizing: border-box;
       padding: 0.8rem;
       margin: 0.6rem 0;
       border: 1px solid #ccc;
@@ -141,19 +145,6 @@
       text-align: center;
     }
 
-    /* Smooth fade animations */
-    .fade {
-      opacity: 1;
-      max-height: 1000px;
-      transition: opacity 0.5s ease, max-height 0.5s ease;
-      overflow: hidden;
-    }
-    .fade.hidden {
-      opacity: 0;
-      max-height: 0;
-      pointer-events: none;
-    }
-
     /* Journey Type Radios */
     .journey-options {
       display: flex;
@@ -171,24 +162,41 @@
       margin-right: 0.4rem;
     }
 
-    /* OSM Suggestions */
-    .suggestions {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      max-height: 200px;
-      overflow-y: auto;
-      margin-top: -0.5rem;
-      position: absolute;
-      z-index: 2000;
-      width: calc(100% - 2rem);
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
     }
-    .suggestions div {
-      padding: 0.5rem;
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       cursor: pointer;
+      transition: transform 0.3s;
     }
-    .suggestions div:hover {
-      background: #f0f0f0;
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Reviews */
+    .reviews {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .review {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-style: italic;
+    }
+    .review strong {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      color: var(--primary);
     }
 
     footer {
@@ -233,6 +241,7 @@
     <p>Trusted • Reliable • Professional</p>
   </div>
 
+  <!-- Booking Section -->
   <section id="booking">
     <div class="booking-container">
       <div class="booking-left">
@@ -242,7 +251,6 @@
 
       <div class="booking-right">
         <form id="bookingForm" class="booking-form" onsubmit="return false;">
-          
           <label>Journey Type</label>
           <div class="journey-options">
             <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
@@ -251,10 +259,8 @@
 
           <label for="pickup">Pickup Location</label>
           <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required>
-          <div id="pickupSuggestions" class="suggestions" style="display:none;"></div>
 
-          <!-- Dropoff for Return -->
-          <div id="dropoffReturn" class="fade">
+          <div id="dropoffReturn">
             <label for="dropoffAirport">Dropoff Location (Airport)</label>
             <select id="dropoffAirport" name="dropoffAirport" style="width:100%;">
               <option value="">-- Select Airport --</option>
@@ -268,29 +274,15 @@
             </select>
           </div>
 
-          <!-- Dropoff for One Way -->
           <div id="dropoffOneWay" class="fade hidden">
             <label for="dropoffAddress">Dropoff Address</label>
             <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address">
-            <div id="dropoffSuggestions" class="suggestions" style="display:none;"></div>
-          </div>
-
-          <!-- Manchester Terminal -->
-          <div id="manchesterTerminal" class="fade hidden">
-            <label for="terminal">Select Manchester Terminal</label>
-            <select id="terminal" name="terminal">
-              <option value="">-- Select Terminal --</option>
-              <option>Terminal 1</option>
-              <option>Terminal 2</option>
-              <option>Terminal 3</option>
-            </select>
           </div>
 
           <label for="pickupDate">Pickup Date</label>
           <input type="date" id="pickupDate" name="pickupDate" required>
 
-          <!-- Return Date Wrapper -->
-          <div id="returnDateWrapper" class="fade">
+          <div id="returnDateWrapper">
             <label for="returnDate">Return Date</label>
             <input type="date" id="returnDate" name="returnDate" required>
           </div>
@@ -312,10 +304,56 @@
           <button class="btn-whatsapp" onclick="sendToWhatsApp()">Send via WhatsApp</button>
           <button class="btn-email" onclick="sendToEmail()">Send via Email</button>
         </form>
-
         <div id="successMessage" class="success-message">
           ✅ Your booking request has been prepared! Please check WhatsApp or Email to send it.
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Northwest Airport Transfers, we pride ourselves on providing a professional, friendly, and reliable service. Based in the Bolton & Wigan area, we specialise in airport transfers to Manchester and Liverpool airports. Our drivers are fully DBS checked and know the local routes inside out.</p>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>We offer:</p>
+    <ul>
+      <li>Airport transfers from Bolton & Wigan to Manchester and Liverpool airports.</li>
+      <li>A fleet of modern vehicles, from saloon cars to 8-seat minibuses.</li>
+      <li>DBS-checked drivers with excellent area knowledge.</li>
+      <li>Flight tracking to ensure we’re always on time.</li>
+    </ul>
+  </section>
+
+  <!-- Fleet Gallery -->
+  <section id="gallery">
+    <h2>Fleet Gallery</h2>
+    <div class="gallery">
+      <a href="mercedes-minibus.png" data-lightbox="fleet"><img src="mercedes-minibus.png" alt="Minibus"></a>
+      <a href="saloon-car.png" data-lightbox="fleet"><img src="saloon-car.png" alt="Saloon Car"></a>
+      <a href="mpv.png" data-lightbox="fleet"><img src="mpv.png" alt="MPV"></a>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews">
+    <h2>Reviews</h2>
+    <div class="reviews">
+      <div class="review">
+        "Excellent service, always on time and very professional."
+        <strong>- Sarah J.</strong>
+      </div>
+      <div class="review">
+        "Friendly driver, clean car, and smooth ride to the airport!"
+        <strong>- James P.</strong>
+      </div>
+      <div class="review">
+        "The best transfer company I've used in years."
+        <strong>- Emma R.</strong>
       </div>
     </div>
   </section>
@@ -328,14 +366,13 @@
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <script>
     const phoneNumber = "+441234567890";
 
-    // Call Us behaviour
     function setupCallLinks() {
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       const callLinks = [document.getElementById("callUsLink"), document.getElementById("callBtnFooter")];
-
       callLinks.forEach(link => {
         if (isMobile) {
           link.setAttribute("href", "tel:" + phoneNumber);
@@ -348,7 +385,6 @@
       });
     }
 
-    // Booking logic
     function toggleJourney() {
       const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       if (journeyType === "oneway") {
@@ -373,15 +409,11 @@
       const journeyType = document.querySelector('input[name="journeyType"]:checked').value;
       const pickup = document.getElementById("pickup").value;
       let dropoff = "";
-
       if (journeyType === "return") {
         dropoff = document.getElementById("dropoffAirport").value;
       } else {
         dropoff = document.getElementById("dropoffAddress").value;
-        const terminal = document.getElementById("terminal").value;
-        if (terminal) dropoff += " (Manchester " + terminal + ")";
       }
-
       const pickupDate = document.getElementById("pickupDate").value;
       const returnDate = document.getElementById("returnDate").value;
       const time = document.getElementById("time").value;
@@ -422,7 +454,7 @@
       }
     }
   </script>
-  <!-- Replace YOUR_API_KEY with a valid Google Maps API key -->
+  <!-- Replace YOUR_API_KEY with your actual Google API key -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
