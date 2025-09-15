@@ -93,7 +93,7 @@
     .booking-left {
       flex: 1;
       min-width: 250px;
-      background: url('booking-bg.jpg') center/cover no-repeat;
+      background: url('manchester-airport-terminal.jpg') center/cover no-repeat;
       border-radius: 12px;
       padding: 2rem;
       color: white;
@@ -167,6 +167,18 @@
     }
     .journey-options input[type="radio"] {
       margin-right: 0.4rem;
+    }
+
+    /* Select2 fixes */
+    .select2-container--default .select2-selection--single {
+      height: 42px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .select2-container .select2-selection__rendered {
+      line-height: 28px;
     }
 
     /* Gallery */
@@ -401,7 +413,11 @@
     }
 
     $(document).ready(function() {
-      $('#dropoffAirport').select2({ placeholder: "Select an airport", allowClear: true, width: "100%" });
+      $('#dropoffAirport').select2({
+        placeholder: "Select an airport",
+        allowClear: true,
+        width: "resolve"
+      });
       setupCallLinks();
     });
 
