@@ -37,9 +37,9 @@
     h2{color:var(--primary);margin:0 0 1.25rem;text-align:center}
 
     /* Booking split */
-    .booking-container{display:flex;gap:2rem;flex-wrap:wrap;align-items:stretch;justify-content:space-between}
-    .booking-left{flex:1;min-width:260px;background:url('manchester-airport-terminal.jpg') center/cover no-repeat;border-radius:12px;position:relative;display:flex}
-    .booking-left .overlay{background:rgba(0,0,0,.55);margin:auto;border-radius:12px;padding:2rem;width:100%}
+    .booking-container{display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+    .booking-left{flex:1;min-width:260px;background:url('manchester-airport-terminal.jpg') center/cover no-repeat;border-radius:12px;position:relative;display:flex;align-items:flex-start}
+    .booking-left .overlay{background:rgba(0,0,0,.55);padding:2rem;border-radius:12px;margin-top:0;width:100%}
     .booking-left h2,.booking-left p,.booking-left li{color:#f0f0f0}
     .booking-left ul{list-style:none;margin:1rem 0 0;padding:0}
     .booking-left li{margin:.45rem 0}
@@ -266,19 +266,12 @@
         document.getElementById("dropoffReturn").style.display="block";
         document.getElementById("dropoffOneWay").style.display="none";
         document.getElementById("returnDateWrapper").style.display="block";
-        // terminal visibility handled by change listener below
       }
     }
 
     function initAutocomplete(){
-      new google.maps.places.Autocomplete(
-        document.getElementById("pickup"),
-        { types:['address'], componentRestrictions:{ country:"uk" } }
-      );
-      new google.maps.places.Autocomplete(
-        document.getElementById("dropoffAddress"),
-        { types:['address'], componentRestrictions:{ country:"uk" } }
-      );
+      new google.maps.places.Autocomplete(document.getElementById("pickup"), { types:['address'], componentRestrictions:{ country:"uk" } });
+      new google.maps.places.Autocomplete(document.getElementById("dropoffAddress"), { types:['address'], componentRestrictions:{ country:"uk" } });
     }
 
     function getBookingDetails(){
@@ -327,10 +320,9 @@
       clearFormAndShowMessage("Email");
     }
 
-    // Init UI behaviour
+    // Init UI
     $(function(){
       $('#dropoffAirport').select2({placeholder:"Select an airport",allowClear:true,width:"100%"});
-      // Show MAN terminal selector only when Manchester chosen
       $('#dropoffAirport').on('change', function(){
         const isMAN = (this.value || "").includes("Manchester Airport");
         document.getElementById("manchesterTerminal").style.display = isMAN ? "block" : "none";
