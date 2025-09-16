@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Northwest Airport Transfers | Book Your Transfer</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body{font-family:Poppins,sans-serif;margin:0;background:#f4f4f4;color:#333;line-height:1.6}
+    header{background:#0A2239;padding:1rem 2rem;color:#fff;position:sticky;top:0;z-index:1000}
+    header h1{margin:0;font-size:1.5rem}
+    section{max-width:1100px;margin:auto;padding:2rem 1rem}
+    h2{text-align:center;color:#0A2239}
+    .booking-container{display:flex;gap:2rem;flex-wrap:wrap;justify-content:space-between}
+    .booking-right{flex:0 0 400px;max-width:100%}
+    .booking-form{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+    .booking-form label{display:block;margin-top:1rem;font-weight:600}
+    .booking-form input,.booking-form select,.booking-form textarea,.booking-form button{width:100%;padding:.75rem;margin-top:.3rem;border:1px solid #ccc;border-radius:8px;font-size:1rem}
+    .booking-form button{cursor:pointer;font-weight:700;color:#fff;border:none;transition:.25s}
+    .btn-whatsapp{background:#25d366}.btn-whatsapp:hover{background:#1ebe57}
+    .btn-email{background:#1E90FF}.btn-email:hover{background:#005bb5}
+    .btn-quote{background:#0A2239;opacity:.5;pointer-events:none}
+    .btn-quote.active{opacity:1;pointer-events:auto}
+    .journey-options{display:flex;gap:1.5rem;margin-top:.5rem}
+    .journey-options label{display:flex;align-items:center}
+    .success-message{display:none;margin-top:1rem;padding:1rem;background:#d4edda;color:#155724;border-radius:6px;font-weight:600;text-align:center}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Northwest Airport Transfers</h1>
+  </header>
+
+  <section id="booking">
+    <h2>Book an Airport Transfer</h2>
+    <div class="booking-container">
+      <!-- Booking form -->
+      <div class="booking-right">
+        <form id="bookingForm" class="booking-form" onsubmit="return false;">
+          <label>Journey Type</label>
+          <div class="journey-options">
+            <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
+            <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
+          </div>
+
+          <label for="pickup">Pickup Location</label>
+          <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" required />
+
+          <div id="dropoffReturn">
+            <label for="dropoffAirport">Dropoff Location (Airport)</label>
+            <select id="dropoffAirport" name="dropoffAirport" required>
+              <option value="">-- Select Airport --</option>
+              <option>Manchester Airport (MAN)</option>
+              <option>Liverpool John Lennon Airport (LPL)</option>
+            </select>
+          </div>
+
+          <div id="dropoffOneWay" style="display:none;">
+            <label for="dropoffAddress">Dropoff Address</label>
+            <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Enter address"/>
+          </div>
+
+          <label for="pickupDate">Pickup Date</label>
+          <input type="date" id="pickupDate" name="pickupDate" required/>
+
+          <div id="returnDateWrapper">
+            <label for="returnDate">Return Date</label>
+            <input type="date" id="returnDate" name="returnDate" required/>
+          </div>
+
+          <label for="pickupTime">Pickup Time</label>
+          <input type="time" id="pickupTime" name="pickupTime" required/>
+
+          <label for="passengers">Passengers</label>
+          <select id="passengers" name="passengers" required>
+            <option value="">-- Select --</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4+">4+</option>
+          </select>
+
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="notes" placeholder="Any special requests…"></textarea>
+
+          <button type="button" class="btn-whatsapp" onclick="sendToWhatsApp()">💬 Send via WhatsApp</button>
+          <button type="button" class="btn-email" onclick="sendToEmail()">✉️ Send via Email</button>
+          <button type="button" id="getQuoteBtn" class="btn-quote">💷 Get Quote</button>
+        </form>
+
+        <div id="successMessage" class="success-message"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleJourney(){
+      const type = document.querySelector('input[name="journeyType"]:checked').value;
+      document.getElementById("dropoffReturn").style.display = (type === "return") ? "block" : "none";
+      document.getElementById("dropoffOneWay").style.display = (type === "oneway") ? "block" : "none";
+      document.getElementById("returnDateWrapper").style.display = (type === "return") ? "block" : "none";
+    }
+
+    function getFormData(){
+      return {
+        journeyType: document.querySelector('input[name="journeyType"]:checked').value,
+        pickup: document.getElementById("pickup").value.trim(),
+        dropoffAirport: document.getElementById("dropoffAirport").value,
+        dropoffAddress: document.getElementById("dropoffAddress").value.trim(),
+        pickupDate: document.getElementById("pickupDate").value,
+        returnDate: document.getElementById("returnDate").value,
+        pickupTime: document.getElementById("pickupTime").value,
+        passengers: document.getElementById("passengers").value,
+        notes: document.getElementById("notes").value.trim()
+      };
+    }
+
+    function validateForm(){
+      const data = getFormData();
+      if(!data.pickup || !data.pickupDate || !data.pickupTime || !data.passengers) return false;
+      if(data.journeyType === "return" && !data.dropoffAirport) return false;
+      if(data.journeyType === "oneway" && !data.dropoffAddress) return false;
+      return true;
+    }
+
+    function updateQuoteButton(){
+      const btn = document.getElementById("getQuoteBtn");
+      if(validateForm()){
+        btn.classList.add("active");
+        btn.onclick = goToQuote;
+      } else {
+        btn.classList.remove("active");
+        btn.onclick = null;
+      }
+    }
+
+    function goToQuote(){
+      const data = getFormData();
+      localStorage.setItem("bookingData", JSON.stringify(data));
+      window.location.href = "quote.html";
+    }
+
+    function sendToWhatsApp(){
+      alert("WhatsApp integration here.");
+    }
+    function sendToEmail(){
+      alert("Email integration here.");
+    }
+
+    document.getElementById("bookingForm").addEventListener("input", updateQuoteButton);
+    toggleJourney();
+    updateQuoteButton();
+  </script>
+</body>
+</html>
