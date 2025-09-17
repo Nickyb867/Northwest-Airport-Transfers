@@ -54,8 +54,6 @@
           <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers logo" class="h-10 w-auto"/>
           <span class="font-bold tracking-tight">Northwest Airport Transfers</span>
         </a>
-
-        <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-6">
           <a href="#booking" class="hover:text-accent">Book</a>
           <a href="#about" class="hover:text-accent">About</a>
@@ -65,8 +63,6 @@
           <a href="#faq" class="hover:text-accent">FAQ</a>
           <a href="tel:+441234567890" class="btn btn-accent">📞 Call</a>
         </nav>
-
-        <!-- Mobile menu button -->
         <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/20">
           <span class="sr-only">Open menu</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor">
@@ -74,8 +70,6 @@
           </svg>
         </button>
       </div>
-
-      <!-- Mobile menu -->
       <div id="mobileMenu" class="md:hidden hidden pb-4">
         <nav class="grid gap-2">
           <a href="#booking" class="py-2">Book</a>
@@ -113,7 +107,7 @@
     <p class="text-center text-gray-500 mt-2">Quick, reliable transfers to Manchester (MAN) & Liverpool (LPL)</p>
 
     <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <!-- ✅ Left info panel (enhanced) -->
+      <!-- Left info panel -->
       <aside class="relative rounded-2xl overflow-hidden shadow-card">
         <img src="manchester-airport-terminal.jpg" alt="" class="absolute inset-0 w-full h-full object-cover"/>
         <div class="absolute inset-0 bg-black/70"></div>
@@ -149,9 +143,108 @@
         </div>
       </aside>
 
-      <!-- Booking form (unchanged, full form from earlier version) -->
-      <div>
-        <!-- Replace this comment with the full booking form code you already have -->
+      <!-- Booking form -->
+      <div class="bg-white p-6 rounded-2xl shadow-card">
+        <form id="bookingForm" class="space-y-4">
+          <div>
+            <label class="font-semibold">Passenger Name</label>
+            <input type="text" id="name" class="w-full border rounded-lg px-3 py-2 mt-1" required>
+          </div>
+          <div>
+            <label class="font-semibold">Mobile Number</label>
+            <input type="tel" id="mobile" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="+447123456789" required>
+          </div>
+          <div>
+            <label class="font-semibold">Email Address (optional)</label>
+            <input type="email" id="email" class="w-full border rounded-lg px-3 py-2 mt-1">
+          </div>
+          <div>
+            <label class="font-semibold">Journey Type</label>
+            <div class="flex gap-4 mt-1">
+              <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
+              <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
+            </div>
+          </div>
+          <div>
+            <label class="font-semibold">Pickup Location</label>
+            <input type="text" id="pickup" class="w-full border rounded-lg px-3 py-2 mt-1" required>
+          </div>
+          <div id="dropoffReturn">
+            <label class="font-semibold">Dropoff Location (Airport)</label>
+            <select id="dropoffAirport" class="w-full mt-1">
+              <option value="">-- Select Airport --</option>
+              <option>Manchester Airport (MAN)</option>
+              <option>Liverpool John Lennon Airport (LPL)</option>
+              <option>London Heathrow Airport (LHR)</option>
+              <option>London Gatwick Airport (LGW)</option>
+              <option>London Stansted Airport (STN)</option>
+              <option>Birmingham Airport (BHX)</option>
+              <option>Edinburgh Airport (EDI)</option>
+            </select>
+          </div>
+          <div id="manchesterTerminal" style="display:none;">
+            <label class="font-semibold">Manchester Airport Terminal</label>
+            <select id="terminal" class="w-full mt-1">
+              <option value="">-- Select Terminal --</option>
+              <option>Terminal 1</option>
+              <option>Terminal 2</option>
+              <option>Terminal 3</option>
+            </select>
+          </div>
+          <div id="dropoffOneWay" style="display:none;">
+            <label class="font-semibold">Dropoff Address</label>
+            <input type="text" id="dropoffAddress" class="w-full border rounded-lg px-3 py-2 mt-1">
+          </div>
+          <div>
+            <label class="font-semibold">Pickup Date</label>
+            <input type="date" id="pickupDate" class="w-full border rounded-lg px-3 py-2 mt-1" required>
+          </div>
+          <div>
+            <label class="font-semibold">Pickup Time</label>
+            <input type="time" id="pickupTime" class="w-full border rounded-lg px-3 py-2 mt-1" required>
+          </div>
+          <div id="returnDateWrapper">
+            <label class="font-semibold">Return Date</label>
+            <input type="date" id="returnDate" class="w-full border rounded-lg px-3 py-2 mt-1">
+          </div>
+          <div id="returnTimeWrapper">
+            <label class="font-semibold">Return Pickup Time</label>
+            <input type="time" id="returnTime" class="w-full border rounded-lg px-3 py-2 mt-1">
+          </div>
+          <div>
+            <label class="font-semibold">Passengers</label>
+            <select id="passengers" class="w-full mt-1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4+</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold">Number of Suitcases</label>
+            <select id="luggage" class="w-full mt-1">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5+</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold">Notes (optional)</label>
+            <textarea id="notes" class="w-full border rounded-lg px-3 py-2 mt-1" rows="3"></textarea>
+          </div>
+          <div>
+            <label class="font-semibold">Payment Preference</label>
+            <select id="payment" class="w-full mt-1">
+              <option>Cash</option>
+              <option>Card</option>
+              <option>Prepay Online</option>
+            </select>
+          </div>
+          <button type="button" id="getQuoteBtn" class="btn btn-success w-full mt-4 disabled:opacity-50" disabled>💰 Get Quote</button>
+        </form>
       </div>
     </div>
   </section>
@@ -263,7 +356,7 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
-  <!-- ✅ Google Places API -->
+  <!-- Google Places API -->
   <script>
     function initAutocomplete(){
       const opts = { types:['address'], componentRestrictions:{ country:"uk" } };
@@ -276,3 +369,4 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
+
