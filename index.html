@@ -17,8 +17,9 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: { primary:'#0A2239', accent:'#005bb5' },
-          boxShadow: { card:'0 12px 32px rgba(0,0,0,.08)' }
+          colors: { primary:'#0A2239', accent:'#005bb5', call:'#22c55e' },
+          boxShadow: { card:'0 12px 32px rgba(0,0,0,.08)' },
+          animation: { pulseSlow: 'pulse 2s infinite' }
         }
       }
     }
@@ -42,7 +43,7 @@
     .select2-container--default .select2-selection--single .select2-selection__rendered{
       padding-left:10px!important; padding-right:30px!important;
     }
-    /* Tooltip for floating WhatsApp */
+    /* Tooltip */
     .tooltip {
       position: absolute;
       left: 100%;
@@ -79,7 +80,10 @@
           <a href="#gallery" class="hover:text-accent">Fleet</a>
           <a href="#reviews" class="hover:text-accent">Reviews</a>
           <a href="#faq" class="hover:text-accent">FAQ</a>
-          <a href="tel:+441234567890" class="btn btn-accent">📞 Call</a>
+          <a href="tel:+441234567890"
+             class="bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-pulseSlow">
+            📞 Call Now
+          </a>
         </nav>
         <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/20">
           <span class="sr-only">Open menu</span>
@@ -96,7 +100,10 @@
           <a href="#gallery" class="py-2">Fleet</a>
           <a href="#reviews" class="py-2">Reviews</a>
           <a href="#faq" class="py-2">FAQ</a>
-          <a href="tel:+441234567890" class="btn btn-accent mt-2">📞 Call</a>
+          <a href="tel:+441234567890"
+             class="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-3 rounded-xl shadow-lg mt-3 animate-pulseSlow">
+            📞 Call Now
+          </a>
         </nav>
       </div>
     </div>
@@ -113,7 +120,10 @@
         <p class="mt-4 text-white/90">Modern saloons & 8-seat minibuses • Flight tracking • Friendly, on-time service</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="#booking" class="btn btn-accent">🚖 Book Now</a>
-          <a href="tel:+441234567890" class="btn btn-dark">📞 Call Us</a>
+          <a href="tel:+441234567890"
+             class="btn bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-lg animate-pulseSlow">
+            📞 Call Us Now
+          </a>
         </div>
       </div>
     </div>
@@ -125,7 +135,7 @@
     <p class="text-center text-gray-500 mt-2">Quick, reliable transfers to Manchester (MAN) & Liverpool (LPL)</p>
 
     <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <!-- Left info panel (enhanced) -->
+      <!-- Left info panel -->
       <aside class="relative rounded-2xl overflow-hidden shadow-card">
         <img src="manchester-airport-terminal.jpg" alt="Manchester airport terminal" class="absolute inset-0 w-full h-full object-cover"/>
         <div class="absolute inset-0 bg-black/70"></div>
@@ -154,44 +164,38 @@
             <img src="manchester-airport-logo.png" alt="Manchester Airport" class="h-8 bg-white rounded p-1"/>
             <img src="liverpool-airport-logo.png" alt="Liverpool Airport" class="h-8 bg-white rounded p-1"/>
           </div>
-          <div class="text-sm text-white/90">
-            ✨ All vehicles are air-conditioned, GPS-tracked, and cleaned daily for your comfort & safety.
-          </div>
         </div>
       </aside>
 
       <!-- Booking form -->
       <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
         <form id="bookingForm" novalidate>
-          <!-- Passenger -->
           <div class="grid md:grid-cols-2 gap-4">
             <div class="md:col-span-2">
               <label class="font-semibold">Passenger Name *</label>
-              <input id="name" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="Lead traveller name"/>
+              <input id="name" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
             </div>
             <div>
               <label class="font-semibold">Mobile Number *</label>
-              <input id="mobile" type="tel" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="e.g. 07123 456789"/>
-              <p class="text-sm text-gray-500 mt-1">UK mobiles: 07… or +44 7… (spaces ok)</p>
+              <input id="mobile" type="tel" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
             </div>
             <div>
               <label class="font-semibold">Email Address</label>
-              <input id="email" type="email" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="you@example.com"/>
+              <input id="email" type="email" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
             </div>
           </div>
 
-          <!-- Journey -->
           <div class="mt-6">
             <label class="font-semibold">Journey Type</label>
-            <div class="flex flex-wrap gap-6 mt-2">
-              <label class="inline-flex items-center gap-2"><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> <span>One Way</span></label>
-              <label class="inline-flex items-center gap-2"><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> <span>Return</span></label>
+            <div class="flex gap-6 mt-2">
+              <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
+              <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
             </div>
           </div>
 
           <div class="mt-4">
             <label class="font-semibold">Pickup Location *</label>
-            <input id="pickup" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="Enter pickup address"/>
+            <input id="pickup" type="text" required class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
           </div>
 
           <div id="dropoffReturn" class="mt-4">
@@ -200,11 +204,6 @@
               <option value="">-- Select Airport --</option>
               <option>Manchester Airport (MAN)</option>
               <option>Liverpool John Lennon Airport (LPL)</option>
-              <option>London Heathrow Airport (LHR)</option>
-              <option>London Gatwick Airport (LGW)</option>
-              <option>London Stansted Airport (STN)</option>
-              <option>Birmingham Airport (BHX)</option>
-              <option>Edinburgh Airport (EDI)</option>
             </select>
           </div>
 
@@ -220,7 +219,7 @@
 
           <div id="dropoffOneWay" class="hidden mt-4">
             <label class="font-semibold">Dropoff Address *</label>
-            <input id="dropoffAddress" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="Enter dropoff address"/>
+            <input id="dropoffAddress" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4 mt-4">
@@ -263,23 +262,22 @@
           </div>
 
           <div class="mt-4">
-            <label class="font-semibold">Inbound Flight Number (from airport)</label>
-            <input id="flightInbound" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="e.g., EZY1234"/>
+            <label class="font-semibold">Inbound Flight Number</label>
+            <input id="flightInbound" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3"/>
           </div>
 
           <div class="mt-4">
             <label class="font-semibold">Notes (optional)</label>
-            <textarea id="notes" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3 min-h-[96px]" placeholder="Any special requests…"></textarea>
+            <textarea id="notes" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3 min-h-[96px]"></textarea>
           </div>
 
-          <!-- Actions -->
           <div class="mt-6 grid sm:grid-cols-3 gap-3">
             <button type="button" class="btn btn-success" onclick="sendToWhatsApp()">💬 WhatsApp</button>
             <button type="button" class="btn btn-accent" onclick="sendToEmail()">✉️ Email</button>
             <button id="getQuoteBtn" type="button" class="btn btn-dark opacity-50 pointer-events-none">💷 Get Quote</button>
           </div>
 
-          <div id="successMessage" class="hidden mt-4 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-green-800 font-semibold" role="status" aria-live="polite"></div>
+          <div id="successMessage" class="hidden mt-4 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-green-800 font-semibold"></div>
         </form>
       </div>
     </div>
@@ -377,17 +375,23 @@
       <p class="mt-3 text-white/80">Bolton • Wigan • Manchester Airport • Liverpool Airport</p>
       <div class="mt-4 flex gap-3 justify-center">
         <a href="#booking" class="btn btn-accent">Book</a>
-        <a href="tel:+441234567890" class="btn btn-dark">📞 Call Us Now</a>
+        <a href="tel:+441234567890"
+           class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg animate-pulseSlow">
+          📞 Call Us Now
+        </a>
       </div>
     </div>
   </footer>
 
   <!-- Sticky mobile CTA -->
   <div class="sticky-cta md:hidden">
-    <a href="#booking" class="btn btn-accent rounded-full shadow-card">🚖 Book a Transfer</a>
+    <a href="tel:+441234567890"
+       class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-lg animate-pulseSlow">
+      📞 Call Now
+    </a>
   </div>
 
-  <!-- Floating WhatsApp Button (left, centered) -->
+  <!-- Floating WhatsApp Button -->
   <div class="whatsapp-btn fixed left-4 top-1/2 -translate-y-1/2 z-50">
     <a href="https://wa.me/447123456789" target="_blank" aria-label="Chat on WhatsApp"
        class="relative flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition">
@@ -398,35 +402,29 @@
     </a>
   </div>
 
-  <!-- Libs -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
-  <!-- Booking logic -->
   <script>
-    const WHATSAPP_NUMBER = "447123456789";   // TODO: replace
-    const EMAIL_ADDRESS   = "bookings@northwestairporttransfers.com"; // TODO: replace
+    const WHATSAPP_NUMBER = "447123456789";
+    const EMAIL_ADDRESS   = "bookings@northwestairporttransfers.com";
 
-    // Mobile menu
     document.getElementById('menuBtn').addEventListener('click', () => {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
 
-    // Journey toggle + required flags
     function toggleJourney(){
       const type = document.querySelector('input[name="journeyType"]:checked')?.value || 'return';
       const isOneWay = type === 'oneway';
-
       document.getElementById('dropoffReturn').classList.toggle('hidden', isOneWay);
       document.getElementById('dropoffOneWay').classList.toggle('hidden', !isOneWay);
       document.getElementById('returnWrapper').classList.toggle('hidden', isOneWay);
-
       document.getElementById('dropoffAirport').required = !isOneWay;
       document.getElementById('dropoffAddress').required = isOneWay;
       document.getElementById('returnDate').required = !isOneWay;
       document.getElementById('returnTime').required = !isOneWay;
-
       updateQuoteButton();
     }
 
@@ -455,9 +453,8 @@
 
     function validateForm(){
       const d = getFormData();
-      const telOk = /^(\+447\d{9}|07\d{9})$/.test(d.mobile); // spaces removed
+      const telOk = /^(\+447\d{9}|07\d{9})$/.test(d.mobile);
       if(!d.name || !d.mobile || !telOk || !d.pickup || !d.pickupDate || !d.pickupTime || !d.passengers) return false;
-
       if(d.journeyType === "return"){
         if(!d.dropoffAirport || !d.returnDate || !d.returnTime) return false;
       } else {
@@ -470,11 +467,9 @@
       const btn = document.getElementById("getQuoteBtn");
       if(validateForm()){
         btn.classList.remove('opacity-50','pointer-events-none');
-        btn.removeAttribute('disabled');
         btn.onclick = goToQuote;
       } else {
         btn.classList.add('opacity-50','pointer-events-none');
-        btn.setAttribute('disabled', 'disabled');
         btn.onclick = null;
       }
     }
@@ -489,11 +484,9 @@
     function linesForMessage(d, priceText){
       return [
         "🚖 Airport Transfer Booking Request",
-        "",
         `👤 Passenger: ${d.name}`,
         `📱 Mobile: ${d.mobile}`,
         d.email ? `📧 Email: ${d.email}` : "",
-        "",
         `🚦 Journey Type: ${d.journeyType}`,
         `📍 Pickup: ${d.pickup}`,
         `🏁 Dropoff: ${d.journeyType === "return" ? (d.dropoffAirport + (d.terminal? " ("+d.terminal+")":"")) : d.dropoffAddress}`,
@@ -501,9 +494,9 @@
         d.journeyType === "return" ? `📅 Return: ${d.returnDate} at ${d.returnTime}` : "",
         d.flightInbound ? `🛬 Inbound Flight: ${d.flightInbound}` : "",
         `👥 Passengers: ${d.passengers}`,
-        `🧳 Number of suitcases: ${d.luggage || '—'}`,
+        `🧳 Suitcases: ${d.luggage || '—'}`,
         d.notes ? `📝 Notes: ${d.notes}` : "",
-        priceText ? `\n💷 Estimated Price: ${priceText}` : ""
+        priceText ? `💷 Estimated Price: ${priceText}` : ""
       ].filter(Boolean).join("\n");
     }
 
@@ -528,7 +521,6 @@
       successToast("Prepared email.");
     }
 
-    // Init UI
     $(function(){
       $('#dropoffAirport').select2({placeholder:"Select an airport",allowClear:true,width:"100%"});
       $('#dropoffAirport').on('change', function(){
