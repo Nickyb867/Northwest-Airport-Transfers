@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Northwest Airport Transfers | Bolton & Wigan → Manchester & Liverpool</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Quote | Northwest Airport Transfers</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,356 +11,137 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: { primary:'#0A2239', accent:'#005bb5' },
-          boxShadow: { card:'0 12px 32px rgba(0,0,0,.08)' }
+          colors: { primary:'#0A2239', accent:'#005bb5', call:'#22c55e' },
+          boxShadow: { card:'0 12px 32px rgba(0,0,0,.08)' },
+          animation: { pulseSlow: 'pulse 2s infinite' }
         }
       }
     }
   </script>
 
-  <!-- Select2 + Lightbox -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet"/>
-
   <style>
     body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    .btn{ @apply inline-flex items-center justify-center font-semibold rounded-xl px-4 py-3 transition; }
-    .btn-accent{ @apply bg-accent text-white hover:bg-blue-700; }
-    .btn-dark{ @apply bg-gray-900 text-white hover:bg-black; }
-    .btn-success{ background:#0C6B61; color:#fff; }
-    .btn-success:hover{ background:#0A5A51; }
-    .sticky-cta{ position:fixed; right:16px; bottom:16px; z-index:60; }
-    .select2-container--default .select2-selection--single{
-      height:46px!important; display:flex; align-items:center; border-radius:12px; border:1px solid #d1d5db; font-size:1rem
-    }
-    .select2-container--default .select2-selection--single .select2-selection__rendered{
-      padding-left:10px!important; padding-right:30px!important;
-    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-primary text-white shadow">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <a class="flex items-center gap-3" href="#top">
-          <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers logo" class="h-10 w-auto"/>
-          <span class="font-bold tracking-tight">Northwest Airport Transfers</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-6">
-          <a href="#booking" class="hover:text-accent">Book</a>
-          <a href="#about" class="hover:text-accent">About</a>
-          <a href="#services" class="hover:text-accent">Services</a>
-          <a href="#gallery" class="hover:text-accent">Fleet</a>
-          <a href="#reviews" class="hover:text-accent">Reviews</a>
-          <a href="#faq" class="hover:text-accent">FAQ</a>
-          <a href="tel:+441234567890" class="btn btn-accent">📞 Call</a>
-        </nav>
-        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/20">
-          <span class="sr-only">Open menu</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-      <div id="mobileMenu" class="md:hidden hidden pb-4">
-        <nav class="grid gap-2">
-          <a href="#booking" class="py-2">Book</a>
-          <a href="#about" class="py-2">About</a>
-          <a href="#services" class="py-2">Services</a>
-          <a href="#gallery" class="py-2">Fleet</a>
-          <a href="#reviews" class="py-2">Reviews</a>
-          <a href="#faq" class="py-2">FAQ</a>
-          <a href="tel:+441234567890" class="btn btn-accent mt-2">📞 Call</a>
-        </nav>
-      </div>
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Logo" class="h-10"/>
+        <span class="font-bold tracking-tight">Northwest Airport Transfers</span>
+      </a>
+      <a href="tel:+441234567890"
+         class="bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-pulseSlow">
+        📞 Call Now
+      </a>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="top" class="relative">
-    <div class="absolute inset-0">
-      <img src="mercedes-minibus.png" alt="" class="w-full h-full object-cover brightness-50"/>
-    </div>
-    <div class="relative max-w-6xl mx-auto px-4 py-24 md:py-28 text-white">
-      <div class="max-w-2xl">
-        <h1 class="text-4xl md:text-5xl font-extrabold">Reliable Airport Transfers from Bolton & Wigan</h1>
-        <p class="mt-4 text-white/90">Modern saloons & 8-seat minibuses • Flight tracking • Friendly, on-time service</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#booking" class="btn btn-accent">🚖 Book Now</a>
-          <a href="tel:+441234567890" class="btn btn-dark">📞 Call Us</a>
-        </div>
+  <!-- Quote Section -->
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-primary text-center">Your Booking Quote</h1>
+    <p class="text-center text-gray-600 mt-2">Based on your booking details</p>
+
+    <div id="quoteCard" class="mt-8 bg-white rounded-2xl shadow-card p-6 border border-gray-100">
+      <h2 class="text-xl font-bold text-primary mb-4">Booking Summary</h2>
+      <ul id="summaryList" class="space-y-2 text-gray-700"></ul>
+
+      <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-800 font-bold text-lg">
+        Estimated Price: <span id="priceText"></span>
+      </div>
+
+      <div class="mt-6 grid sm:grid-cols-3 gap-3">
+        <button onclick="sendToWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl px-4 py-3 shadow-lg">💬 WhatsApp</button>
+        <button onclick="sendToEmail()" class="bg-accent hover:bg-blue-700 text-white font-bold rounded-xl px-4 py-3 shadow-lg">✉️ Email</button>
+        <a href="tel:+441234567890" class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl px-4 py-3 shadow-lg flex items-center justify-center animate-pulseSlow">📞 Call Now</a>
       </div>
     </div>
-  </section>
 
-  <!-- Booking -->
-  <section id="booking" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">Book an Airport Transfer</h2>
-    <p class="text-center text-gray-500 mt-2">Quick, reliable transfers to Manchester (MAN) & Liverpool (LPL)</p>
-
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <!-- Left info panel -->
-      <aside class="relative rounded-2xl overflow-hidden shadow-card">
-        <img src="manchester-airport-terminal.jpg" alt="" class="absolute inset-0 w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-black/70"></div>
-        <div class="relative p-6 md:p-8 text-white space-y-6">
-          <div>
-            <h3 class="text-2xl font-bold">Why ride with us</h3>
-            <ul class="mt-4 space-y-2">
-              <li>🚖 Door-to-door airport transfers</li>
-              <li>👨‍✈️ DBS-checked professional drivers</li>
-              <li>⏰ Reliable, always on time</li>
-              <li>🛫 Live flight tracking for delays</li>
-              <li>🚘 Modern saloons & 8-seat minibuses</li>
-              <li>💳 Pay by cash or card</li>
-              <li>🌙 Available 24/7</li>
-              <li>💷 Fixed transparent pricing</li>
-              <li>🧼 Clean, air-conditioned vehicles</li>
-            </ul>
-          </div>
-          <div class="bg-accent text-white text-center font-semibold py-3 rounded-xl shadow">
-            🕑 Available 24/7 – Early flights & late arrivals covered
-          </div>
-          <div class="bg-white/10 p-4 rounded-xl">
-            <p class="italic text-sm">“Fantastic service! On time, polite, and great value. Will use again.”</p>
-            <p class="mt-2 font-semibold">– Sarah J.</p>
-          </div>
-          <div class="flex items-center gap-4">
-            <img src="manchester-airport-logo.png" alt="Manchester Airport" class="h-8 bg-white rounded p-1"/>
-            <img src="liverpool-airport-logo.png" alt="Liverpool Airport" class="h-8 bg-white rounded p-1"/>
-          </div>
-          <div class="text-sm text-white/90">
-            ✨ All vehicles are air-conditioned, GPS-tracked, and cleaned daily for your comfort & safety.
-          </div>
-        </div>
-      </aside>
-
-      <!-- Booking form -->
-      <div class="bg-white p-6 rounded-2xl shadow-card">
-        <form id="bookingForm" class="space-y-4">
-          <div>
-            <label class="font-semibold">Passenger Name</label>
-            <input type="text" id="name" class="w-full border rounded-lg px-3 py-2 mt-1" required>
-          </div>
-          <div>
-            <label class="font-semibold">Mobile Number</label>
-            <input type="tel" id="mobile" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="+447123456789" required>
-          </div>
-          <div>
-            <label class="font-semibold">Email Address (optional)</label>
-            <input type="email" id="email" class="w-full border rounded-lg px-3 py-2 mt-1">
-          </div>
-          <div>
-            <label class="font-semibold">Journey Type</label>
-            <div class="flex gap-4 mt-1">
-              <label><input type="radio" name="journeyType" value="oneway" onclick="toggleJourney()"> One Way</label>
-              <label><input type="radio" name="journeyType" value="return" onclick="toggleJourney()" checked> Return</label>
-            </div>
-          </div>
-          <div>
-            <label class="font-semibold">Pickup Location</label>
-            <input type="text" id="pickup" class="w-full border rounded-lg px-3 py-2 mt-1" required>
-          </div>
-          <div id="dropoffReturn">
-            <label class="font-semibold">Dropoff Location (Airport)</label>
-            <select id="dropoffAirport" class="w-full mt-1">
-              <option value="">-- Select Airport --</option>
-              <option>Manchester Airport (MAN)</option>
-              <option>Liverpool John Lennon Airport (LPL)</option>
-              <option>London Heathrow Airport (LHR)</option>
-              <option>London Gatwick Airport (LGW)</option>
-              <option>London Stansted Airport (STN)</option>
-              <option>Birmingham Airport (BHX)</option>
-              <option>Edinburgh Airport (EDI)</option>
-            </select>
-          </div>
-          <div id="manchesterTerminal" style="display:none;">
-            <label class="font-semibold">Manchester Airport Terminal</label>
-            <select id="terminal" class="w-full mt-1">
-              <option value="">-- Select Terminal --</option>
-              <option>Terminal 1</option>
-              <option>Terminal 2</option>
-              <option>Terminal 3</option>
-            </select>
-          </div>
-          <div id="dropoffOneWay" style="display:none;">
-            <label class="font-semibold">Dropoff Address</label>
-            <input type="text" id="dropoffAddress" class="w-full border rounded-lg px-3 py-2 mt-1">
-          </div>
-          <div>
-            <label class="font-semibold">Pickup Date</label>
-            <input type="date" id="pickupDate" class="w-full border rounded-lg px-3 py-2 mt-1" required>
-          </div>
-          <div>
-            <label class="font-semibold">Pickup Time</label>
-            <input type="time" id="pickupTime" class="w-full border rounded-lg px-3 py-2 mt-1" required>
-          </div>
-          <div id="returnDateWrapper">
-            <label class="font-semibold">Return Date</label>
-            <input type="date" id="returnDate" class="w-full border rounded-lg px-3 py-2 mt-1">
-          </div>
-          <div id="returnTimeWrapper">
-            <label class="font-semibold">Return Pickup Time</label>
-            <input type="time" id="returnTime" class="w-full border rounded-lg px-3 py-2 mt-1">
-          </div>
-          <div>
-            <label class="font-semibold">Passengers</label>
-            <select id="passengers" class="w-full mt-1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4+</option>
-            </select>
-          </div>
-          <div>
-            <label class="font-semibold">Number of Suitcases</label>
-            <select id="luggage" class="w-full mt-1">
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5+</option>
-            </select>
-          </div>
-          <div>
-            <label class="font-semibold">Notes (optional)</label>
-            <textarea id="notes" class="w-full border rounded-lg px-3 py-2 mt-1" rows="3"></textarea>
-          </div>
-          <div>
-            <label class="font-semibold">Payment Preference</label>
-            <select id="payment" class="w-full mt-1">
-              <option>Cash</option>
-              <option>Card</option>
-              <option>Prepay Online</option>
-            </select>
-          </div>
-          <button type="button" id="getQuoteBtn" class="btn btn-success w-full mt-4 disabled:opacity-50" disabled>💰 Get Quote</button>
-        </form>
-      </div>
+    <div id="noData" class="hidden text-center mt-12 text-gray-600">
+      <p>No booking details found. Please go back and complete the <a href="index.html#booking" class="text-accent font-semibold">booking form</a>.</p>
     </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">About Us</h2>
-    <p class="mt-3 text-center text-gray-600 max-w-3xl mx-auto">
-      We’re a friendly, reliable airport transfer service based around Bolton & Wigan,
-      specialising in Manchester and Liverpool airports. Our drivers are DBS-checked and know the local routes and airport drop-off points.
-    </p>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">Our Services</h2>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <h3 class="font-bold text-lg">Airport Transfers</h3>
-        <p class="mt-2 text-gray-600">Bolton & Wigan ⇄ Manchester (MAN) & Liverpool (LPL)</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <h3 class="font-bold text-lg">Group Travel</h3>
-        <p class="mt-2 text-gray-600">Comfortable minibuses up to 8 passengers</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <h3 class="font-bold text-lg">Business Bookings</h3>
-        <p class="mt-2 text-gray-600">Account options & regular routes</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Fleet Gallery -->
-  <section id="gallery" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">Fleet Gallery</h2>
-    <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <a href="mercedes-minibus.png" data-lightbox="fleet" class="rounded-2xl overflow-hidden shadow-card">
-        <img src="mercedes-minibus.png" alt="Mercedes 8-seat minibus" loading="lazy"/>
-      </a>
-      <a href="saloon-car.png" data-lightbox="fleet" class="rounded-2xl overflow-hidden shadow-card">
-        <img src="saloon-car.png" alt="Modern saloon car" loading="lazy"/>
-      </a>
-      <a href="saloon-car.png" data-lightbox="fleet" class="rounded-2xl overflow-hidden shadow-card">
-        <img src="saloon-car.png" alt="Clean interior" loading="lazy"/>
-      </a>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section id="reviews" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">Reviews</h2>
-    <div class="mt-6 grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
-        <p class="mt-2">“Excellent service, always on time and very professional.”</p>
-        <p class="mt-3 font-semibold text-primary">– Sarah J.</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
-        <p class="mt-2">“Friendly driver, clean car, and smooth ride to the airport!”</p>
-        <p class="mt-3 font-semibold text-primary">– James P.</p>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
-        <p class="mt-2">“The best transfer company I've used in years.”</p>
-        <p class="mt-3 font-semibold text-primary">– Emma R.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-primary text-center">Frequently Asked Questions</h2>
-    <div class="mt-6 space-y-3">
-      <details class="bg-white p-5 rounded-2xl shadow-card border border-gray-100">
-        <summary class="font-semibold cursor-pointer">Do you track flights?</summary>
-        <p class="mt-2 text-gray-600">Yes, we monitor live flight info and adjust pickup times if there are delays.</p>
-      </details>
-      <details class="bg-white p-5 rounded-2xl shadow-card border border-gray-100">
-        <summary class="font-semibold cursor-pointer">How do I pay?</summary>
-        <p class="mt-2 text-gray-600">Cash, card, or prepay online (if arranged). Choose your preference in the form.</p>
-      </details>
-      <details class="bg-white p-5 rounded-2xl shadow-card border border-gray-100">
-        <summary class="font-semibold cursor-pointer">What if my plans change?</summary>
-        <p class="mt-2 text-gray-600">Just call or message us—no problem. We’ll update your booking.</p>
-      </details>
-    </div>
-  </section>
+  </main>
 
   <!-- Footer -->
   <footer class="bg-primary text-white mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-10 text-center">
+    <div class="max-w-5xl mx-auto px-4 py-10 text-center">
       <p>&copy; 2025 Northwest Airport Transfers • All Rights Reserved</p>
-      <p class="mt-3 text-white/80">Bolton • Wigan • Manchester Airport • Liverpool Airport</p>
-      <div class="mt-4 flex gap-3 justify-center">
-        <a href="#booking" class="btn btn-accent">Book</a>
-        <a href="tel:+441234567890" class="btn btn-dark">📞 Call Us Now</a>
-      </div>
     </div>
   </footer>
 
-  <!-- Sticky mobile CTA -->
-  <div class="sticky-cta md:hidden">
-    <a href="#booking" class="btn btn-accent rounded-full shadow-card">🚖 Book a Transfer</a>
-  </div>
-
-  <!-- Libs -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
-  <!-- Google Places API -->
   <script>
-    function initAutocomplete(){
-      const opts = { types:['address'], componentRestrictions:{ country:"uk" } };
-      const pickupEl = document.getElementById("pickup");
-      const dropEl   = document.getElementById("dropoffAddress");
-      if (pickupEl && window.google?.maps?.places) new google.maps.places.Autocomplete(pickupEl, opts);
-      if (dropEl   && window.google?.maps?.places) new google.maps.places.Autocomplete(dropEl,   opts);
+    const WHATSAPP_NUMBER = "447123456789";
+    const EMAIL_ADDRESS   = "bookings@northwestairporttransfers.com";
+
+    function calculatePrice(d){
+      let price = 0;
+      const pax = (d.passengers || "").includes("4") ? "4+" : "1-3";
+      const pickup = d.pickup.toLowerCase();
+
+      if(pickup.includes("bolton") && d.dropoffAirport?.includes("Manchester")) price = pax==="4+"?65:50;
+      if(pickup.includes("wigan")  && d.dropoffAirport?.includes("Manchester")) price = pax==="4+"?70:55;
+      if(pickup.includes("bolton") && d.dropoffAirport?.includes("Liverpool"))  price = pax==="4+"?80:70;
+      if(pickup.includes("wigan")  && d.dropoffAirport?.includes("Liverpool"))  price = pax==="4+"?80:70;
+
+      return price && d.journeyType==="return" ? `£${price*2} (Return)` : price ? `£${price} (One Way)` : "Contact us for a price";
     }
+
+    function buildSummary(d, price){
+      const list = document.getElementById("summaryList");
+      list.innerHTML = "";
+      const add = (label,val) => { if(val) list.innerHTML += `<li><strong>${label}:</strong> ${val}</li>`; };
+      add("Name", d.name);
+      add("Mobile", d.mobile);
+      add("Email", d.email);
+      add("Journey Type", d.journeyType);
+      add("Pickup", d.pickup);
+      add("Dropoff", d.journeyType==="return" ? (d.dropoffAirport + (d.terminal? " ("+d.terminal+")":"")) : d.dropoffAddress);
+      add("Pickup Date/Time", `${d.pickupDate} ${d.pickupTime}`);
+      if(d.journeyType==="return") add("Return Date/Time", `${d.returnDate} ${d.returnTime}`);
+      add("Passengers", d.passengers);
+      add("Suitcases", d.luggage);
+      add("Inbound Flight", d.flightInbound);
+      add("Notes", d.notes);
+      document.getElementById("priceText").textContent = price;
+    }
+
+    function buildMessage(d, price){
+      return [
+        "🚖 Airport Transfer Booking Request",
+        `👤 ${d.name}`, `📱 ${d.mobile}`, d.email?`📧 ${d.email}`:"",
+        `🚦 ${d.journeyType}`, `📍 Pickup: ${d.pickup}`,
+        `🏁 Dropoff: ${d.journeyType==="return"?(d.dropoffAirport+(d.terminal?" ("+d.terminal+")":"")):d.dropoffAddress}`,
+        `📅 Pickup: ${d.pickupDate} at ${d.pickupTime}`,
+        d.journeyType==="return"?`📅 Return: ${d.returnDate} at ${d.returnTime}`:"",
+        `👥 Passengers: ${d.passengers}`, `🧳 Suitcases: ${d.luggage||"—"}`,
+        d.flightInbound?`🛬 Inbound Flight: ${d.flightInbound}`:"",
+        d.notes?`📝 Notes: ${d.notes}`:"",
+        `💷 Price: ${price}`
+      ].filter(Boolean).join("\n");
+    }
+
+    function sendToWhatsApp(){
+      const d = JSON.parse(localStorage.getItem("bookingData")||"{}");
+      const price = calculatePrice(d);
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage(d,price))}`,"_blank","noopener");
+    }
+
+    function sendToEmail(){
+      const d = JSON.parse(localStorage.getItem("bookingData")||"{}");
+      const price = calculatePrice(d);
+      const subject = "Airport Transfer Booking Request";
+      const body = buildMessage(d,price);
+      window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    window.addEventListener("DOMContentLoaded", ()=>{
+      const data = JSON.parse(localStorage.getItem("bookingData")||"{}");
+      if(!data.name){ document.getElementById("quoteCard").classList.add("hidden"); document.getElementById("noData").classList.remove("hidden"); return; }
+      const price = calculatePrice(data);
+      buildSummary(data, price);
+    });
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
-
