@@ -22,7 +22,7 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet"/>
 
-  <!-- Schema -->
+  <!-- Local Business Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,6 +39,63 @@
     },
     "areaServed": ["Bolton", "Wigan", "Manchester Airport", "Liverpool Airport"],
     "serviceType": "Airport Transfers"
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much is a taxi from Bolton to Manchester Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our fixed-price Bolton to Manchester Airport taxi service is competitively priced. Contact us on WhatsApp or email for the latest quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide airport transfers from Wigan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer Wigan airport transfers to both Manchester and Liverpool airports. Whether you’re travelling alone or in a group, we have vehicles to suit your needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your drivers DBS checked?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All of our professional drivers are fully DBS checked and have excellent local knowledge of Bolton, Wigan, and the North West."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer return journeys?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you can book one-way or return airport transfers. Return bookings can be arranged at the time of booking for peace of mind."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Review Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    "itemReviewed": {
+      "@type": "TaxiService",
+      "name": "Northwest Airport Transfers"
+    },
+    "ratingValue": "5",
+    "bestRating": "5",
+    "reviewCount": "125"
   }
   </script>
 
@@ -101,6 +158,13 @@
     footer .links a{color:#ddd;text-decoration:none;margin:0 .8rem}
     footer .links a:hover{color:var(--accent)}
     .call-btn{display:inline-block;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:700;margin-top:1rem}
+
+    /* Floating Buttons */
+    .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:2000}
+    .floating-buttons a{padding:.9rem 1.2rem;border-radius:50%;color:#fff;text-align:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:.3s;text-decoration:none}
+    .floating-buttons a:hover{transform:scale(1.1)}
+    .float-whatsapp{background:#25d366}
+    .float-call{background:var(--accent)}
   </style>
 </head>
 <body>
@@ -201,8 +265,15 @@
           <label for="notes">Notes (optional)</label>
           <textarea id="notes" name="notes" placeholder="Any special requests…"></textarea>
 
-          <button class="btn-whatsapp" onclick="sendToWhatsApp()">💬 Send via WhatsApp</button>
-          <button class="btn-email" onclick="sendToEmail()">✉️ Send via Email</button>
+          <!-- WhatsApp button with reCAPTCHA -->
+          <button class="btn-whatsapp g-recaptcha" 
+                  data-sitekey="YOUR_SITE_KEY" 
+                  data-callback="sendToWhatsApp">💬 Send via WhatsApp</button>
+
+          <!-- Email button with reCAPTCHA -->
+          <button class="btn-email g-recaptcha" 
+                  data-sitekey="YOUR_SITE_KEY" 
+                  data-callback="sendToEmail">✉️ Send via Email</button>
         </form>
 
         <div id="successMessage" class="success-message">
@@ -293,11 +364,21 @@
     <a class="call-btn" href="#" id="callBtnFooter">📞 Call Us Now</a>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/447123456789" target="_blank" class="float-whatsapp">💬</a>
+    <a href="tel:+441234567890" class="float-call">📞</a>
+  </div>
+
+  <!-- reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- jQuery, Select2, Lightbox -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
+  <!-- Custom JS -->
   <script>
     const phoneNumber = "+441234567890";
 
