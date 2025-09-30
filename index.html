@@ -6,7 +6,7 @@
   <title>Bolton & Wigan Airport Transfers | Taxi to Manchester & Liverpool Airports</title>
 
   <meta name="description" content="Reliable Bolton & Wigan airport taxi transfers to Manchester Airport (MAN) and Liverpool Airport (LPL). Fixed prices, DBS checked drivers, modern vehicles, and 24/7 service."/>
-  <meta name="keywords" content="Bolton airport transfers, Wigan airport taxi, taxi to Manchester Airport, Liverpool airport transfer, Bolton to Manchester Airport taxi, Wigan to Manchester Airport transfer, Northwest Airport Transfers"/>
+  <meta name="keywords" content="Bolton airport transfers, Wigan airport taxi, taxi to Manchester Airport, Liverpool airport transfer, Bolton to Manchester Airport taxi, Wigan to Liverpool Airport transfer, Northwest Airport Transfers"/>
 
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="canonical" href="https://northwest-airport-transfers.vercel.app/" />
@@ -41,7 +41,16 @@
     section{max-width:1100px;margin:auto;padding:3rem 1rem}
     h2{color:var(--primary);margin:0 0 1.25rem;text-align:center}
 
-    /* Google Form Wrapper */
+    /* Booking section layout */
+    .booking-container{display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+    .booking-left,.booking-right{flex:1;min-width:280px}
+
+    .booking-left{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.1)}
+    .booking-left h2{margin-bottom:1rem;text-align:left}
+    .booking-left ul{list-style:none;padding:0;margin:0}
+    .booking-left li{margin:.5rem 0;padding-left:1.5rem;position:relative}
+    .booking-left li::before{content:"✅";position:absolute;left:0;color:green}
+
     .google-form-wrapper {
       background:#fff;
       padding:1.5rem;
@@ -101,11 +110,29 @@
 
   <!-- Booking -->
   <section id="booking">
-    <h2>Book a Transfer</h2>
-    <div class="google-form-wrapper">
-      <!-- PASTE YOUR GOOGLE FORM EMBED IFRAME BELOW -->
-      <iframe src="https://docs.google.com/forms/d/e/<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSctU1zoxn4Pwjf9zG7q6nVJ-ddbyTEezU-kV2nBiYvzPCfhVA/viewform?embedded=true" width="640" height="601" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>/viewform?embedded=true"
-              frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <div class="booking-container">
+      <!-- Why Book With Us -->
+      <div class="booking-left">
+        <h2>Why Book With Us?</h2>
+        <ul>
+          <li>Fleet of modern, comfortable vehicles</li>
+          <li>DBS-checked, professional drivers</li>
+          <li>Corporate travel & business contracts welcomed</li>
+          <li>Family friendly – child & booster seats on request</li>
+          <li>Flight tracking for delays</li>
+          <li>Fixed prices with no hidden fees</li>
+          <li>24/7 availability, day or night</li>
+        </ul>
+      </div>
+
+      <!-- Google Form -->
+      <div class="booking-right">
+        <h2 style="text-align:center; color:#0A2239; margin-bottom:1rem;">Book a Transfer</h2>
+        <div class="google-form-wrapper">
+          <!-- PASTE YOUR GOOGLE FORM EMBED IFRAME BELOW -->
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSctU1zoxn4Pwjf9zG7q6nVJ-ddbyTEezU-kV2nBiYvzPCfhVA/viewform?embedded=true" width="640" height="601" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -148,7 +175,6 @@
     <div class="gallery">
       <a href="mercedes-minibus.png"><img src="mercedes-minibus.png" alt="Bolton to Manchester Airport Minibus Transfer"/></a>
       <a href="saloon-car.png"><img src="saloon-car.png" alt="Wigan to Manchester Airport Taxi Car"/></a>
-      <a href="mpv.png"><img src="mpv.png" alt="Liverpool Airport Transfer MPV Vehicle"/></a>
     </div>
   </section>
 
