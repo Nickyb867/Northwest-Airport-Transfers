@@ -1,118 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bolton & Wigan Airport Transfers | Taxi to Manchester & Liverpool Airports</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bolton & Wigan Airport Transfers | Taxi to Manchester & Liverpool Airports</title>
+<meta name="description" content="Reliable Bolton & Wigan airport taxi transfers to Manchester (MAN) and Liverpool (LPL). Fixed prices, DBS-checked drivers, modern vehicles, child & booster seats, 24/7 service."/>
+<link rel="canonical" href="https://northwest-airport-transfers.vercel.app/"/>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
 
-  <meta name="description" content="Reliable Bolton & Wigan airport taxi transfers to Manchester Airport (MAN) and Liverpool Airport (LPL). Fixed prices, DBS checked drivers, modern vehicles, and 24/7 service."/>
-  <meta name="keywords" content="Bolton airport transfers, Wigan airport taxi, taxi to Manchester Airport, Liverpool airport transfer, Bolton to Manchester Airport taxi, Wigan to Liverpool Airport transfer, Northwest Airport Transfers"/>
+<style>
+:root{--primary:#0A2239;--accent:#1E90FF;--light:#f4f4f4;--text:#333;--danger:#d32f2f;--success:#2e7d32}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--light);color:var(--text);line-height:1.6}
 
-  <link rel="icon" type="image/png" href="favicon.png"/>
-  <link rel="canonical" href="https://northwest-airport-transfers.vercel.app/" />
+/* Header / Nav */
+header{background:var(--primary);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
+header img{height:60px}
+nav{display:flex;flex-wrap:wrap;gap:1rem}
+nav a{color:#fff;text-decoration:none;font-weight:600;transition:color .3s}
+nav a:hover{color:var(--accent)}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Bolton & Wigan Airport Transfers | Manchester Airport Taxi Service"/>
-  <meta property="og:description" content="Trusted airport transfers from Bolton & Wigan to Manchester & Liverpool Airports. Book online or via WhatsApp. Modern vehicles, DBS-checked drivers."/>
-  <meta property="og:image" content="https://northwest-airport-transfers.vercel.app/mercedes-minibus.png"/>
-  <meta property="og:url" content="https://northwest-airport-transfers.vercel.app/"/>
-  <meta property="og:type" content="website"/>
+/* Hero */
+.hero{background:url('mercedes-minibus.png') center/cover no-repeat;color:#fff;text-align:center;padding:6rem 2rem;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(10,34,57,.65)}
+.hero h1,.hero p{position:relative;z-index:2}
+.hero h1{font-size:2.5rem;margin:0 0 1rem}
+.hero p{font-size:1.1rem;margin:0}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+/* Sections */
+section{max-width:1100px;margin:auto;padding:3rem 1rem}
+h2{color:var(--primary);margin:0 0 1.25rem;text-align:center}
 
-  <style>
-    :root{--primary:#0A2239;--accent:#1E90FF;--light:#f4f4f4;--text:#333}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Poppins,Arial,sans-serif;background:var(--light);color:var(--text);line-height:1.6}
+/* Booking 2-col layout */
+.booking-container{display:flex;gap:2rem;align-items:stretch;flex-wrap:wrap}
+.booking-left,.booking-right{flex:1 1 420px;min-width:300px;display:flex}
+.card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.1);display:flex;flex-direction:column;width:100%}
+.card h2{margin-bottom:.75rem;text-align:left}
+.booking-left ul{list-style:none;margin:0;padding:0}
+.booking-left li{margin:.5rem 0;padding-left:1.5rem;position:relative}
+.booking-left li::before{content:"✅";position:absolute;left:0}
+@media(max-width:767px){.booking-container{gap:1rem}}
 
-    header{background:var(--primary);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
-    header img{height:60px}
-    nav{display:flex;gap:1.5rem}
-    nav a{color:#fff;text-decoration:none;font-weight:600;transition:color .3s}
-    nav a:hover{color:var(--accent)}
+/* Form styles */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-grid .full{grid-column:1/-1}
+label{font-weight:600}
+input,select,textarea,button{width:100%;padding:.8rem;border:1px solid #ccc;border-radius:8px;font-size:1rem}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:1rem}
+.error{color:var(--danger);font-size:.85rem;margin-top:.25rem;min-height:1em}
+.invalid{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(211,47,47,.12)}
+.valid{border-color:var(--success)!important;box-shadow:0 0 0 3px rgba(46,125,50,.12)}
+.help{font-size:.9rem;color:#555;margin-top:.25rem}
+.btn-primary{background:var(--accent);color:#fff;font-weight:700;border:0;cursor:pointer}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
 
-    .hero{background:url('mercedes-minibus.png') center/cover no-repeat;color:#fff;text-align:center;padding:8rem 2rem;position:relative}
-    .hero::after{content:"";position:absolute;inset:0;background:rgba(10,34,57,.65)}
-    .hero h1,.hero p{position:relative;z-index:2}
-    .hero h1{font-size:2.5rem;margin:0 0 1rem}
-    .hero p{font-size:1.1rem;margin:0}
+/* reCAPTCHA */
+.recaptcha-wrap{display:flex;justify-content:center;margin:.5rem 0 0}
 
-    section{max-width:1100px;margin:auto;padding:3rem 1rem}
-    h2{color:var(--primary);margin:0 0 1.25rem;text-align:center}
+/* Result banner */
+.banner{margin-top:1rem;padding:.9rem 1rem;border-radius:8px;border:1px solid transparent;display:none}
+.banner.success{background:#e8f5e9;border-color:#c8e6c9;color:#1b5e20}
+.banner.error{background:#ffebee;border-color:#ffcdd2;color:#b71c1c}
 
-    /* Booking section layout */
-    .booking-container{display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start}
-    .booking-left,.booking-right{flex:1;min-width:280px}
+/* Gallery / Reviews / FAQ / Footer */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.gallery img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.review{background:#fff;padding:1.25rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.stars{color:gold;font-size:1.1rem;margin-bottom:.4rem}
+.review strong{display:block;margin-top:.7rem;color:var(--primary)}
+.faq{background:#fff;padding:1.25rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-bottom:1rem}
+footer{background:var(--primary);color:#fff;text-align:center;padding:2rem 1rem;margin-top:2rem}
+footer .links{margin-top:.75rem}
+footer .links a{color:#ddd;text-decoration:none;margin:0 .8rem}
+footer .links a:hover{color:var(--accent)}
+.call-btn{display:inline-block;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:700;margin-top:1rem}
 
-    .booking-left{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.1)}
-    .booking-left h2{margin-bottom:1rem;text-align:left}
-    .booking-left ul{list-style:none;padding:0;margin:0}
-    .booking-left li{margin:.5rem 0;padding-left:1.5rem;position:relative}
-    .booking-left li::before{content:"✅";position:absolute;left:0;color:green}
-
-    .google-form-wrapper {
-      background:#fff;
-      padding:1.5rem;
-      border-radius:12px;
-      box-shadow:0 5px 20px rgba(0,0,0,.1);
-    }
-    .google-form-wrapper iframe {
-      border-radius:12px;
-      width:100%;
-      min-height:1600px;
-    }
-
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
-    .gallery img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s,box-shadow .3s}
-    .gallery img:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(0,0,0,.2)}
-
-    .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
-    .review{background:#fff;padding:1.25rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .stars{color:gold;font-size:1.1rem;margin-bottom:.4rem}
-    .review strong{display:block;margin-top:.7rem;color:var(--primary)}
-
-    .faq{background:#fff;padding:1.25rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-bottom:1rem}
-
-    footer{background:var(--primary);color:#fff;text-align:center;padding:2rem 1rem;margin-top:2rem}
-    footer .links{margin-top:.75rem}
-    footer .links a{color:#ddd;text-decoration:none;margin:0 .8rem}
-    footer .links a:hover{color:var(--accent)}
-    .call-btn{display:inline-block;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:700;margin-top:1rem}
-
-    /* Floating Buttons */
-    .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:2000}
-    .floating-buttons a{padding:.9rem 1.2rem;border-radius:50%;color:#fff;text-align:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:.3s;text-decoration:none}
-    .floating-buttons a:hover{transform:scale(1.1)}
-    .float-whatsapp{background:#25d366}
-    .float-call{background:var(--accent)}
-  </style>
+/* Floating Buttons */
+.floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:2000}
+.floating-buttons a{padding:.9rem 1.2rem;border-radius:50%;color:#fff;text-align:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:.3s;text-decoration:none}
+.floating-buttons a:hover{transform:scale(1.1)}
+.float-whatsapp{background:#25d366}
+.float-call{background:var(--accent)}
+</style>
 </head>
 <body>
 
-  <header>
-    <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo"/>
-    <nav>
-      <a href="#booking">Book Transfer</a>
-      <a href="#about">About Us</a>
-      <a href="#services">Our Services</a>
-      <a href="#gallery">Fleet Gallery</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#faq">FAQ</a>
-      <a href="tel:+447520664620">Call Us</a>
-    </nav>
-  </header>
+<header>
+  <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo"/>
+  <nav>
+    <a href="#booking">Book Transfer</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Our Services</a>
+    <a href="#gallery">Fleet Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <a href="tel:+447520664620">Call Us</a>
+  </nav>
+</header>
 
-  <div class="hero">
-    <h1>Bolton & Wigan Airport Transfers</h1>
-    <p>Trusted • Reliable • Professional • Fixed Prices</p>
-  </div>
+<div class="hero">
+  <h1>Bolton & Wigan Airport Transfers</h1>
+  <p>Trusted • Reliable • Professional • Fixed Prices</p>
+</div>
 
-  <!-- Booking -->
-  <section id="booking">
-    <div class="booking-container">
-      <!-- Why Book With Us -->
-      <div class="booking-left">
+<!-- Booking (2 columns) -->
+<section id="booking">
+  <div class="booking-container">
+    <!-- Left: Why Book With Us -->
+    <div class="booking-left">
+      <div class="card">
         <h2>Why Book With Us?</h2>
         <ul>
           <li>Fleet of modern, comfortable vehicles</li>
@@ -124,109 +123,289 @@
           <li>24/7 availability, day or night</li>
         </ul>
       </div>
+    </div>
 
-      <!-- Google Form -->
-      <div class="booking-right">
-        <h2 style="text-align:center; color:#0A2239; margin-bottom:1rem;">Book a Transfer</h2>
-        <div class="google-form-wrapper">
-          <!-- PASTE YOUR GOOGLE FORM EMBED IFRAME BELOW -->
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSctU1zoxn4Pwjf9zG7q6nVJ-ddbyTEezU-kV2nBiYvzPCfhVA/viewform?embedded=true" width="640" height="601" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        </div>
+    <!-- Right: Custom Booking Form -->
+    <div class="booking-right">
+      <div class="card">
+        <h2>Book a Transfer</h2>
+
+        <form id="bookingForm" novalidate>
+          <div class="form-grid">
+            <div class="full">
+              <label for="name">Full Name</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Your name"/>
+              <div class="error" id="name_error"></div>
+            </div>
+
+            <div class="full">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"/>
+              <div class="error" id="email_error"></div>
+            </div>
+
+            <div>
+              <label>Journey Type</label>
+              <select id="journeyType" name="journeyType">
+                <option value="oneway">One Way</option>
+                <option value="return">Return</option>
+              </select>
+              <div class="error" id="journeyType_error"></div>
+            </div>
+
+            <div>
+              <label for="passengers">Passengers</label>
+              <select id="passengers" name="passengers">
+                <option>1</option><option>2</option><option>3</option><option>4+</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label for="pickup">Pickup Location</label>
+              <input id="pickup" name="pickup" placeholder="Enter pickup address"/>
+              <div class="error" id="pickup_error"></div>
+            </div>
+
+            <div class="full">
+              <label for="dropoff">Dropoff Location</label>
+              <input id="dropoff" name="dropoff" placeholder="Enter dropoff address or airport"/>
+              <div class="error" id="dropoff_error"></div>
+            </div>
+
+            <div>
+              <label for="pickupDate">Pickup Date</label>
+              <input id="pickupDate" name="pickupDate" type="date"/>
+              <div class="error" id="pickupDate_error"></div>
+            </div>
+
+            <div>
+              <label for="pickupTime">Pickup Time</label>
+              <input id="pickupTime" name="pickupTime" type="time"/>
+              <div class="error" id="pickupTime_error"></div>
+            </div>
+
+            <div id="returnRowDate" style="display:none;">
+              <label for="returnDate">Return Date</label>
+              <input id="returnDate" name="returnDate" type="date"/>
+              <div class="error" id="returnDate_error"></div>
+            </div>
+
+            <div id="returnRowTime" style="display:none;">
+              <label for="returnTime">Return Time</label>
+              <input id="returnTime" name="returnTime" type="time"/>
+              <div class="error" id="returnTime_error"></div>
+            </div>
+
+            <div>
+              <label for="outboundFlight">Flight Number (optional)</label>
+              <input id="outboundFlight" name="outboundFlight" placeholder="e.g. BA1395"/>
+            </div>
+
+            <div id="returnFlightWrapper" style="display:none;">
+              <label for="returnFlight">Return Flight Number (required)</label>
+              <input id="returnFlight" name="returnFlight" placeholder="e.g. EZY2023"/>
+              <div class="error" id="returnFlight_error"></div>
+            </div>
+
+            <div class="full">
+              <label>Extras</label>
+              <div class="row">
+                <label><input type="checkbox" id="childSeat" name="childSeat"> Child seat required</label>
+                <label><input type="checkbox" id="boosterSeat" name="boosterSeat"> Booster seat required</label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" placeholder="Any special requests…"></textarea>
+            </div>
+
+            <div class="full recaptcha-wrap">
+              <div class="g-recaptcha" data-sitekey="6Lf0K9krAAAAAK85_d2YmLerwLupzet8o_hZ-WNL"></div>
+            </div>
+
+            <div class="full">
+              <button class="btn-primary" id="submitBtn" type="submit">Submit Booking</button>
+              <div id="formBanner" class="banner" role="status" aria-live="polite"></div>
+              <div class="help">We’ll email you and confirm availability shortly.</div>
+            </div>
+          </div>
+        </form>
+
       </div>
     </div>
-  </section>
-
-  <!-- About Us -->
-  <section id="about">
-    <h2>About Northwest Airport Transfers</h2>
-    <p>
-      Northwest Airport Transfers is your trusted provider of 
-      <strong>airport taxis from Bolton and Wigan to Manchester Airport (MAN)</strong> 
-      and <strong>Liverpool John Lennon Airport (LPL)</strong>. 
-      We specialise in comfortable, reliable, and affordable transfers for both holidaymakers and business travellers.
-    </p>
-    <p>
-      All of our drivers are <strong>DBS checked</strong> and experienced, with excellent local knowledge of 
-      Bolton, Wigan, and the surrounding areas. Whether you need a 
-      <strong>Bolton taxi to Manchester Airport</strong> or a 
-      <strong>Wigan airport transfer to Liverpool Airport</strong>, 
-      our modern fleet of saloons and 8-seat minibuses ensures a smooth and stress-free journey every time.
-    </p>
-  </section>
-
-  <!-- Services -->
-  <section id="services">
-    <h2>Our Airport Transfer Services</h2>
-    <ul>
-      <li><strong>Bolton to Manchester Airport Taxi</strong> – direct transfers with flight tracking and fixed prices.</li>
-      <li><strong>Wigan to Manchester Airport Transfers</strong> – reliable, on-time service 24/7.</li>
-      <li><strong>Bolton to Liverpool Airport Taxi</strong> – comfortable journeys from Bolton to LPL for individuals or groups.</li>
-      <li><strong>Wigan to Liverpool Airport Transfers</strong> – affordable minibus and saloon taxis for family holidays or business travel.</li>
-      <li>Modern fleet: saloon cars, executive cars, and 8-seat minibuses.</li>
-      <li>DBS-checked, professional drivers with outstanding local knowledge.</li>
-      <li>24/7 availability with <strong>fixed prices</strong> and no hidden fees.</li>
-      <li>Child & booster seats available upon request (no extra charge).</li>
-    </ul>
-  </section>
-
-  <!-- Fleet -->
-  <section id="gallery">
-    <h2>Fleet Gallery</h2>
-    <div class="gallery">
-      <a href="mercedes-minibus.png"><img src="mercedes-minibus.png" alt="Bolton to Manchester Airport Minibus Transfer"/></a>
-      <a href="saloon-car.png"><img src="saloon-car.png" alt="Wigan to Manchester Airport Taxi Car"/></a>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section id="reviews">
-    <h2>Customer Reviews</h2>
-    <div class="reviews">
-      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“Excellent service, always on time and very professional.”<strong>– Sarah J.</strong></div>
-      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“Friendly driver, clean car, and smooth ride to the airport!”<strong>– James P.</strong></div>
-      <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“The best transfer company I've used in years.”<strong>– Emma R.</strong></div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq">
-      <h3>How much is a taxi from Bolton to Manchester Airport?</h3>
-      <p>Our fixed-price <strong>Bolton to Manchester Airport taxi service</strong> is competitively priced. Contact us on WhatsApp or call for the latest quote.</p>
-    </div>
-    <div class="faq">
-      <h3>Do you provide airport transfers from Wigan?</h3>
-      <p>Yes, we offer <strong>Wigan airport transfers</strong> to both Manchester and Liverpool airports. Whether you’re travelling alone or in a group, we have vehicles to suit your needs.</p>
-    </div>
-    <div class="faq">
-      <h3>Are your drivers DBS checked?</h3>
-      <p>All of our professional drivers are fully <strong>DBS checked</strong> and have excellent local knowledge of Bolton, Wigan, and the North West.</p>
-    </div>
-    <div class="faq">
-      <h3>Do you offer return journeys?</h3>
-      <p>Yes, you can book <strong>one-way or return airport transfers</strong>. Return bookings can be arranged at the time of booking for peace of mind.</p>
-    </div>
-    <div class="faq">
-      <h3>Do you provide child or booster seats?</h3>
-      <p>Yes, <strong>child and booster seats are available on request</strong> at no extra charge.</p>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Northwest Airport Transfers • All Rights Reserved</p>
-    <div class="links">
-      <a href="#booking">Book</a> | <a href="#about">About</a> | <a href="#services">Services</a> | 
-      <a href="#gallery">Fleet</a> | <a href="#reviews">Reviews</a> | <a href="#faq">FAQ</a>
-    </div>
-    <a class="call-btn" href="tel:+447520664620">📞 Call Us Now</a>
-  </footer>
-
-  <!-- Floating Buttons -->
-  <div class="floating-buttons">
-    <a href="https://wa.me/447520664620" target="_blank" class="float-whatsapp">💬</a>
-    <a href="tel:+447520664620" class="float-call">📞</a>
   </div>
+</section>
 
+<!-- About Us -->
+<section id="about">
+  <h2>About Northwest Airport Transfers</h2>
+  <p>Northwest Airport Transfers is your trusted provider of <strong>airport taxis from Bolton and Wigan to Manchester Airport (MAN)</strong> and <strong>Liverpool John Lennon Airport (LPL)</strong>. We specialise in comfortable, reliable, and affordable transfers for both holidaymakers and business travellers.</p>
+  <p>All of our drivers are <strong>DBS checked</strong> and experienced. Our modern fleet of saloons, MPVs and minibuses ensures a smooth and stress-free journey every time.</p>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <h2>Our Airport Transfer Services</h2>
+  <ul>
+    <li><strong>Bolton to Manchester Airport Taxi</strong> – direct transfers with flight tracking and fixed prices.</li>
+    <li><strong>Wigan to Manchester Airport Transfers</strong> – reliable, on-time service 24/7.</li>
+    <li><strong>Bolton to Liverpool Airport Taxi</strong> – comfortable journeys from Bolton to LPL for individuals or groups.</li>
+    <li><strong>Wigan to Liverpool Airport Transfers</strong> – affordable taxis and minibuses for families or business travel.</li>
+    <li>Modern fleet: saloons, executive cars, and 8-seat minibuses.</li>
+    <li>DBS-checked drivers with outstanding local knowledge.</li>
+    <li>24/7 availability with <strong>fixed prices</strong> and no hidden fees.</li>
+    <li>Child & booster seats available upon request (no extra charge).</li>
+  </ul>
+</section>
+
+<!-- Fleet -->
+<section id="gallery">
+  <h2>Fleet Gallery</h2>
+  <div class="gallery">
+    <img src="mercedes-minibus.png" alt="Mercedes Minibus for airport transfers"/>
+    <img src="saloon-car.png" alt="Saloon car for Manchester Airport taxi"/>
+    <img src="mpv.png" alt="MPV vehicle for Liverpool Airport transfers"/>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <h2>Customer Reviews</h2>
+  <div class="reviews">
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“Excellent service, always on time and very professional.”<strong>– Sarah J.</strong></div>
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“Friendly driver, clean car, and smooth ride to the airport!”<strong>– James P.</strong></div>
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>“The best transfer company I've used in years.”<strong>– Emma R.</strong></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq"><h3>How much is a taxi from Bolton to Manchester Airport?</h3><p>Our fixed-price <strong>Bolton to Manchester Airport taxi service</strong> is competitively priced. Contact us on WhatsApp or call for the latest quote.</p></div>
+  <div class="faq"><h3>Do you provide airport transfers from Wigan?</h3><p>Yes, we offer <strong>Wigan airport transfers</strong> to both Manchester and Liverpool airports.</p></div>
+  <div class="faq"><h3>Are your drivers DBS checked?</h3><p>All of our professional drivers are fully <strong>DBS checked</strong> with excellent local knowledge.</p></div>
+  <div class="faq"><h3>Do you offer return journeys?</h3><p>Yes, you can book <strong>one-way or return airport transfers</strong>. Return bookings can be arranged at the time of booking.</p></div>
+  <div class="faq"><h3>Do you provide child or booster seats?</h3><p>Yes, <strong>child and booster seats</strong> are available on request at no extra charge.</p></div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Northwest Airport Transfers • All Rights Reserved</p>
+  <div class="links">
+    <a href="#booking">Book</a> | <a href="#about">About</a> | <a href="#services">Services</a> | 
+    <a href="#gallery">Fleet</a> | <a href="#reviews">Reviews</a> | <a href="#faq">FAQ</a>
+  </div>
+  <a class="call-btn" href="tel:+447520664620">📞 Call Us Now</a>
+</footer>
+
+<!-- Floating Buttons -->
+<div class="floating-buttons" aria-label="Quick Contact">
+  <a href="https://wa.me/447520664620" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Chat on WhatsApp">💬</a>
+  <a href="tel:+447520664620" class="float-call" aria-label="Call us by phone">📞</a>
+</div>
+
+<!-- Scripts -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places" async defer></script>
+<script>
+/* ===== Google Places Autocomplete (UK) ===== */
+function initAutocomplete(){
+  const opts={componentRestrictions:{country:"uk"}};
+  if(window.google && google.maps && google.maps.places){
+    new google.maps.places.Autocomplete(document.getElementById("pickup"),opts);
+    new google.maps.places.Autocomplete(document.getElementById("dropoff"),opts);
+  }
+}
+window.addEventListener('load', initAutocomplete);
+
+/* ===== Form logic ===== */
+const form = document.getElementById('bookingForm');
+const banner = document.getElementById('formBanner');
+const journeyTypeEl = document.getElementById('journeyType');
+const returnElems = ['returnRowDate','returnRowTime','returnFlightWrapper'].map(id=>document.getElementById(id));
+function toggleReturn(){
+  const isReturn = journeyTypeEl.value === 'return';
+  returnElems.forEach(el=>el.style.display = isReturn ? 'block' : 'none');
+}
+journeyTypeEl.addEventListener('change', toggleReturn); toggleReturn();
+
+function setError(id,msg){const input=document.getElementById(id);const err=document.getElementById(id+'_error');if(!err)return;err.textContent=msg||'';if(msg){input&&input.classList.add('invalid')}else{input&&input.classList.remove('invalid')}}
+function require(id,label){const v=(document.getElementById(id).value||'').trim();if(!v){setError(id, label+' is required');return false} setError(id,'');return true}
+function validEmail(str){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)}
+
+async function postData(payload){
+  // TODO: replace with your deployed Apps Script web app URL:
+  const GAS_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_WEB_APP_ID/exec";
+  const res = await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  if(!res.ok) throw new Error('Network response was not ok');
+  return await res.json();
+}
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  banner.style.display='none'; banner.className='banner';
+
+  // Basic validation
+  let ok=true;
+  ok&=require('name','Full Name');
+  const emailVal=(document.getElementById('email').value||'').trim();
+  if(!emailVal || !validEmail(emailVal)){setError('email','Valid email is required'); ok=false} else setError('email','');
+  ok&=require('pickup','Pickup Location');
+  ok&=require('dropoff','Dropoff Location');
+  ok&=require('pickupDate','Pickup Date');
+  ok&=require('pickupTime','Pickup Time');
+
+  const isReturn = journeyTypeEl.value==='return';
+  if(isReturn){
+    ok&=require('returnDate','Return Date');
+    ok&=require('returnTime','Return Time');
+    ok&=require('returnFlight','Return Flight Number');
+  }
+
+  // reCAPTCHA check
+  const token = grecaptcha.getResponse();
+  if(!token){ banner.textContent="Please complete the reCAPTCHA."; banner.classList.add('error'); banner.style.display='block'; return }
+  if(!ok){ banner.textContent="Please correct the highlighted fields."; banner.classList.add('error'); banner.style.display='block'; return }
+
+  // Build payload
+  const payload = {
+    name: document.getElementById('name').value.trim(),
+    email: emailVal,
+    journeyType: journeyTypeEl.value,
+    pickup: document.getElementById('pickup').value.trim(),
+    dropoff: document.getElementById('dropoff').value.trim(),
+    pickupDate: document.getElementById('pickupDate').value,
+    pickupTime: document.getElementById('pickupTime').value,
+    returnDate: document.getElementById('returnDate').value || '',
+    returnTime: document.getElementById('returnTime').value || '',
+    outboundFlight: document.getElementById('outboundFlight').value.trim(),
+    returnFlight: document.getElementById('returnFlight').value.trim(),
+    passengers: document.getElementById('passengers').value,
+    childSeat: document.getElementById('childSeat').checked ? 'Yes':'No',
+    boosterSeat: document.getElementById('boosterSeat').checked ? 'Yes':'No',
+    notes: document.getElementById('notes').value.trim(),
+    recaptchaToken: token
+  };
+
+  // Submit
+  document.getElementById('submitBtn').disabled = true;
+  try{
+    const resp = await postData(payload);
+    if(resp && resp.status==='ok'){
+      banner.textContent = "✅ Thank you! Your booking has been received. A confirmation has been emailed to you.";
+      banner.classList.add('success'); banner.style.display='block';
+      form.reset(); grecaptcha.reset(); toggleReturn();
+    }else{
+      throw new Error(resp && resp.error ? resp.error : 'Unknown error');
+    }
+  }catch(err){
+    banner.textContent = "❌ Sorry, something went wrong sending your booking. Please try again or call us.";
+    banner.classList.add('error'); banner.style.display='block';
+    console.error(err);
+  }finally{
+    document.getElementById('submitBtn').disabled = false;
+  }
+});
+</script>
 </body>
 </html>
