@@ -74,6 +74,10 @@
     .banner.success{background:#e8f5e9;border-color:#c8e6c9;color:#1b5e20}
     .banner.error{background:#ffebee;border-color:#ffcdd2;color:#b71c1c}
 
+    /* Price box */
+    .price-box{margin-top:0.8rem;padding:0.9rem 1rem;border-radius:12px;background:#f0f7ff;border:1px solid #d6e6ff;display:none}
+    .price-box strong{font-size:1.1rem}
+
     /* Gallery, Reviews, FAQ */
     .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
     .gallery img{width:100%;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
@@ -142,7 +146,7 @@
       <!-- Right: Multi-step custom form -->
       <div class="booking-right">
         <div class="card">
-          <h3>Book a Transfer</h3>
+          <h3>Book a transfer / Get a quote</h3>
 
           <form id="bookingForm" novalidate>
             <!-- STEP 1: Journey & route -->
@@ -163,14 +167,21 @@
                 </div>
                 <div class="full">
                   <label for="pickup">Pickup Location</label>
-                  <input id="pickup" name="pickup" placeholder="Enter pickup address" required/>
+                  <input id="pickup" name="pickup" placeholder="Enter pickup address (Bolton or Wigan)" required/>
                   <div class="error" id="pickup_error"></div>
                 </div>
                 <div class="full">
                   <label for="dropoff">Dropoff Location</label>
-                  <input id="dropoff" name="dropoff" placeholder="Enter dropoff address or airport" required/>
+                  <input id="dropoff" name="dropoff" placeholder="Enter dropoff address or airport (Manchester/Liverpool)" required/>
                   <div class="error" id="dropoff_error"></div>
                 </div>
+              </div>
+              <!-- Live price box -->
+              <div id="priceBox" class="price-box">
+                <div id="priceText"><strong>Estimated Price:</strong> –</div>
+                <small id="priceNote" style="display:block;margin-top:.25rem;color:#3a5572">
+                  Price shown updates automatically from your selections.
+                </small>
               </div>
             </div>
 
@@ -366,6 +377,11 @@
     const banner = document.getElementById('formBanner');
     const journeyTypeEl = document.getElementById('journeyType');
     const returnBlocks = ['returnDateWrap','returnTimeWrap','returnFlightWrap'].map(id => document.getElementById(id));
+    const passengersEl = document.getElementById('passengers');
+    const pickupEl = document.getElementById('pickup');
+    const dropoffEl = document.getElementById('dropoff');
+    const priceBox = document.getElementById('priceBox');
+    const priceText = document.getElementById('priceText');
     let currentStep = 0;
 
     function showStep(i){
@@ -373,6 +389,7 @@
       prevBtn.disabled = (i===0);
       nextBtn.textContent = (i===steps.length-1) ? 'Submit Booking' : 'Next';
       banner.style.display='none';
+      if(i===0) updatePrice(); // show price early on step 1
       window.scrollTo({top: document.getElementById('booking').offsetTop - 20, behavior:'smooth'});
     }
 
@@ -380,7 +397,62 @@
       const isRet = journeyTypeEl.value === 'return';
       returnBlocks.forEach(b => b.style.display = isRet ? 'block' : 'none');
     }
-    journeyTypeEl.addEventListener('change', toggleReturn); toggleReturn();
+    journeyTypeEl.addEventListener('change', ()=>{ toggleReturn(); updatePrice(); });
+    passengersEl.addEventListener('change', updatePrice);
+    pickupEl.addEventListener('input', updatePrice);
+    dropoffEl.addEventListener('input', updatePrice);
+    toggleReturn();
+
+    // ====== Price rules ======
+    // Base (Bolton -> Manchester one-way): 1–2 = £40, 3 = £45, 4+ = £60
+    // Return = double one-way
+    // Wigan pickup: +£5
+    // Liverpool Airport: +£10
+    function normalise(str){ return (str||'').toLowerCase(); }
+    function detectTown(pickup){
+      const p = normalise(pickup);
+      if(p.includes('wigan')) return 'wigan';
+      if(p.includes('bolton')) return 'bolton';
+      return null;
+    }
+    function detectAirport(drop){
+      const d = normalise(drop);
+      if(d.includes('manchester') && d.includes('airport')) return 'manchester';
+      if(d.includes('liverpool') && d.includes('airport')) return 'liverpool';
+      return null;
+    }
+    function baseOneWay(passengers){
+      const p = passengers === '4+' ? 4 : parseInt(passengers||'1',10);
+      if(p<=2) return 40;
+      if(p===3) return 45;
+      return 60; // 4+
+    }
+    function calculatePrice(){
+      const jt = journeyTypeEl.value; // oneway | return
+      const town = detectTown(pickupEl.value);
+      const airport = detectAirport(dropoffEl.value);
+      const pax = passengersEl.value;
+
+      if(!town || !airport) return null; // not enough info
+      let price = baseOneWay(pax);
+
+      // modifiers
+      if(town==='wigan') price += 5;
+      if(airport==='liverpool') price += 10;
+      if(jt==='return') price *= 2;
+
+      return Math.round(price);
+    }
+    function updatePrice(){
+      const price = calculatePrice();
+      if(price!=null){
+        priceText.innerHTML = "<strong>Estimated Price:</strong> £" + price;
+        priceBox.style.display = 'block';
+      }else{
+        priceText.innerHTML = "<strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)";
+        priceBox.style.display = 'block';
+      }
+    }
 
     function stepValid(){
       // Validate required fields only within the active step
@@ -412,7 +484,6 @@
       if (currentStep < steps.length-1){
         currentStep++; showStep(currentStep);
       } else {
-        // Submit
         await submitBooking();
       }
     });
@@ -429,7 +500,7 @@
         email: val('email'),
         phone: val('phone'),
         journeyType: journeyTypeEl.value,
-        passengers: val('passengers') || document.getElementById('passengers').value,
+        passengers: passengersEl.value,
         pickup: val('pickup'),
         dropoff: val('dropoff'),
         pickupDate: val('pickupDate'),
@@ -441,7 +512,9 @@
         childSeat: document.getElementById('childSeat').checked ? 'Yes' : 'No',
         boosterSeat: document.getElementById('boosterSeat').checked ? 'Yes' : 'No',
         notes: val('notes'),
-        recaptchaToken: grecaptcha.getResponse()
+        recaptchaToken: grecaptcha.getResponse(),
+        // Send computed price too (helpful in your sheet/email)
+        quotedPrice: calculatePrice()
       };
 
       if (!GAS_URL || GAS_URL.includes('REPLACE_WITH_YOUR_WEB_APP_ID')){
@@ -458,7 +531,7 @@
           banner.className = 'banner success'; banner.style.display='block';
           document.getElementById('bookingForm').reset();
           grecaptcha.reset();
-          currentStep = 0; toggleReturn(); showStep(currentStep);
+          currentStep = 0; toggleReturn(); showStep(currentStep); updatePrice();
         } else {
           throw new Error(json.error || json.message || 'Unknown error');
         }
