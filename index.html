@@ -3,87 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Northwest Airport Transfers | Bolton & Wigan Taxis to Manchester & Liverpool Airports</title>
-  <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester & Liverpool airports. Fixed prices, DBS checked drivers, modern vehicles, corporate travel options, and 24/7 service."/>
-  <meta name="keywords" content="Bolton airport taxi, Wigan airport transfers, Manchester airport taxi, Liverpool airport taxi, minibus airport transfers, corporate airport travel Bolton, executive taxis Wigan"/>
+  <title>Northwest Airport Transfers | Bolton & Wigan Taxis</title>
+  <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester & Liverpool. Fixed prices, DBS drivers, modern minibuses, corporate travel & family friendly."/>
   <link rel="icon" type="image/png" href="favicon.png"/>
-  <link rel="canonical" href="https://northwest-airport-transfers.vercel.app/" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Northwest Airport Transfers | Bolton & Wigan to Manchester & Liverpool"/>
-  <meta property="og:description" content="Trusted airport transfers with modern vehicles and fixed prices. Covering Bolton, Wigan, Manchester Airport & Liverpool Airport."/>
-  <meta property="og:image" content="https://northwest-airport-transfers.vercel.app/mercedes-minibus.png"/>
-  <meta property="og:url" content="https://northwest-airport-transfers.vercel.app/"/>
-  <meta property="og:type" content="website"/>
 
   <style>
     :root{--primary:#0A2239;--accent:#1E90FF;--light:#f4f4f4;--text:#333}
-    body{margin:0;font-family:Poppins,Arial,sans-serif;background:var(--light);color:var(--text);line-height:1.6}
-    header{background:var(--primary);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
+    body{margin:0;font-family:Poppins,Arial,sans-serif;background:var(--light);color:var(--text)}
+    header{background:var(--primary);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
     header img{height:60px}
-    nav{display:flex;gap:1rem}
-    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a{color:#fff;text-decoration:none;margin:0 .6rem;font-weight:600}
     nav a:hover{color:var(--accent)}
-    .hero{background:url('mercedes-minibus.png') center/cover no-repeat;color:#fff;text-align:center;padding:6rem 2rem;position:relative}
+    .hero{background:url('mercedes-minibus.png') center/cover no-repeat;color:#fff;text-align:center;padding:5rem 2rem;position:relative}
     .hero::after{content:"";position:absolute;inset:0;background:rgba(10,34,57,.65)}
     .hero h1,.hero p{position:relative;z-index:2}
-    .hero h1{font-size:2.8rem;margin:0}
-    .hero p{font-size:1.2rem}
+    .hero h1{font-size:2.5rem;margin:0}
     section{max-width:1100px;margin:auto;padding:3rem 1rem}
-    h2{color:var(--primary);text-align:center;margin-bottom:1.2rem}
+    h2{color:var(--primary);text-align:center}
 
-    /* Booking layout */
+    /* Booking form */
     #booking{position:relative}
-    #booking::before{content:"";background:url('A_logo_for_Northwest_Airport_Transfers.png') center/250px no-repeat;opacity:0.05;position:absolute;inset:0;z-index:0}
+    #booking::before{content:"";background:url('A_logo_for_Northwest_Airport_Transfers.png') center/250px no-repeat;opacity:0.05;position:absolute;inset:0}
     .booking-container{display:flex;gap:2rem;flex-wrap:wrap;position:relative;z-index:1}
-    .booking-left,.booking-right{flex:1;min-width:300px}
-    .card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 5px 18px rgba(0,0,0,.1)}
-
-    .booking-left ul{list-style:none;padding:0;margin:0}
-    .booking-left li{margin:.5rem 0}
-    .booking-left h3{margin-bottom:.8rem}
-
-    .booking-right h3{text-align:center;margin:0.5rem 0 1rem}
-    .booking-right img{display:block;margin:0 auto 0.6rem;max-width:120px;height:auto}
-
-    /* Form */
-    form label{font-weight:600;display:block;margin-top:0.8rem}
-    form input,form select,form textarea{width:100%;padding:.7rem;border:1px solid #ccc;border-radius:6px;margin-top:.3rem}
-    .form-row{display:flex;gap:1rem}
-    .form-row>div{flex:1}
-    #priceBox{margin-top:1rem;padding:1rem;background:#f0f8ff;border:1px solid #1E90FF;border-radius:8px;font-weight:700;text-align:center}
+    .card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1);flex:1;min-width:300px}
+    .card img{display:block;margin:0 auto 1rem;max-width:120px}
+    form label{display:block;font-weight:600;margin-top:0.8rem}
+    form input,form select,form textarea{width:100%;padding:.7rem;margin-top:.3rem;border:1px solid #ccc;border-radius:6px}
+    .form-step{display:none}
+    .form-step.active{display:block}
+    .form-nav{margin-top:1rem;display:flex;justify-content:space-between}
+    .form-nav button{background:var(--accent);color:#fff;padding:.8rem 1.2rem;border:none;border-radius:6px;font-weight:600;cursor:pointer}
+    .form-nav button:hover{background:#005bb5}
+    #priceBox{margin-top:1rem;padding:1rem;background:#f0f8ff;border:1px solid var(--accent);border-radius:8px;font-weight:700;text-align:center}
     .g-recaptcha{margin:1rem 0}
-    button{background:var(--accent);color:#fff;padding:.9rem;width:100%;border:none;border-radius:6px;font-weight:700;cursor:pointer}
-    button:hover{background:#005bb5}
-
-    /* Gallery & Reviews */
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
-    .gallery img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
-    .review{background:#fff;padding:1rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-    .stars{color:gold}
-
-    footer{background:var(--primary);color:#fff;text-align:center;padding:2rem 1rem}
-    footer img{height:60px;margin-bottom:0.5rem}
-
-    /* Floating buttons */
+    #formMessage{text-align:center;margin-top:1rem;font-weight:600}
+    footer{background:var(--primary);color:#fff;text-align:center;padding:2rem 1rem;margin-top:2rem}
+    footer img{height:60px;margin-bottom:.5rem}
     .floating-buttons{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:12px;z-index:2000}
     .floating-buttons a{padding:.9rem 1.2rem;border-radius:50%;color:#fff;text-align:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(0,0,0,.3);text-decoration:none}
     .float-whatsapp{background:#25d366}
     .float-call{background:var(--accent)}
-    .floating-buttons a:hover{transform:scale(1.1)}
   </style>
 </head>
 <body>
 
 <header>
-  <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo"/>
+  <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Logo"/>
   <nav>
     <a href="#booking">Book Transfer</a>
-    <a href="#about">About Us</a>
+    <a href="#about">About</a>
     <a href="#services">Services</a>
-    <a href="#corporate">Corporate Travel</a>
-    <a href="#modern">Modern Vehicles</a>
     <a href="#gallery">Fleet</a>
     <a href="#reviews">Reviews</a>
     <a href="#faq">FAQ</a>
@@ -96,116 +65,86 @@
   <p>Trusted • Reliable • Professional • Fixed Prices</p>
 </div>
 
-<!-- Booking -->
 <section id="booking">
   <div class="booking-container">
-    <div class="booking-left card">
+    <div class="card">
       <h3>Why Book With Us?</h3>
       <ul>
-        <li>✅ Fleet of modern, comfortable vehicles</li>
+        <li>✅ Fleet of modern vehicles & minibuses</li>
         <li>✅ DBS-checked professional drivers</li>
-        <li>✅ Corporate travel & business contracts welcomed</li>
-        <li>✅ Family friendly – child & booster seats on request</li>
+        <li>✅ Corporate & family travel</li>
+        <li>✅ Child & booster seats on request</li>
         <li>✅ Flight tracking for delays</li>
-        <li>✅ Fixed prices with no hidden fees</li>
+        <li>✅ Fixed transparent pricing</li>
       </ul>
     </div>
 
-    <div class="booking-right card">
+    <div class="card">
       <img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Logo"/>
-      <h3>Book a Transfer / Get a Quote</h3>
+      <h3 style="text-align:center">Book a Transfer / Get a Quote</h3>
       <form id="bookingForm">
-        <label>Pickup Location</label>
-        <input type="text" id="pickup" required/>
+        <!-- Step 1 -->
+        <div class="form-step active">
+          <label>Pickup Location</label>
+          <input type="text" id="pickup" required/>
+          <label>Dropoff Location</label>
+          <select id="dropoff" required>
+            <option value="">-- Select --</option>
+            <option value="manchester">Manchester Airport (MAN)</option>
+            <option value="liverpool">Liverpool Airport (LPL)</option>
+          </select>
+        </div>
 
-        <label>Dropoff Location</label>
-        <select id="dropoff" required>
-          <option value="">-- Select --</option>
-          <option value="manchester">Manchester Airport (MAN)</option>
-          <option value="liverpool">Liverpool Airport (LPL)</option>
-        </select>
+        <!-- Step 2 -->
+        <div class="form-step">
+          <label>Journey Type</label>
+          <select id="journey" required>
+            <option value="oneway">One Way</option>
+            <option value="return">Return</option>
+          </select>
+          <label>Passengers</label>
+          <select id="passengers" required>
+            <option value="1-2">1-2</option>
+            <option value="3">3</option>
+            <option value="4+">4+</option>
+          </select>
+        </div>
 
-        <label>Journey Type</label>
-        <select id="journey" required>
-          <option value="oneway">One Way</option>
-          <option value="return">Return</option>
-        </select>
+        <!-- Step 3 -->
+        <div class="form-step">
+          <label>Pickup Date</label>
+          <input type="date" id="pickupDate" required/>
+          <label>Pickup Time</label>
+          <input type="time" id="pickupTime" required/>
+          <label>Return Date</label>
+          <input type="date" id="returnDate"/>
+          <label>Return Flight Number</label>
+          <input type="text" id="returnFlight"/>
+        </div>
 
-        <label>Passengers</label>
-        <select id="passengers" required>
-          <option value="1-2">1-2</option>
-          <option value="3">3</option>
-          <option value="4+">4+</option>
-        </select>
+        <!-- Step 4 -->
+        <div class="form-step">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email"/>
+          <label>Notes</label>
+          <textarea id="notes"></textarea>
+          <div id="priceBox">Enter details to see price</div>
+        </div>
 
-        <div id="priceBox">Enter details to see price</div>
+        <!-- Step 5 -->
+        <div class="form-step">
+          <div class="g-recaptcha" data-sitekey="6LcK2NorAAAAAEqyQ6rUev8DxVSKbA7Yy9_pXj3l"></div>
+          <button type="submit">Submit Booking</button>
+        </div>
 
-        <label>Pickup Date</label>
-        <input type="date" id="pickupDate" required/>
-        <label>Pickup Time</label>
-        <input type="time" id="pickupTime" required/>
-
-        <label>Return Date</label>
-        <input type="date" id="returnDate"/>
-        <label>Return Flight Number</label>
-        <input type="text" id="returnFlight"/>
-
-        <label>Notes</label>
-        <textarea id="notes"></textarea>
-
-        <div class="g-recaptcha" data-sitekey="6LcK2NorAAAAAEqyQ6rUev8DxVSKbA7Yy9_pXj3l"></div>
-        <button type="submit">Submit Booking</button>
+        <div class="form-nav">
+          <button type="button" id="prevBtn">⬅ Back</button>
+          <button type="button" id="nextBtn">Next ➡</button>
+        </div>
       </form>
       <div id="formMessage"></div>
     </div>
   </div>
-</section>
-
-<!-- Other Sections (About, Services, Corporate, Modern, Gallery, Reviews, FAQ, Footer) -->
-<section id="about">
-  <h2>About Us</h2>
-  <p>Northwest Airport Transfers provides reliable airport transfers from Bolton & Wigan...</p>
-</section>
-
-<section id="services">
-  <h2>Our Services</h2>
-  <ul>
-    <li>Bolton to Manchester Airport</li>
-    <li>Wigan to Manchester Airport</li>
-    <li>Bolton to Liverpool Airport</li>
-    <li>Wigan to Liverpool Airport</li>
-  </ul>
-</section>
-
-<section id="corporate">
-  <h2>Corporate Travel</h2>
-  <p>We provide professional executive travel for businesses and contracts.</p>
-</section>
-
-<section id="modern">
-  <h2>Modern Vehicles</h2>
-  <p>Our fleet includes modern saloons, executive cars, and 8-seat minibuses.</p>
-</section>
-
-<section id="gallery">
-  <h2>Fleet Gallery</h2>
-  <div class="gallery">
-    <img src="mercedes-minibus.png" alt="Minibus"/>
-    <img src="saloon-car.png" alt="Car"/>
-  </div>
-</section>
-
-<section id="reviews">
-  <h2>Customer Reviews</h2>
-  <div class="reviews">
-    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>Great service!</div>
-    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div>On time and reliable.</div>
-  </div>
-</section>
-
-<section id="faq">
-  <h2>FAQ</h2>
-  <p>Common customer questions and answers...</p>
 </section>
 
 <footer>
@@ -222,36 +161,58 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places"></script>
 <script>
 function initAutocomplete(){
-  new google.maps.places.Autocomplete(document.getElementById("pickup"), { componentRestrictions:{ country:"uk" }});
+  new google.maps.places.Autocomplete(document.getElementById("pickup"), {componentRestrictions:{country:"uk"}});
 }
 window.onload=initAutocomplete;
 
-// Price Calculator
+// Form step navigation
+let currentStep=0;
+const steps=document.querySelectorAll(".form-step");
+document.getElementById("nextBtn").onclick=()=>{if(currentStep<steps.length-1){steps[currentStep].classList.remove("active");currentStep++;steps[currentStep].classList.add("active");}};
+document.getElementById("prevBtn").onclick=()=>{if(currentStep>0){steps[currentStep].classList.remove("active");currentStep--;steps[currentStep].classList.add("active");}};
+
+// Price calculator
 function calculatePrice(){
   const drop=document.getElementById("dropoff").value;
   const journey=document.getElementById("journey").value;
   const pax=document.getElementById("passengers").value;
   let base=0;
-  if(drop==="manchester"){
-    if(pax==="1-2") base=40;
-    if(pax==="3") base=45;
-    if(pax==="4+") base=60;
-  } else if(drop==="liverpool"){
-    if(pax==="1-2") base=50;
-    if(pax==="3") base=55;
-    if(pax==="4+") base=70;
-  }
+  if(drop==="manchester"){if(pax==="1-2") base=40;if(pax==="3") base=45;if(pax==="4+") base=60;}
+  if(drop==="liverpool"){if(pax==="1-2") base=50;if(pax==="3") base=55;if(pax==="4+") base=70;}
   if(journey==="return") base*=2;
   document.getElementById("priceBox").innerText= base>0 ? "Estimated Price: £"+base : "Enter details to see price";
 }
-["dropoff","journey","passengers"].forEach(id=>{
-  document.getElementById(id).addEventListener("change",calculatePrice);
-});
+["dropoff","journey","passengers"].forEach(id=>{document.getElementById(id).addEventListener("change",calculatePrice);});
 
-// Form submission (placeholder – link to GAS or email backend)
-document.getElementById("bookingForm").addEventListener("submit",function(e){
+// Apps Script submit
+const GAS_URL="YOUR_GAS_WEBAPP_URL";
+document.getElementById("bookingForm").addEventListener("submit",async function(e){
   e.preventDefault();
-  document.getElementById("formMessage").innerHTML="<p style='color:green'>✅ Booking received! We'll confirm shortly.</p>";
+  const bookingData={
+    pickup:document.getElementById("pickup").value,
+    dropoff:document.getElementById("dropoff").value,
+    journey:document.getElementById("journey").value,
+    passengers:document.getElementById("passengers").value,
+    pickupDate:document.getElementById("pickupDate").value,
+    pickupTime:document.getElementById("pickupTime").value,
+    returnDate:document.getElementById("returnDate").value,
+    returnFlight:document.getElementById("returnFlight").value,
+    email:document.getElementById("email").value,
+    notes:document.getElementById("notes").value,
+    price:document.getElementById("priceBox").innerText.replace("Estimated Price: £","")
+  };
+  try{
+    const res=await fetch(GAS_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(bookingData)});
+    const result=await res.json();
+    if(result.status==="success"){
+      document.getElementById("formMessage").innerHTML="<p style='color:green'>✅ Booking sent! Check your email for confirmation.</p>";
+      document.getElementById("bookingForm").reset();
+    }else{
+      document.getElementById("formMessage").innerHTML="<p style='color:red'>❌ Error: "+result.message+"</p>";
+    }
+  }catch(err){
+    document.getElementById("formMessage").innerHTML="<p style='color:red'>❌ Failed to send booking.</p>";
+  }
 });
 </script>
 </body>
