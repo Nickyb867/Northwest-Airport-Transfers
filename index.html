@@ -639,7 +639,26 @@
       }
 
       try{
-        const res = await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+       try {
+  const res = await fetch(GAS_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  banner.textContent = "Your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
+  banner.className = "banner success";
+  banner.style.display = "block";
+  document.getElementById("bookingForm").reset();
+  grecaptcha.reset();
+  setStep(0); toggleReturn(); updatePrice();
+} catch (err) {
+  console.error("Submission error:", err);
+  banner.textContent = "❌ Sorry, something went wrong sending your booking. Please try again or call us.";
+  banner.className = "banner error";
+  banner.style.display = "block";
+}
+
         const json = await res.json().catch(()=> ({}));
         if (res.ok && (json.status==='ok' || json.status==='success' || json.result==='success')){
           banner.textContent = "your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
