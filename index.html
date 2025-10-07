@@ -475,7 +475,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places" async defer></script>
 
   <script>
-    // ===== CONFIG: paste your Apps Script Web App URL (ends with /exec) =====
+    // ===== CONFIG (your live Apps Script endpoint) =====
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwiw0Q67JWvbdEFkcGbdxiBxJq9kiMc7_oxBr2LSq45qN6cngm5_iga0oq6EMlygW3u5Q/exec";
 
     // ===== Google Places Autocomplete =====
@@ -572,14 +572,11 @@
     });
 
     function stepValid(){
-      // Check required fields only in the active step
       const req = steps[currentStep].querySelectorAll('[required]');
       for (const el of req){ if(!el.value.trim()) return false; }
-      // Final step: reCAPTCHA must be completed
       if (currentStep === steps.length-1){
         if (grecaptcha.getResponse()==="") return false;
       }
-      // If return, ensure required return fields are present
       if (journeyEl.value==='return'){
         const fields = ['returnDate','returnTime','returnFlight'];
         for (const id of fields){
@@ -607,73 +604,44 @@
     toggleReturn();
     updatePrice();
 
-    // ===== Submit to Apps Script =====
     function val(id){ return (document.getElementById(id)?.value || '').trim(); }
 
+    // ===== Submit to Apps Script using FormData + no-cors (reliably triggers doPost) =====
     async function submitBooking(){
       nextBtn.disabled = true; prevBtn.disabled = true;
 
-      const payload = {
-        name: val('name'),
-        phone: val('phone'),
-        journeyType: journeyEl.value,
-        passengers: passengersEl.value,
-        pickup: val('pickup'),
-        dropoff: (dropoffEl.options[dropoffEl.selectedIndex]?.text || '').trim(),
-        pickupDate: val('pickupDate'),
-        pickupTime: val('pickupTime'),
-        returnDate: val('returnDate'),
-        returnTime: val('returnTime'),
-        returnFlight: val('returnFlight'),
-        childSeat: document.getElementById('childSeat').checked ? 'Yes' : 'No',
-        boosterSeat: document.getElementById('boosterSeat').checked ? 'Yes' : 'No',
-        notes: val('notes'),
-        recaptchaToken: grecaptcha.getResponse(),
-        quotedPrice: calculatePrice()
-      };
+      const formData = new FormData();
+      formData.append("name", val("name"));
+      formData.append("phone", val("phone"));
+      formData.append("journeyType", journeyEl.value);
+      formData.append("passengers", passengersEl.value);
+      formData.append("pickup", val("pickup"));
+      formData.append("dropoff", (dropoffEl.options[dropoffEl.selectedIndex]?.text || "").trim());
+      formData.append("pickupDate", val("pickupDate"));
+      formData.append("pickupTime", val("pickupTime"));
+      formData.append("returnDate", val("returnDate"));
+      formData.append("returnTime", val("returnTime"));
+      formData.append("returnFlight", val("returnFlight"));
+      formData.append("childSeat", document.getElementById("childSeat").checked ? "Yes" : "No");
+      formData.append("boosterSeat", document.getElementById("boosterSeat").checked ? "Yes" : "No");
+      formData.append("notes", val("notes"));
+      formData.append("recaptchaToken", grecaptcha.getResponse());
+      formData.append("quotedPrice", calculatePrice());
 
-      if (!GAS_URL || GAS_URL.includes('AKfycbwiw0Q67JWvbdEFkcGbdxiBxJq9kiMc7_oxBr2LSq45qN6cngm5_iga0oq6EMlygW3u5Q')){
-        banner.textContent = "Form is ready. Add your Google Apps Script Web App URL to GAS_URL first.";
-        banner.className = 'banner error'; banner.style.display='block';
-        nextBtn.disabled = false; prevBtn.disabled = false; return;
-      }
+      try {
+        await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: formData });
 
-      try{
-       try {
-  const res = await fetch(GAS_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-  banner.textContent = "Your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
-  banner.className = "banner success";
-  banner.style.display = "block";
-  document.getElementById("bookingForm").reset();
-  grecaptcha.reset();
-  setStep(0); toggleReturn(); updatePrice();
-} catch (err) {
-  console.error("Submission error:", err);
-  banner.textContent = "❌ Sorry, something went wrong sending your booking. Please try again or call us.";
-  banner.className = "banner error";
-  banner.style.display = "block";
-}
+        banner.textContent = "✅ Your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
+        banner.className = "banner success"; banner.style.display = "block";
 
-        const json = await res.json().catch(()=> ({}));
-        if (res.ok && (json.status==='ok' || json.status==='success' || json.result==='success')){
-          banner.textContent = "your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
-          banner.className = 'banner success'; banner.style.display='block';
-          document.getElementById('bookingForm').reset();
-          grecaptcha.reset();
-          setStep(0); toggleReturn(); updatePrice();
-        } else {
-          throw new Error(json.error || json.message || 'Unknown error');
-        }
-      }catch(err){
-        console.error(err);
+        document.getElementById("bookingForm").reset();
+        grecaptcha.reset();
+        setStep(0); toggleReturn(); updatePrice();
+      } catch (err) {
+        console.error("Submission error:", err);
         banner.textContent = "❌ Sorry, something went wrong sending your booking. Please try again or call us.";
-        banner.className = 'banner error'; banner.style.display='block';
-      }finally{
+        banner.className = "banner error"; banner.style.display = "block";
+      } finally {
         nextBtn.disabled = false; prevBtn.disabled = false;
       }
     }
