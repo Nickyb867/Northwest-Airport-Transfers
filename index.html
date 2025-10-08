@@ -536,5 +536,59 @@
     // Init
     showStep(0);
   </script>
+  <!-- Floating WhatsApp & Call Buttons -->
+<style>
+  .floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+  }
+  .floating-buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 26px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .floating-buttons a:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  .whatsapp-btn {
+    background-color: #25d366;
+  }
+  .call-btn {
+    background-color: #002244;
+  }
+  @media(max-width:600px) {
+    .floating-buttons a {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+    }
+  }
+</style>
+
+<div class="floating-buttons" aria-label="Quick contact buttons">
+  <!-- WhatsApp -->
+  <a class="whatsapp-btn" href="https://wa.me/447900123456?text=Hi%20Northwest%20Airport%20Transfers%2C%20I%27d%20like%20to%20book%20an%20airport%20transfer." target="_blank" rel="noopener" title="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16.003 2.007A13.93 13.93 0 0 0 2.003 16.005c0 2.474.646 4.885 1.875 7.011L2 30l7.206-1.857a13.967 13.967 0 0 0 6.797 1.709h.001a13.933 13.933 0 0 0 14.002-13.896A13.935 13.935 0 0 0 16.003 2.007zm7.943 19.856c-.334.942-1.96 1.797-2.703 1.903-.693.099-1.58.141-2.552-.16a11.486 11.486 0 0 1-2.561-1.119 17.58 17.58 0 0 1-5.772-5.139 6.7 6.7 0 0 1-1.46-3.492c-.063-.655.195-1.404.82-1.698.217-.105.493-.153.775-.153.149 0 .284.007.404.012.131.007.309-.05.482.368.173.419.587 1.445.639 1.55.05.105.08.224.016.361-.065.138-.097.224-.194.347-.098.123-.205.273-.293.367-.097.103-.198.215-.086.417.111.202.496.815 1.065 1.321.733.65 1.353.852 1.548.947.195.095.308.08.419-.048.111-.127.482-.563.612-.756.13-.192.259-.161.432-.097.174.064 1.104.523 1.292.618.188.095.313.143.361.222.047.08.047.921-.287 1.863z"/></svg>
+  </a>
+
+  <!-- Call -->
+  <a class="call-btn" href="tel:+447900123456" title="Call us now">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1.003 1.003 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1v3.56a1 1 0 0 1-1 1C10.19 22.07 2 13.88 2 3.98a1 1 0 0 1 1-1h3.56a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57.09.33.02.68-.24.93l-2.27 2.31z"/></svg>
+  </a>
+</div>
+
 </body>
 </html>
