@@ -56,10 +56,9 @@ nav a:hover {
   position: relative;
 }
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 34, 57, 0.6);
+  background: rgba(0, 0, 0, 0.55);
+}
+
 }
 .hero h1, .hero p {
   position: relative;
