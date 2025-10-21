@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Northwest Airport Transfers | Bolton & Wigan Taxis</title>
-  <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester & Liverpool. Fixed prices, DBS-checked drivers, modern vehicles, corporate travel, child & booster seats."/>
-  <link rel="icon" type="image/png" href="assets/favicon.png"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Northwest Airport Transfers | Bolton & Wigan Taxis to Manchester & Liverpool Airports</title>
+
+  <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester & Liverpool Airports. Fixed prices, DBS-checked drivers, modern vehicles, and 24/7 service." />
+
+  <link rel="icon" type="image/png" href="assets/A_logo_for_Northwest_Airport_Transfers.png" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Google reCAPTCHA + Places -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places" async defer></script>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header id="main-header"></header>
+  <!-- Header -->
+  <header>
+    <img src="./assets/A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo" />
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="booking.html">Book</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="faq.html">FAQ</a>
+      <a href="tel:+447520664620">Call</a>
+    </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- Hero -->
+  <div class="hero">
     <h1>Bolton & Wigan Airport Transfers</h1>
     <p>Trusted • Reliable • Professional • Fixed Prices</p>
     <a href="booking.html" class="btn btn-primary">Book a Transfer</a>
-  </section>
+  </div>
 
-  <!-- WHY BOOK -->
+  <!-- Why Book With Us -->
   <section class="why">
     <h2>Why Book With Us?</h2>
     <ul>
       <li>Fleet of modern, comfortable vehicles</li>
       <li>DBS-checked, professional drivers</li>
-      <li>Corporate travel & business contracts welcomed</li>
+      <li>Corporate travel & business accounts available</li>
       <li>Family friendly – child & booster seats on request</li>
       <li>Flight tracking for delays</li>
       <li>Fixed prices with no hidden fees</li>
@@ -34,33 +50,61 @@
     </ul>
   </section>
 
-  <!-- SHORT BOOKING FORM -->
-  <section id="quick-book">
-    <h2>Quick Booking Enquiry</h2>
+  <!-- Quick Booking Form -->
+  <section id="quick-booking">
+    <h2>Get an Instant Quote</h2>
     <form id="quickBookingForm">
-      <label>Collection Location</label>
-      <input type="text" id="pickupShort" name="pickup" placeholder="Enter pickup address" required/>
+      <label for="pickupShort">Collection Location</label>
+      <input id="pickupShort" placeholder="Enter collection address (Bolton or Wigan)" required />
 
-      <label>Destination Airport</label>
+      <label for="dropoffShort">Drop-off Airport</label>
       <select id="dropoffShort" required>
         <option value="">-- Select Airport --</option>
-        <option value="manchester">Manchester (MAN)</option>
-        <option value="liverpool">Liverpool (LPL)</option>
+        <option value="manchester">Manchester Airport (MAN)</option>
+        <option value="liverpool">Liverpool Airport (LPL)</option>
       </select>
 
-      <label>Passengers</label>
+      <label for="passengersShort">Passengers</label>
       <select id="passengersShort" required>
-        <option>1</option><option>2</option><option>3</option><option>4+</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4+</option>
       </select>
 
-      <button type="submit" class="btn btn-primary">Get Quote</button>
+      <button type="submit" class="btn btn-primary">Calculate Price</button>
+      <div id="quickPrice" class="price-box" style="display:none;"></div>
     </form>
-    <div id="quickPrice" class="price-box" style="display:none;"></div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="main-footer"></footer>
+  <!-- About -->
+  <section id="about">
+    <h2>About Northwest Airport Transfers</h2>
+    <p>We provide reliable <strong>airport transfers from Bolton and Wigan</strong> to both <strong>Manchester Airport (MAN)</strong> and <strong>Liverpool John Lennon Airport (LPL)</strong>. Our drivers are fully <strong>DBS checked</strong>, professional, and friendly — ensuring a safe and stress-free journey every time.</p>
+    <p>Our modern fleet includes saloons, executive cars, MPVs, and 8-seat minibuses — ideal for business travellers and families alike.</p>
+  </section>
 
+  <!-- Footer -->
+  <footer>
+    <img src="./assets/A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo" />
+    <p>&copy; 2025 Northwest Airport Transfers • All Rights Reserved</p>
+    <div>
+      <a href="index.html">Home</a> |
+      <a href="booking.html">Book</a> |
+      <a href="about.html">About</a> |
+      <a href="services.html">Services</a> |
+      <a href="faq.html">FAQ</a>
+    </div>
+    <a class="call-btn" href="tel:+447520664620">📞 Call Us Now</a>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/447520664620" target="_blank" class="float-whatsapp" aria-label="Chat on WhatsApp">💬</a>
+    <a href="tel:+447520664620" class="float-call" aria-label="Call us by phone">📞</a>
+  </div>
+
+  <!-- JS -->
   <script src="js/main.js"></script>
 </body>
 </html>
