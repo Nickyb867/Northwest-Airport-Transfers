@@ -1,11 +1,12 @@
 :root {
-  --primary: #0A2239;
-  --accent: #1E90FF;
-  --light: #f6f7fb;
-  --text: #333;
-  --ok: #2e7d32;
-  --err: #b71c1c;
+  --primary: #001f3f;        /* deeper navy */
+  --accent: #0074D9;         /* bold blue */
+  --light: #f9fafc;          /* cleaner background */
+  --text: #1a1a1a;
+  --ok: #2ecc40;
+  --err: #ff4136;
 }
+
 
 * { box-sizing: border-box; }
 
