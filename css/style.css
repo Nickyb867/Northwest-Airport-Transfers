@@ -1,0 +1,193 @@
+:root {
+  --primary: #0A2239;
+  --accent: #1E90FF;
+  --light: #f6f7fb;
+  --text: #333;
+  --ok: #2e7d32;
+  --err: #b71c1c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Header + Nav */
+header {
+  background: var(--primary);
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header img {
+  height: 58px;
+}
+nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+nav a:hover {
+  color: var(--accent);
+}
+@media (max-width: 768px) {
+  header img { height: 46px; }
+  nav { font-size: 0.9rem; }
+}
+
+/* Hero Section */
+.hero {
+  background: url('../assets/mercedes-minibus.png') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 6rem 1.25rem;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 34, 57, 0.6);
+}
+.hero h1, .hero p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.85rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Sections */
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+h2 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Why Book With Us */
+.why ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.why li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+.why li::before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Booking Forms */
+form label {
+  font-weight: 600;
+  display: block;
+  margin-top: 0.75rem;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #cfd3d8;
+  border-radius: 8px;
+}
+.price-box {
+  margin-top: 1rem;
+  background: #f0f7ff;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #d6e6ff;
+}
+
+/* Footer */
+footer {
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+footer img {
+  height: 60px;
+  margin-bottom: 0.5rem;
+}
+footer a {
+  color: #dfe6ee;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+footer a:hover {
+  color: var(--accent);
+}
+.call-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2000;
+}
+.floating-buttons a {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.float-whatsapp { background: #25d366; }
+.float-call { background: var(--accent); }
