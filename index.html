@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Northwest Airport Transfers | Bolton & Wigan Taxis to Manchester & Liverpool Airports</title>
   <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester (MAN) & Liverpool (LPL). Fixed prices, DBS-checked drivers, modern vehicles, corporate travel, child & booster seats."/>
-  <link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="canonical" href="https://northwest-airport-transfers.vercel.app/" />
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <link rel="canonical" href="https://northwest-airport-transfers.vercel.app/" />
 
   <meta property="og:title" content="Northwest Airport Transfers | Bolton & Wigan to Manchester & Liverpool"/>
   <meta property="og:description" content="Trusted airport transfers with modern vehicles and fixed prices. Covering Bolton, Wigan, Manchester Airport & Liverpool Airport."/>
@@ -221,8 +221,22 @@
                   <label for="pickupAirport">Pickup (Airport)</label>
                   <select id="pickupAirport" name="pickupAirport">
                     <option value="">-- Select airport --</option>
-                    <option value="manchester">Manchester Airport (MAN)</option>
-                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option value="london">London Heathrow Airport (LHR)</option>
+<option value="london">London Gatwick Airport (LGW)</option>
+<option value="manchester">Manchester Airport (MAN)</option>
+<option value="birmingham">Birmingham Airport (BHX)</option>
+<option value="london">London Stansted Airport (STN)</option>
+<option value="london">London Luton Airport (LTN)</option>
+<option value="edinburgh">Edinburgh Airport (EDI)</option>
+<option value="glasgow">Glasgow Airport (GLA)</option>
+<option value="bristol">Bristol Airport (BRS)</option>
+<option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+<option value="leeds">Leeds Bradford Airport (LBA)</option>
+<option value="newcastle">Newcastle Airport (NCL)</option>
+<option value="east">East Midlands Airport (EMA)</option>
+<option value="london">London City Airport (LCY)</option>
+<option value="aberdeen">Aberdeen Airport (ABZ)</option>
+<option value="cardiff">Cardiff Airport (CWL)</option>
                   </select>
                 </div>
 
@@ -231,8 +245,22 @@
                   <input id="dropoffText" name="dropoffText" placeholder="Type airport name (MAN or LPL)" />
                   <select id="dropoff" name="dropoff" style="margin-top:.5rem">
                     <option value="">-- Or choose from list --</option>
-                    <option value="manchester">Manchester Airport (MAN)</option>
-                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option value="london">London Heathrow Airport (LHR)</option>
+<option value="london">London Gatwick Airport (LGW)</option>
+<option value="manchester">Manchester Airport (MAN)</option>
+<option value="birmingham">Birmingham Airport (BHX)</option>
+<option value="london">London Stansted Airport (STN)</option>
+<option value="london">London Luton Airport (LTN)</option>
+<option value="edinburgh">Edinburgh Airport (EDI)</option>
+<option value="glasgow">Glasgow Airport (GLA)</option>
+<option value="bristol">Bristol Airport (BRS)</option>
+<option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+<option value="leeds">Leeds Bradford Airport (LBA)</option>
+<option value="newcastle">Newcastle Airport (NCL)</option>
+<option value="east">East Midlands Airport (EMA)</option>
+<option value="london">London City Airport (LCY)</option>
+<option value="aberdeen">Aberdeen Airport (ABZ)</option>
+<option value="cardiff">Cardiff Airport (CWL)</option>
                   </select>
                 </div>
 
@@ -695,7 +723,7 @@
 
       try {
         await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: formData });
-        banner.textContent = "✅ Your booking has been successfully submitted. We will contact you shortly to confirm the booking.";
+        banner.textContent = "✅ Thank you for your booking. Once your booking has been reviewed and confirmed, you’ll receive a text or WhatsApp message with your driver and journey details.";
         banner.className = "banner success"; banner.style.display = "block";
 
         document.getElementById("bookingForm").reset();
