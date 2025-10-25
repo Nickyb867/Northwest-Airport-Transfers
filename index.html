@@ -91,13 +91,13 @@
     footer{background:var(--primary);color:#fff;text-align:center;padding:2rem 1rem;margin-top:2rem}
     footer .links{margin-top:.6rem}
     footer .links a{color:#dfe6ee;text-decoration:none;margin:0 .6rem}
-    footer .links a:hover{color:var(--accent)}
-    .call-btn{display:inline-block;background:var(--accent);color:#fff;padding:.8rem 1.1rem;border-radius:10px;text-decoration:none;font-weight:700;margin-top:.9rem}
+    footer .links a:hover{color:#1E90FF}
+    .call-btn{display:inline-block;background:#1E90FF;color:#fff;padding:.8rem 1.1rem;border-radius:10px;text-decoration:none;font-weight:700;margin-top:.9rem}
     footer img{height:60px;margin-bottom:.5rem}
     .floating-buttons{position:fixed;bottom:10px;right:10px;display:flex;flex-direction:column;gap:10px;z-index:2000}
     .floating-buttons a{width:56px;height:56px;border-radius:50%;color:#fff;text-align:center;font-size:1.35rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.28);text-decoration:none}
     .float-whatsapp{background:#25d366}
-    .float-call{background:var(--accent)}
+    .float-call{background:#1E90FF}
     #services{position:relative}
     #services::before{content:"";background:url('A_logo_for_Northwest_Airport_Transfers.png') center/240px no-repeat;opacity:0.05;position:absolute;inset:0;z-index:0}
     #services > *{position:relative;z-index:1}
@@ -181,7 +181,6 @@
           </div>
 
           <form id="bookingForm" novalidate>
-            <!-- STEP 1: Journey Type -->
             <div class="form-step active" data-step="0">
               <div class="form-grid">
                 <div>
@@ -209,7 +208,6 @@
               </div>
             </div>
 
-            <!-- STEP 2: Pickup / Dropoff -->
             <div class="form-step" data-step="1">
               <div class="form-grid">
                 <div class="full" id="pickupAddressWrap">
@@ -221,46 +219,49 @@
                   <label for="pickupAirport">Pickup (Airport)</label>
                   <select id="pickupAirport" name="pickupAirport">
                     <option value="">-- Select airport --</option>
-                    <option value="london">London Heathrow Airport (LHR)</option>
-<option value="london">London Gatwick Airport (LGW)</option>
-<option value="manchester">Manchester Airport (MAN)</option>
-<option value="birmingham">Birmingham Airport (BHX)</option>
-<option value="london">London Stansted Airport (STN)</option>
-<option value="london">London Luton Airport (LTN)</option>
-<option value="edinburgh">Edinburgh Airport (EDI)</option>
-<option value="glasgow">Glasgow Airport (GLA)</option>
-<option value="bristol">Bristol Airport (BRS)</option>
-<option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
-<option value="leeds">Leeds Bradford Airport (LBA)</option>
-<option value="newcastle">Newcastle Airport (NCL)</option>
-<option value="east">East Midlands Airport (EMA)</option>
-<option value="london">London City Airport (LCY)</option>
-<option value="aberdeen">Aberdeen Airport (ABZ)</option>
-<option value="cardiff">Cardiff Airport (CWL)</option>
+                    <option value="manchester">Manchester Airport (MAN)</option>
+                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option disabled>──────────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ)</option>
+                    <option value="birmingham">Birmingham Airport (BHX)</option>
+                    <option value="bristol">Bristol Airport (BRS)</option>
+                    <option value="cardiff">Cardiff Airport (CWL)</option>
+                    <option value="east">East Midlands Airport (EMA)</option>
+                    <option value="edinburgh">Edinburgh Airport (EDI)</option>
+                    <option value="glasgow">Glasgow Airport (GLA)</option>
+                    <option value="leeds">Leeds Bradford Airport (LBA)</option>
+                    <option value="londoncity">London City Airport (LCY)</option>
+                    <option value="gatwick">London Gatwick Airport (LGW)</option>
+                    <option value="heathrow">London Heathrow Airport (LHR)</option>
+                    <option value="luton">London Luton Airport (LTN)</option>
+                    <option value="stansted">London Stansted Airport (STN)</option>
+                    <option value="newcastle">Newcastle Airport (NCL)</option>
+                    <option value="southampton">Southampton Airport (SOU)</option>
                   </select>
                 </div>
 
                 <div class="full" id="dropoffGroup">
                   <label for="dropoff">Dropoff (Airport)</label>
-                  <input id="dropoffText" name="dropoffText" placeholder="Type airport name (MAN or LPL)" />
-                  <select id="dropoff" name="dropoff" style="margin-top:.5rem">
-                    <option value="">-- Or choose from list --</option>
-                    <option value="london">London Heathrow Airport (LHR)</option>
-<option value="london">London Gatwick Airport (LGW)</option>
-<option value="manchester">Manchester Airport (MAN)</option>
-<option value="birmingham">Birmingham Airport (BHX)</option>
-<option value="london">London Stansted Airport (STN)</option>
-<option value="london">London Luton Airport (LTN)</option>
-<option value="edinburgh">Edinburgh Airport (EDI)</option>
-<option value="glasgow">Glasgow Airport (GLA)</option>
-<option value="bristol">Bristol Airport (BRS)</option>
-<option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
-<option value="leeds">Leeds Bradford Airport (LBA)</option>
-<option value="newcastle">Newcastle Airport (NCL)</option>
-<option value="east">East Midlands Airport (EMA)</option>
-<option value="london">London City Airport (LCY)</option>
-<option value="aberdeen">Aberdeen Airport (ABZ)</option>
-<option value="cardiff">Cardiff Airport (CWL)</option>
+                  <select id="dropoff" name="dropoff">
+                    <option value="">-- Select airport --</option>
+                    <option value="manchester">Manchester Airport (MAN)</option>
+                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option disabled>──────────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ)</option>
+                    <option value="birmingham">Birmingham Airport (BHX)</option>
+                    <option value="bristol">Bristol Airport (BRS)</option>
+                    <option value="cardiff">Cardiff Airport (CWL)</option>
+                    <option value="east">East Midlands Airport (EMA)</option>
+                    <option value="edinburgh">Edinburgh Airport (EDI)</option>
+                    <option value="glasgow">Glasgow Airport (GLA)</option>
+                    <option value="leeds">Leeds Bradford Airport (LBA)</option>
+                    <option value="londoncity">London City Airport (LCY)</option>
+                    <option value="gatwick">London Gatwick Airport (LGW)</option>
+                    <option value="heathrow">London Heathrow Airport (LHR)</option>
+                    <option value="luton">London Luton Airport (LTN)</option>
+                    <option value="stansted">London Stansted Airport (STN)</option>
+                    <option value="newcastle">Newcastle Airport (NCL)</option>
+                    <option value="southampton">Southampton Airport (SOU)</option>
                   </select>
                 </div>
 
@@ -271,7 +272,6 @@
               </div>
             </div>
 
-            <!-- STEP 3: Dates -->
             <div class="form-step" data-step="2">
               <div class="form-grid">
                 <div>
@@ -299,7 +299,6 @@
               </div>
             </div>
 
-            <!-- STEP 4: Extras -->
             <div class="form-step" data-step="3">
               <div class="form-grid">
                 <div class="full">
@@ -316,7 +315,6 @@
               </div>
             </div>
 
-            <!-- STEP 5: Confirm -->
             <div class="form-step" data-step="4">
               <div class="form-grid">
                 <div class="full">
@@ -478,7 +476,6 @@
       const opts = { componentRestrictions: { country: "uk" } };
       if (window.google && google.maps && google.maps.places) {
         new google.maps.places.Autocomplete(document.getElementById("pickup"), opts);
-        new google.maps.places.Autocomplete(document.getElementById("dropoffText"), { ...opts, types: ['establishment'] });
         const dropAddr = document.getElementById("dropoffAddress");
         if (dropAddr) new google.maps.places.Autocomplete(dropAddr, opts);
       }
@@ -503,7 +500,6 @@
 
     const dropoffGroup = document.getElementById('dropoffGroup');
     const dropoffEl = document.getElementById('dropoff');
-    const dropoffTextEl = document.getElementById('dropoffText');
     const dropoffAddressWrap = document.getElementById('dropoffAddressWrap');
     const dropoffAddressEl = document.getElementById('dropoffAddress');
 
@@ -617,11 +613,6 @@
       const town = detectTown(townSource);
 
       let ap = dropoffEl.value;
-      if(!ap){
-        const t = normalise(dropoffTextEl.value);
-        if(t.includes('manchester')) ap = 'manchester';
-        else if(t.includes('liverpool')) ap = 'liverpool';
-      }
       if (jt==='oneway' && dir==='from'){
         ap = pickupAirportEl.value || ap;
       }
@@ -644,7 +635,7 @@
         priceBox.style.display = 'block';
       }
     }
-    [passengersEl, pickupEl, pickupAirportEl, dropoffEl, dropoffTextEl, dropoffAddressEl].forEach(el=>{
+    [passengersEl, pickupEl, pickupAirportEl, dropoffEl, dropoffAddressEl].forEach(el=>{
       el.addEventListener(el && el.tagName==='SELECT' ? 'change' : 'input', updatePrice);
     });
 
@@ -695,7 +686,7 @@
       const dropText =
         (jt==='oneway' && dir==='from')
           ? val('dropoffAddress')
-          : ((dropoffEl.options[dropoffEl.selectedIndex]?.text || '').trim() || val('dropoffText'));
+          : (dropoffEl.options[dropoffEl.selectedIndex]?.text || '').trim();
 
       const pickupText =
         (jt==='oneway' && dir==='from')
@@ -723,7 +714,7 @@
 
       try {
         await fetch(GAS_URL, { method: "POST", mode: "no-cors", body: formData });
-        banner.textContent = "✅ Thank you for your booking. Once your booking has been reviewed and confirmed, you’ll receive a text or WhatsApp message with your driver and journey details.";
+        banner.textContent = "✅ Thank you for submitting your booking. Once your booking is confirmed, you’ll receive an SMS or WhatsApp message.";
         banner.className = "banner success"; banner.style.display = "block";
 
         document.getElementById("bookingForm").reset();
