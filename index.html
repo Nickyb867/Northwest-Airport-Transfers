@@ -102,16 +102,17 @@
     #services::before{content:"";background:url('A_logo_for_Northwest_Airport_Transfers.png') center/240px no-repeat;opacity:0.05;position:absolute;inset:0;z-index:0}
     #services > *{position:relative;z-index:1}
 
-    /* Added: reveal pill styling (desktop only usage via JS) */
-    #phoneNumberReveal{
+    /* NEW: Desktop header call banner (hidden by default) */
+    #callBanner{
       display:none;
       background:#1E90FF;
       color:#fff;
       font-weight:700;
-      padding:.8rem 1.1rem;
-      border-radius:10px;
       text-align:center;
-      box-shadow:0 4px 12px rgba(0,0,0,.28);
+      font-size:1.2rem;
+      padding:.9rem 0;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+      width:100%;
     }
   </style>
 </head>
@@ -131,6 +132,9 @@
       <a href="tel:+447520664620" id="callUsLink">Call Us</a>
     </nav>
   </header>
+
+  <!-- NEW: Banner that appears below header on desktop when "Call Us" is clicked -->
+  <div id="callBanner">📞 Call us on 07520 664 620</div>
 
   <div class="hero">
     <h1>Bolton & Wigan Airport Transfers</h1>
@@ -474,9 +478,7 @@
 
   <div class="floating-buttons" aria-label="Quick Contact">
     <a href="https://wa.me/447520664620" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Chat on WhatsApp">💬</a>
-    <a href="tel:+447520664620" class="float-call" id="floatCall" aria-label="Call us by phone">📞</a>
-    <!-- Added: desktop-revealed number pill -->
-    <div id="phoneNumberReveal">07520&nbsp;664&nbsp;620</div>
+    <a href="tel:+447520664620" class="float-call" aria-label="Call us by phone">📞</a>
   </div>
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -750,23 +752,28 @@
   };
   </script>
 
-  <!-- Added: Desktop-only WhatsApp removal + call number reveal -->
+  <!-- NEW: Desktop-only top Call Us banner toggle + hide WhatsApp bubble on desktop -->
   <script>
     document.addEventListener('DOMContentLoaded', function(){
       const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
-      const wa = document.querySelector('.float-whatsapp');
-      const callBtn = document.getElementById('floatCall');
-      const numberBox = document.getElementById('phoneNumberReveal');
+      const callLink = document.getElementById('callUsLink');
+      const banner = document.getElementById('callBanner');
+      const waFloat = document.querySelector('.float-whatsapp');
 
       if(!isMobile){
-        if(wa) wa.style.display = 'none';          // hide WhatsApp on desktop
-        if(callBtn){
-          callBtn.removeAttribute('href');         // prevent direct call on desktop
-          callBtn.style.cursor = 'pointer';
-          callBtn.addEventListener('click', ()=>{
-            numberBox.style.display = (numberBox.style.display === 'block') ? 'none' : 'block';
+        // Header "Call Us" shows banner instead of dialing
+        if(callLink){
+          callLink.removeAttribute('href');
+          callLink.style.cursor = 'pointer';
+          callLink.addEventListener('click', ()=>{
+            banner.style.display = (banner.style.display==='block') ? 'none' : 'block';
           });
         }
+        // Hide WhatsApp floating button on desktop only
+        if(waFloat){ waFloat.style.display = 'none'; }
+      } else {
+        // Ensure mobile devices keep tel: behavior
+        if(callLink){ callLink.setAttribute('href','tel:+447520664620'); }
       }
     });
   </script>
