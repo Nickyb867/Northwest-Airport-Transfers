@@ -15,76 +15,32 @@
   <meta property="og:title" content="Bolton Airport Transfers | Taxis to Manchester & Liverpool"/>
   <meta property="og:description" content="Trusted airport taxis from Bolton (BL1–BL7) & Wigan to MAN & LPL. Fixed prices, friendly drivers, instant quotes."/>
   <meta property="og:url" content="https://northwest-airport-transfers.vercel.app/"/>
-  <meta property="og:image" content="https://northwest-airport-transfers.vercel.app/assets/mercedes-minibus.png"/>
+  <meta property="og:image" content="https://northwest-airport-transfers.vercel.app/mercedes-minibus.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-<style>
-:root {
-  --brand:#0a3d62;
-  --accent:#1e90ff;
-  --bg:#ffffff;
-  --ink:#111827;
-  --muted:#6b7280;
-}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans';}
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;z-index:50;}
-.container{max-width:1120px;margin:0 auto;padding:0 16px;}
-.row{display:flex;gap:16px;flex-wrap:wrap;}
-.space{height:16px;}
-nav a{color:var(--ink);text-decoration:none;margin-right:12px;font-weight:600;}
-.btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;}
-.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent);}
-.hero{background:linear-gradient(180deg,#f8fbff,transparent);padding:32px 0 8px;}
-.hero h1{font-size:clamp(28px,4.5vw,44px);margin:0 0 8px;}
-.sub{color:var(--muted);}
-.card{border:1px solid #eee;border-radius:14px;padding:16px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.03);}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
-.quick-links{font-size:14px;margin:8px 0 16px;color:var(--muted);}
-.quick-links a{color:var(--accent);}
-footer{margin-top:32px;border-top:1px solid #eee;padding:24px 0;color:var(--muted);}
-img{max-width:100%;height:auto;}
-.faq dt{font-weight:700;margin-top:12px;}
-.faq dd{margin:6px 0 12px 0;}
-.price{font-weight:800;font-size:18px;}
-.note{font-size:12px;color:var(--muted);}
-</style>
-<!-- TaxiService schema (kept) + additions -->
+  <link rel="stylesheet" href="/css/style.css"/>
+  <!-- TaxiService schema with phone & geo -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "TaxiService",
-    "name": "Northwest Airport Transfers",
-    "url": "https://northwest-airport-transfers.vercel.app/",
-    "image": "https://northwest-airport-transfers.vercel.app/assets/mercedes-minibus.png",
-    "description": "Airport taxis from Bolton (BL1–BL7) & Wigan to Manchester Airport (MAN) and Liverpool John Lennon Airport (LPL). Fixed prices, DBS-checked drivers, modern vehicles.",
-    "telephone": "+441234567890",
-    "areaServed": [
-      {"@type": "City","name": "Bolton"},
-      {"@type": "City","name": "Wigan"},
-      {"@type": "AdministrativeArea","name": "Greater Manchester"},
-      {"@type": "Airport","name": "Manchester Airport","iataCode":"MAN"},
-      {"@type": "Airport","name": "Liverpool John Lennon Airport","iataCode":"LPL"}
-    ],
-    "serviceArea": {
-      "@type": "Place",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Bolton",
-        "postalCode": "BL5",
-        "addressCountry": "GB"
-      }
-    },
-    "geo": { "@type": "GeoCoordinates", "latitude": 53.578, "longitude": -2.493 },
-    "priceRange": "££",
-    "sameAs": ["https://www.facebook.com/","https://www.instagram.com/"]
+    "@context":"https://schema.org",
+    "@type":"TaxiService",
+    "name":"Northwest Airport Transfers",
+    "url":"https://northwest-airport-transfers.vercel.app/",
+    "image":"https://northwest-airport-transfers.vercel.app/mercedes-minibus.png",
+    "description":"Airport taxis from Bolton (BL1–BL7) & Wigan to Manchester Airport (MAN) and Liverpool John Lennon Airport (LPL). Fixed prices, DBS-checked drivers, modern vehicles.",
+    "telephone":"+441234567890",
+    "areaServed":[{"@type":"City","name":"Bolton"},{"@type":"City","name":"Wigan"},{"@type":"AdministrativeArea","name":"Greater Manchester"},{"@type":"Airport","name":"Manchester Airport","iataCode":"MAN"},{"@type":"Airport","name":"Liverpool John Lennon Airport","iataCode":"LPL"}],
+    "serviceArea":{"@type":"Place","address":{"@type":"PostalAddress","addressLocality":"Bolton","postalCode":"BL5","addressCountry":"GB"}},
+    "geo":{"@type":"GeoCoordinates","latitude":53.578,"longitude":-2.493},
+    "priceRange":"££"
   }
   </script>
-  <!-- LocalBusiness schema (added) -->
+  <!-- LocalBusiness schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"LocalBusiness",
     "name":"Northwest Airport Transfers",
-    "image":"https://northwest-airport-transfers.vercel.app/assets/mercedes-minibus.png",
+    "image":"https://northwest-airport-transfers.vercel.app/mercedes-minibus.png",
     "telephone":"+441234567890",
     "address":{"@type":"PostalAddress","addressLocality":"Bolton","postalCode":"BL5","addressCountry":"GB"},
     "url":"https://northwest-airport-transfers.vercel.app/",
@@ -108,6 +64,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </header>
+
   <section class="hero" id="home">
     <div class="container">
       <p class="quick-links">
@@ -124,11 +81,12 @@ img{max-width:100%;height:auto;}
           <span style="margin-left:12px;">or <a href="#call" style="color:var(--accent);font-weight:700;">Call us</a></span>
         </div>
         <div style="flex:1;min-width:260px;text-align:right;">
-          <img src="/assets/mercedes-minibus.png" alt="Bolton airport transfer minibus to Manchester Airport (MAN)" loading="eager"/>
+          <img src="/mercedes-minibus.png" alt="Bolton airport transfer minibus to Manchester Airport (MAN)" loading="eager"/>
         </div>
       </div>
     </div>
   </section>
+
   <section id="booking">
     <div class="container">
       <h2>Book Your Airport Transfer</h2>
@@ -175,6 +133,7 @@ img{max-width:100%;height:auto;}
       </form>
     </div>
   </section>
+
   <section id="bolton-to-manchester">
     <div class="container">
       <h2>Bolton → Manchester Airport Taxi</h2>
@@ -185,6 +144,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </section>
+
   <section id="bolton-to-liverpool">
     <div class="container">
       <h2>Bolton → Liverpool Airport Taxi</h2>
@@ -195,6 +155,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </section>
+
   <section id="wigan-airport-taxis">
     <div class="container">
       <h2>Wigan Airport Taxis</h2>
@@ -205,6 +166,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </section>
+
   <section id="why-us">
     <div class="container">
       <h2>Why Choose Our Bolton & Wigan Airport Taxi Service</h2>
@@ -218,6 +180,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </section>
+
   <section id="reviews">
     <div class="container">
       <h2>Customer Reviews</h2>
@@ -228,6 +191,7 @@ img{max-width:100%;height:auto;}
       </div>
     </div>
   </section>
+
   <section id="faq">
     <div class="container">
       <h2>Frequently Asked Questions</h2>
@@ -243,27 +207,21 @@ img{max-width:100%;height:auto;}
       </dl>
     </div>
   </section>
+
   <section id="areas">
     <div class="container">
       <h2>Service Areas</h2>
       <p class="sub">Serving all Bolton districts (BL1, BL2, BL3, BL4, BL5, BL6, BL7) plus Wigan, Westhoughton, Horwich, Farnworth, Walkden, Tyldesley & surrounding areas.</p>
       <div class="grid-3">
-        <div class="card"><p>BL1</p></div>
-        <div class="card"><p>BL2</p></div>
-        <div class="card"><p>BL3</p></div>
-        <div class="card"><p>BL4</p></div>
-        <div class="card"><p>BL5</p></div>
-        <div class="card"><p>BL6</p></div>
-        <div class="card"><p>BL7</p></div>
-        <div class="card"><p>Wigan</p></div>
-        <div class="card"><p>Westhoughton</p></div>
-        <div class="card"><p>Horwich</p></div>
-        <div class="card"><p>Farnworth</p></div>
-        <div class="card"><p>Walkden</p></div>
+        <div class="card"><p>BL1</p></div><div class="card"><p>BL2</p></div><div class="card"><p>BL3</p></div>
+        <div class="card"><p>BL4</p></div><div class="card"><p>BL5</p></div><div class="card"><p>BL6</p></div>
+        <div class="card"><p>BL7</p></div><div class="card"><p>Wigan</p></div><div class="card"><p>Westhoughton</p></div>
+        <div class="card"><p>Horwich</p></div><div class="card"><p>Farnworth</p></div><div class="card"><p>Walkden</p></div>
         <div class="card"><p>Tyldesley</p></div>
       </div>
     </div>
   </section>
+
   <section id="call">
     <div class="container">
       <h2>Call Us</h2>
@@ -271,24 +229,23 @@ img{max-width:100%;height:auto;}
       <a class="btn" href="tel:+441234567890">Call 01234 567 890</a>
     </div>
   </section>
+
   <footer>
     <div class="container">
       <p>© 2025 Northwest Airport Transfers — Bolton & Wigan Airport Taxis</p>
       <p>Non-stop routes to Manchester Airport (MAN) and Liverpool (LPL). BL5-based.</p>
     </div>
   </footer>
-  <!-- FAQ schema (kept) -->
+
+  <!-- FAQ schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type": "Question","name": "Do you cover all of Bolton (BL1–BL7) for Manchester Airport taxis?","acceptedAnswer":{"@type":"Answer","text":"Yes — we collect from every Bolton district (BL1–BL7) and Wigan for transfers to Manchester Airport (MAN) and Liverpool (LPL)."}},
-      {"@type": "Question","name": "Are your prices fixed from Bolton to Manchester Airport?","acceptedAnswer":{"@type":"Answer","text":"Yes. You’ll see a fixed quote before you book, with options for the vehicle size you need."}},
-      {"@type": "Question","name": "Do you provide child seats?","acceptedAnswer":{"@type":"Answer","text":"Child and booster seats are available on request at no extra cost. Please add this in the booking notes."}}
-    ]
-  }
+  { "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Do you cover all of Bolton (BL1–BL7) for Manchester Airport taxis?","acceptedAnswer":{"@type":"Answer","text":"Yes — we collect from every Bolton district (BL1–BL7) and Wigan for transfers to Manchester Airport (MAN) and Liverpool (LPL)."}},
+    {"@type":"Question","name":"Are your prices fixed from Bolton to Manchester Airport?","acceptedAnswer":{"@type":"Answer","text":"Yes. You’ll see a fixed quote before you book, with options for the vehicle size you need."}},
+    {"@type":"Question","name":"Do you provide child seats?","acceptedAnswer":{"@type":"Answer","text":"Child and booster seats are available on request at no extra cost. Please add this in the booking notes."}}
+  ] }
   </script>
+
   <!-- Live price calculator -->
   <script>
     const PRICE_TABLE = {
@@ -303,38 +260,29 @@ img{max-width:100%;height:auto;}
       if (/(WESTHOUGHTON|HORWICH|FARNWORTH|WALKDEN|TYLDESLEY|LITTLE HULTON)/.test(s)) return "BOLTON";
       return "OTHER";
     }
-    function paxBand(pax) {
-      const n = Number(pax||0);
-      if (n>=1 && n<=3) return "1-3";
-      if (n===4) return "4";
-      if (n>=5 && n<=7) return "5-7";
-      if (n===8) return "8";
-      return null;
+    function paxBand(pax){const n=Number(pax||0);if(n>=1&&n<=3)return"1-3";if(n===4)return"4";if(n>=5&&n<=7)return"5-7";if(n===8)return"8";return null;}
+    function formatGBP(v){return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(v);}
+    function calcPrice(){
+      const journeyType=document.getElementById('journeyType').value;
+      const pickup=document.getElementById('pickup').value.trim();
+      const dropoff=document.getElementById('dropoff').value;
+      const pax=document.getElementById('pax').value;
+      const priceEl=document.getElementById('price');
+      const band=paxBand(pax);
+      const area=getAreaFromPickup(pickup);
+      if(area==="OTHER"){priceEl.textContent="Contact us for a price";return;}
+      if(!band){priceEl.textContent="£—";return;}
+      const base=PRICE_TABLE[dropoff][band];
+      if(!base){priceEl.textContent="£—";return;}
+      const multiplier=(journeyType==='return')?2:1;
+      priceEl.textContent=formatGBP(base*multiplier);
     }
-    function formatGBP(v){ return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(v); }
-    function calcPrice() {
-      const journeyType = document.getElementById('journeyType').value;
-      const pickup = document.getElementById('pickup').value.trim();
-      const dropoff = document.getElementById('dropoff').value;
-      const pax = document.getElementById('pax').value;
-      const priceEl = document.getElementById('price');
-      const band = paxBand(pax);
-      const area = getAreaFromPickup(pickup);
-      if (area === "OTHER") { priceEl.textContent = "Contact us for a price"; return; }
-      if (!band) { priceEl.textContent = "£—"; return; }
-      const base = PRICE_TABLE[dropoff][band];
-      if (!base) { priceEl.textContent = "£—"; return; }
-      const multiplier = (journeyType === 'return') ? 2 : 1;
-      const total = base * multiplier;
-      priceEl.textContent = formatGBP(total);
+    function handleSubmit(){
+      const priceShown=document.getElementById('price').textContent||"£—";
+      document.getElementById('quote').textContent="Thank you for submitting your booking. Once confirmed, we will send an SMS or WhatsApp update. Quoted price: "+priceShown+".";
+      window.scrollTo({top:0,behavior:"smooth"});
     }
-    function handleSubmit() {
-      const priceShown = document.getElementById('price').textContent || "£—";
-      document.getElementById('quote').textContent =
-        "Thank you for submitting your booking. Once confirmed, we will send an SMS or WhatsApp update. Quoted price: " + priceShown + ".";
-      window.scrollTo({top: 0, behavior: "smooth"});
-    }
-    document.addEventListener('DOMContentLoaded', calcPrice);
+    document.addEventListener('DOMContentLoaded',calcPrice);
   </script>
 </body>
 </html>
