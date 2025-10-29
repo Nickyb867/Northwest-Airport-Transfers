@@ -291,5 +291,39 @@
       }
     });
   </script>
+  <!-- Desktop number reveal for "Call Us" -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+  const callLink = document.getElementById('callUsLink');
+  const header = document.querySelector('header');
+  let banner;
+
+  if (!isMobile && callLink) {
+    // Desktop: show phone number below header instead of opening dialer
+    callLink.removeAttribute('href');
+    callLink.style.cursor = 'pointer';
+    callLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.textContent = '📞 07520 664 620';
+        banner.style.background = '#1E90FF';
+        banner.style.color = '#fff';
+        banner.style.fontWeight = '700';
+        banner.style.padding = '0.9rem 1.2rem';
+        banner.style.textAlign = 'center';
+        banner.style.fontSize = '1.1rem';
+        banner.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        header.insertAdjacentElement('afterend', banner);
+      }
+      banner.style.display = banner.style.display === 'block' ? 'none' : 'block';
+    });
+  } else if (callLink) {
+    // Mobile: normal tel: behaviour
+    callLink.setAttribute('href', 'tel:+447520664620');
+  }
+});
+</script>
 </body>
 </html>
