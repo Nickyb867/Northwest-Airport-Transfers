@@ -364,27 +364,32 @@
     function show(el,on){if(!el)return;el.style.display=on?'block':'none'}
     function toggleReturn(){const isReturn=journeyEl.value==='return';show(returnDateWrap,isReturn);show(returnTimeWrap,isReturn);show(returnFlightWrap,isReturn);if(isReturn){returnFlightEl.setAttribute('required','required')}else{returnFlightEl.removeAttribute('required');returnFlightEl.value=''}updatePrice()}
     function toggleOneWayDirectionVisibility(){const isOneWay=journeyEl.value==='oneway';show(oneWayDirectionWrap,isOneWay);applyPickupDropoffMode()}
-    function applyPickupDropoffMode(){
-      const jt=journeyEl.value;const dir=oneWayDirectionEl.value;
-      if(jt==='oneway'&&dir==='from'){
-        show(pickupAddressWrap,false);setRequired(pickupEl,false);
-        show(pickupAirportWrap	true);setRequired(pickupAirportEl,true);
-        show(dropoffGroup,false);setRequired(dropoffEl,false);
-        show(dropoffAddressWrap,true);setRequired(dropoffAddressEl,true)
-      }else if(jt==='oneway'&&dir==='to'){
-        show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);
-        show(pickupAddressWrap,true);setRequired(pickupEl,true);
-        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
-        show(dropoffGroup,true);setRequired(dropoffEl,true)
-      }else{
-        /* FIXED: the malformed call here is corrected */
-        show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);
-        show(pickupAddressWrap	true);setRequired(pickupEl,true);
-        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
-        show(dropoffGroup	true);setRequired(dropoffEl,true)
-      }
-      updatePrice(); reevaluateOutOfArea();
-    }
+   function applyPickupDropoffMode(){
+  const jt = journeyEl.value;
+  const dir = oneWayDirectionEl.value;
+
+  if (jt === 'oneway' && dir === 'from') {
+    show(pickupAddressWrap, false);  setRequired(pickupEl, false);
+    show(pickupAirportWrap, true);   setRequired(pickupAirportEl, true);
+    show(dropoffGroup, false);       setRequired(dropoffEl, false);
+    show(dropoffAddressWrap, true);  setRequired(dropoffAddressEl, true);
+  } else if (jt === 'oneway' && dir === 'to') {
+    show(pickupAirportWrap, false);  setRequired(pickupAirportEl, false);
+    show(pickupAddressWrap, true);   setRequired(pickupEl, true);
+    show(dropoffAddressWrap, false); setRequired(dropoffAddressEl, false);
+    show(dropoffGroup, true);        setRequired(dropoffEl, true);
+  } else {
+    // Return journeys (airport selector + normal address)
+    show(pickupAirportWrap, false);  setRequired(pickupAirportEl, false);
+    show(pickupAddressWrap, true);   setRequired(pickupEl, true);
+    show(dropoffAddressWrap, false); setRequired(dropoffAddressEl, false);
+    show(dropoffGroup, true);        setRequired(dropoffEl, true);
+  }
+
+  updatePrice();
+  reevaluateOutOfArea();
+}
+
     journeyEl.addEventListener('change',()=>{toggleReturn();toggleOneWayDirectionVisibility()});oneWayDirectionEl.addEventListener('change',applyPickupDropoffMode);
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
