@@ -151,44 +151,118 @@
             <div class="step" data-step="4"><div class="bubble">5</div><div class="label">Confirm</div></div>
           </div>
           <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)</div>
+
           <form id="bookingForm" novalidate>
             <div class="form-step active" data-step="0">
               <div class="form-grid">
-                <div><label for="journeyType">Journey Type</label><select id="journeyType" name="journeyType" required><option value="">-- Select --</option><option value="oneway">One Way</option><option value="return">Return</option></select></div>
-                <div><label for="passengers">Passengers</label><select id="passengers" name="passengers"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
-                <div class="full" id="oneWayDirectionWrap" style="display:none"><label for="oneWayDirection">Is this journey from or to the airport?</label><select id="oneWayDirection" name="oneWayDirection"><option value="">-- Select an option --</option><option value="from">From the Airport</option><option value="to">To the Airport</option></select></div>
+                <div>
+                  <label for="journeyType">Journey Type</label>
+                  <select id="journeyType" name="journeyType" required data-summary-label="Journey type">
+                    <option value="">-- Select --</option><option value="oneway">One Way</option><option value="return">Return</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="passengers">Passengers</label>
+                  <select id="passengers" name="passengers" data-summary-label="Passengers"><option>1</option><option>2</option><option>3</option><option>4+</option></select>
+                </div>
+                <div class="full" id="oneWayDirectionWrap" style="display:none">
+                  <label for="oneWayDirection">Is this journey from or to the airport?</label>
+                  <select id="oneWayDirection" name="oneWayDirection" data-summary-label="One-way direction">
+                    <option value="">-- Select an option --</option><option value="from">From the Airport</option><option value="to">To the Airport</option>
+                  </select>
+                </div>
               </div>
             </div>
+
             <div class="form-step" data-step="1">
               <div class="form-grid">
-                <div class="full" id="pickupAddressWrap"><label for="pickup">Pickup Location</label><input id="pickup" name="pickup" placeholder="Enter pickup address (Bolton or Wigan)"/></div>
-                <div class="full" id="pickupAirportWrap" style="display:none"><label for="pickupAirport">Pickup (Airport)</label><select id="pickupAirport" name="pickupAirport"><option value="">-- Select airport --</option><option value="manchester">Manchester Airport (MAN)</option><option value="liverpool">Liverpool John Lennon Airport (LPL)</option><option disabled>──────────</option><option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option></select></div>
-                <div class="full" id="dropoffGroup"><label for="dropoff">Dropoff (Airport)</label><select id="dropoff" name="dropoff"><option value="">-- Select airport --</option><option value="manchester">Manchester Airport (MAN)</option><option value="liverpool">Liverpool John Lennon Airport (LPL)</option><option disabled>──────────</option><option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option></select></div>
-                <div class="full" id="dropoffAddressWrap" style="display:none"><label for="dropoffAddress">Dropoff Address</label><input id="dropoffAddress" name="dropoffAddress" placeholder="Enter dropoff address"/></div>
+                <div class="full" id="pickupAddressWrap">
+                  <label for="pickup">Pickup Location</label>
+                  <input id="pickup" name="pickup" placeholder="Enter pickup address (Bolton or Wigan)" data-summary-label="Pickup"/>
+                </div>
+
+                <div class="full" id="pickupAirportWrap" style="display:none">
+                  <label for="pickupAirport">Pickup (Airport)</label>
+                  <select id="pickupAirport" name="pickupAirport" data-summary-label="Pickup airport">
+                    <option value="">-- Select airport --</option>
+                    <option value="manchester">Manchester Airport (MAN)</option>
+                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option disabled>──────────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option>
+                  </select>
+                </div>
+
+                <div class="full" id="dropoffGroup">
+                  <label for="dropoff">Dropoff (Airport)</label>
+                  <select id="dropoff" name="dropoff" data-summary-label="Dropoff airport">
+                    <option value="">-- Select airport --</option>
+                    <option value="manchester">Manchester Airport (MAN)</option>
+                    <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
+                    <option disabled>──────────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option>
+                  </select>
+                </div>
+
+                <div class="full" id="dropoffAddressWrap" style="display:none">
+                  <label for="dropoffAddress">Dropoff Address</label>
+                  <input id="dropoffAddress" name="dropoffAddress" placeholder="Enter dropoff address" data-summary-label="Dropoff"/>
+                </div>
+
+                <!-- Out-of-area banner appears if postcode not BL/WN -->
+                <div class="full">
+                  <div id="outOfAreaNotice" class="banner error" role="alert" aria-live="polite" style="display:none">
+                    <strong>Outside our standard area.</strong>
+                    Please call us to book: <a href="tel:+447520664620">07520&nbsp;664&nbsp;620</a>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="form-step" data-step="2">
               <div class="form-grid">
-                <div><label for="pickupDate">Pickup Date</label><input id="pickupDate" name="pickupDate" type="date" required/></div>
-                <div><label for="pickupTime">Pickup Time</label><input id="pickupTime" name="pickupTime" type="time" required/></div>
-                <div id="returnDateWrap" style="display:none"><label for="returnDate">Return Date</label><input id="returnDate" name="returnDate" type="date"/></div>
-                <div id="returnTimeWrap" style="display:none"><label for="returnTime">Return Time</label><input id="returnTime" name="returnTime" type="time"/></div>
-                <div id="returnFlightWrap" class="full" style="display:none"><label for="returnFlight">Return Flight Number (required)</label><input id="returnFlight" name="returnFlight" placeholder="e.g. EZY2023"/></div>
+                <div><label for="pickupDate">Pickup Date</label><input id="pickupDate" name="pickupDate" type="date" required data-summary-label="Pickup date"/></div>
+                <div><label for="pickupTime">Pickup Time</label><input id="pickupTime" name="pickupTime" type="time" required data-summary-label="Pickup time"/></div>
+                <div id="returnDateWrap" style="display:none"><label for="returnDate">Return Date</label><input id="returnDate" name="returnDate" type="date" data-summary-label="Return date"/></div>
+                <div id="returnTimeWrap" style="display:none"><label for="returnTime">Return Time</label><input id="returnTime" name="returnTime" type="time" data-summary-label="Return time"/></div>
+                <div id="returnFlightWrap" class="full" style="display:none"><label for="returnFlight">Return Flight Number (required)</label><input id="returnFlight" name="returnFlight" placeholder="e.g. EZY2023" data-summary-label="Return flight"/></div>
               </div>
             </div>
+
             <div class="form-step" data-step="3">
               <div class="form-grid">
-                <div class="full"><label>Extras</label><div style="display:flex;gap:1rem;flex-wrap:wrap"><label><input type="checkbox" id="childSeat" name="childSeat"> Child seat required</label><label><input type="checkbox" id="boosterSeat" name="boosterSeat"> Booster seat required</label></div></div>
-                <div class="full"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" placeholder="Any special requests…"></textarea></div>
+                <div class="full">
+                  <label>Extras</label>
+                  <div style="display:flex;gap:1rem;flex-wrap:wrap">
+                    <label><input type="checkbox" id="childSeat" name="childSeat" data-summary-label="Child seat"> Child seat required</label>
+                    <label><input type="checkbox" id="boosterSeat" name="boosterSeat" data-summary-label="Booster seat"> Booster seat required</label>
+                  </div>
+                </div>
+                <div class="full"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" placeholder="Any special requests…" data-summary-label="Notes"></textarea></div>
               </div>
             </div>
+
             <div class="form-step" data-step="4">
               <div class="form-grid">
-                <div class="full"><label for="name">Contact name</label><input id="name" name="name" autocomplete="name" required/></div>
-                <div class="full"><label for="phone">Telephone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required/></div>
+                <div class="full"><label for="name">Contact name</label><input id="name" name="name" autocomplete="name" required data-summary-label="Passenger name"/></div>
+                <div class="full"><label for="phone">Telephone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required data-summary-label="Phone"/></div>
                 <div class="full" style="display:flex;justify-content:center;margin-top:.5rem"><div class="g-recaptcha" data-sitekey="6LcK2NorAAAAAEqyQ6rUev8DxVSKbA7Yy9_pXj3l"></div></div>
               </div>
             </div>
+
+            <!-- NEW: Review & Confirm step (shown before final submit) -->
+            <div class="form-step" data-step="5" id="step-review">
+              <div class="form-grid">
+                <div class="full">
+                  <h3 style="margin-top:0">Review your booking</h3>
+                  <p>Please check everything is correct before you submit.</p>
+                  <dl id="reviewList" class="review-list" style="margin:0"></dl>
+                  <div style="margin-top:12px;padding:.75rem 1rem;border-radius:10px;background:#f9fbff;border:1px solid #d6e6ff">
+                    <strong>Total (est.): </strong><span id="reviewPrice">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="form-nav"><button type="button" class="btn btn-secondary" id="prevBtn" disabled>Previous</button><button type="button" class="btn btn-primary" id="nextBtn">Next</button></div>
             <div id="formBanner" class="banner" role="status" aria-live="polite"></div>
           </form>
@@ -243,22 +317,122 @@
     const dropoffGroup=document.getElementById('dropoffGroup');const dropoffEl=document.getElementById('dropoff');const dropoffAddressWrap=document.getElementById('dropoffAddressWrap');const dropoffAddressEl=document.getElementById('dropoffAddress');
     const returnDateWrap=document.getElementById('returnDateWrap');const returnTimeWrap=document.getElementById('returnTimeWrap');const returnFlightWrap=document.getElementById('returnFlightWrap');const returnFlightEl=document.getElementById('returnFlight');
     const priceBox=document.getElementById('priceBox');let currentStep=0;
-    function setStep(i){currentStep=i;steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));markers.forEach((m,idx)=>{m.classList.toggle('active',idx===i);m.classList.toggle('finished',idx<i)});prevBtn.disabled=(i===0);nextBtn.textContent=(i===steps.length-1)?'Submit Booking':'Next';banner.style.display='none';window.scrollTo({top:document.getElementById('booking').offsetTop-20,behavior:'smooth'})}
+
+    // NEW: review + out-of-area refs
+    const reviewList=document.getElementById('reviewList');
+    const reviewPrice=document.getElementById('reviewPrice');
+    const outNotice=document.getElementById('outOfAreaNotice');
+
+    function setStep(i){
+      currentStep=i;
+      steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+      // Clamp markers so the last bubble stays active on the review step
+      const activeIdx = Math.min(i, markers.length-1);
+      markers.forEach((m,idx)=>{
+        m.classList.toggle('active', idx===activeIdx);
+        m.classList.toggle('finished', idx<activeIdx);
+      });
+      prevBtn.disabled=(i===0);
+      nextBtn.textContent=(i===steps.length-1)?'Submit Booking':'Next';
+      banner.style.display='none';
+      // Build review when entering final step
+      if(i===steps.length-1){ buildReview(); reevaluateOutOfArea(); }
+      window.scrollTo({top:document.getElementById('booking').offsetTop-20,behavior:'smooth'})
+    }
     function setRequired(el,on){if(!el)return;if(on)el.setAttribute('required','required');else el.removeAttribute('required')}
     function show(el,on){if(!el)return;el.style.display=on?'block':'none'}
     function toggleReturn(){const isReturn=journeyEl.value==='return';show(returnDateWrap,isReturn);show(returnTimeWrap,isReturn);show(returnFlightWrap,isReturn);if(isReturn){returnFlightEl.setAttribute('required','required')}else{returnFlightEl.removeAttribute('required');returnFlightEl.value=''}updatePrice()}
     function toggleOneWayDirectionVisibility(){const isOneWay=journeyEl.value==='oneway';show(oneWayDirectionWrap,isOneWay);applyPickupDropoffMode()}
-    function applyPickupDropoffMode(){const jt=journeyEl.value;const dir=oneWayDirectionEl.value;if(jt==='oneway'&&dir==='from'){show(pickupAddressWrap,false);setRequired(pickupEl,false);show(pickupAirportWrap,true);setRequired(pickupAirportEl,true);show(dropoffGroup,false);setRequired(dropoffEl,false);show(dropoffAddressWrap,true);setRequired(dropoffAddressEl,true)}else if(jt==='oneway'&&dir==='to'){show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}else{show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}updatePrice()}
+    function applyPickupDropoffMode(){const jt=journeyEl.value;const dir=oneWayDirectionEl.value;if(jt==='oneway'&&dir==='from'){show(pickupAddressWrap,false);setRequired(pickupEl,false);show(pickupAirportWrap,true);setRequired(pickupAirportEl,true);show(dropoffGroup,false);setRequired(dropoffEl,false);show(dropoffAddressWrap,true);setRequired(dropoffAddressEl,true)}else if(jt==='oneway'&&dir==='to'){show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}else{show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}updatePrice(); reevaluateOutOfArea();}
     journeyEl.addEventListener('change',()=>{toggleReturn();toggleOneWayDirectionVisibility()});oneWayDirectionEl.addEventListener('change',applyPickupDropoffMode);
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
     function calculatePrice(){const jt=journeyEl.value;const dir=oneWayDirectionEl.value;const pax=passengersEl.value;let townSource=pickupEl.value;if(jt==='oneway'&&dir==='from'){townSource=dropoffAddressEl.value}const town=detectTown(townSource);let ap=dropoffEl.value;if(jt==='oneway'&&dir==='from'){ap=pickupAirportEl.value||ap}if(!town||!ap||!jt||!pax)return null;let price=baseOneWay(pax);if(town==='wigan')price+=5;if(ap==='liverpool')price+=10;if(jt==='return')price*=2;return Math.round(price)}
     function updatePrice(){const price=calculatePrice();if(price!=null){priceBox.innerHTML="<strong>Estimated Price:</strong> £"+price;priceBox.style.display='block'}else{priceBox.innerHTML="<strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)";priceBox.style.display='block'}}
-    [passengersEl,pickupEl,pickupAirportEl,dropoffEl,dropoffAddressEl].forEach(el=>{el.addEventListener(el&&el.tagName==='SELECT'?'change':'input',updatePrice)});
-    function stepValid(){const req=steps[currentStep].querySelectorAll('[required]');for(const el of req){if(!el.value.trim())return false}if(currentStep===steps.length-1){if(grecaptcha.getResponse()==="")return false}if(journeyEl.value==='return'){const fields=['returnDate','returnTime','returnFlight'];for(const id of fields){const el=document.getElementById(id);if(el&&el.offsetParent!==null&&!el.value.trim())return false}}return true}
-    const next=async()=>{if(!stepValid()){banner.textContent=(currentStep===steps.length-1&&grecaptcha.getResponse()==="")?"Please complete the reCAPTCHA.":"Please complete the required fields on this step.";banner.className='banner error';banner.style.display='block';return}if(currentStep<steps.length-1){setStep(currentStep+1)}else{await submitBooking()}};
-    document.getElementById('nextBtn').addEventListener('click',next);document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){setStep(currentStep-1)}});
+    [passengersEl,pickupEl,pickupAirportEl,dropoffEl,dropoffAddressEl].forEach(el=>{el&&el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>{updatePrice(); if(el===pickupEl||el===dropoffAddressEl) reevaluateOutOfArea();})});
+
+    // NEW: UK postcode -> BL/WN check pulled from whichever address field applies
+    const UK_PC_REGEX=/\b([A-Z]{1,2}\d[A-Z\d]?[\s]?\d[A-Z]{2})\b/i;
+    function extractPostcode(text){if(!text) return null; const m=String(text).toUpperCase().match(UK_PC_REGEX); return m?m[1].replace(/\s+/,' ').trim():null;}
+    function postcodeArea(pc){ if(!pc) return null; const m=pc.match(/^([A-Z]{1,2})/); return m?m[1]:null; }
+    function isInBoltonWiganByText(text){ const pc=extractPostcode(text); if(!pc) return null; const area=postcodeArea(pc); return (area==='BL'||area==='WN') ? true : false; }
+    function currentAddressText(){ const jt=journeyEl.value, dir=oneWayDirectionEl.value; if(jt==='oneway' && dir==='from'){ return (dropoffAddressEl.value||'').trim(); } return (pickupEl.value||'').trim(); }
+    function reevaluateOutOfArea(){
+      const txt=currentAddressText();
+      const flag=isInBoltonWiganByText(txt);
+      if(flag===false){ outNotice.style.display='block'; } else { outNotice.style.display='none'; }
+      return flag; // true=in area, false=out, null=unknown
+    }
+
+    function stepValid(){
+      const req=steps[currentStep].querySelectorAll('[required]');
+      for(const el of req){ if(!el.value.trim()) return false; }
+      if(currentStep===4){ if(grecaptcha.getResponse()==="") return false; }
+      if(journeyEl.value==='return'){
+        const fields=['returnDate','returnTime','returnFlight'];
+        for(const id of fields){const el=document.getElementById(id);if(el&&el.offsetParent!==null&&!el.value.trim())return false}
+      }
+      return true
+    }
+
+    function buildReview(){
+      // Build a tidy DL list from all [data-summary-label]
+      reviewList.innerHTML='';
+      const addRow=(label,val)=>{ if(!val) return; const dt=document.createElement('dt'); const dd=document.createElement('dd'); dt.textContent=label; dd.textContent=val; dt.style.fontWeight='600'; dt.style.marginTop='8px'; dd.style.margin='2px 0 8px'; reviewList.appendChild(dt); reviewList.appendChild(dd); };
+      // custom mapping for pickup/dropoff depending on mode to show human text
+      const jt=journeyEl.value, dir=oneWayDirectionEl.value;
+      const pickupText = (jt==='oneway'&&dir==='from')
+        ? (pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'')
+        : (pickupEl.value||'');
+      const dropText = (jt==='oneway'&&dir==='from')
+        ? (dropoffAddressEl.value||'')
+        : (dropoffEl.options[dropoffEl.selectedIndex]?.text||'');
+
+      addRow('Journey type', journeyEl.options[journeyEl.selectedIndex]?.text||'');
+      if(jt==='oneway') addRow('One-way direction', oneWayDirectionEl.options[oneWayDirectionEl.selectedIndex]?.text||'');
+      addRow('Passengers', passengersEl.value);
+      addRow('Pickup', pickupText);
+      addRow('Dropoff', dropText);
+      addRow('Pickup date', document.getElementById('pickupDate').value);
+      addRow('Pickup time', document.getElementById('pickupTime').value);
+      if(jt==='return'){
+        addRow('Return date', document.getElementById('returnDate').value);
+        addRow('Return time', document.getElementById('returnTime').value);
+        addRow('Return flight', document.getElementById('returnFlight').value);
+      }
+      addRow('Child seat', document.getElementById('childSeat').checked ? 'Yes' : 'No');
+      addRow('Booster seat', document.getElementById('boosterSeat').checked ? 'Yes' : 'No');
+      addRow('Notes', document.getElementById('notes').value);
+      addRow('Passenger name', document.getElementById('name').value);
+      addRow('Phone', document.getElementById('phone').value);
+
+      const p=calculatePrice();
+      reviewPrice.textContent = (p!=null) ? ('£'+p) : '—';
+    }
+
+    const next=async()=>{
+      if(!stepValid()){
+        banner.textContent=(currentStep===4&&grecaptcha.getResponse()==="")?"Please complete the reCAPTCHA.":"Please complete the required fields on this step.";
+        banner.className='banner error';banner.style.display='block';return
+      }
+      if(currentStep < steps.length-1){
+        setStep(currentStep+1)
+      }else{
+        // Final submit from review step; block if clearly out of area
+        const inArea=reevaluateOutOfArea();
+        if(inArea===false){
+          banner.textContent="This postcode is outside Bolton/Wigan. Please call us to complete your booking: 07520 664 620.";
+          banner.className='banner error';banner.style.display='block';
+          return;
+        }
+        await submitBooking()
+      }
+    };
+
+    document.getElementById('nextBtn').addEventListener('click',next);
+    document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){setStep(currentStep-1)}});
     setStep(0);toggleReturn();toggleOneWayDirectionVisibility();applyPickupDropoffMode();updatePrice();
+
     function val(id){return(document.getElementById(id)?.value||'').trim()}
     async function submitBooking(){
       nextBtn.disabled=true;prevBtn.disabled=true;
