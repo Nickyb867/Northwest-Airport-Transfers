@@ -15,6 +15,17 @@
   <meta property="og:url" content="https://northwest-airport-transfers.co.uk/"/>
   <meta property="og:image" content="https://northwest-airport-transfers.co.uk/mercedes-minibus.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
+
+  <!-- === [ADD] Google Tag Manager (place before any other <script>) === -->
+  <!-- Replace GTM-XXXXXXX with your container ID -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- === [/ADD GTM] === -->
+
   <script type="application/ld+json">{
     "@context":"https://schema.org",
     "@type":"TaxiService",
@@ -134,6 +145,10 @@
   </style>
 </head>
 <body>
+  <!-- === [ADD] Google Tag Manager (noscript) – first thing inside <body> === -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- === [/ADD GTM noscript] === -->
+
   <header><img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo"/><nav><a href="#booking">Book Transfer</a><a href="#about">About Us</a><a href="#services">Our Services</a><a href="#corporate">Corporate Travel</a><a href="#vehicles">Modern Vehicles</a><a href="#gallery">Fleet Gallery</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="tel:+447520664620" id="callUsLink">Call Us</a></nav></header>
   <div class="hero"><h1>Bolton & Wigan Airport Transfers</h1><p>Trusted • Reliable • Professional • Fixed Prices</p></div>
   <section id="booking">
@@ -174,6 +189,10 @@
           <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)</div>
 
           <form id="bookingForm" novalidate>
+            <!-- === [ADD] Hidden session_id field to stitch client & server events === -->
+            <input type="hidden" id="sid" name="session_id" value="">
+            <!-- === [/ADD] -->
+
             <div class="form-step active" data-step="0">
               <div class="form-grid">
                 <div>
@@ -326,6 +345,113 @@
     <a href="tel:+447520664620" class="float-call" id="floatCall" aria-label="Call us by phone">📞</a>
     <div id="phoneNumberReveal">07520&nbsp;664&nbsp;620</div>
   </div>
+
+  <!-- === [ADD] Analytics helper (wires your UI → dataLayer events for GTM/GA4) === -->
+  <script>
+  /* ==== NWAT Analytics Wiring (GA4 via GTM) ==== */
+  window.dataLayer = window.dataLayer || [];
+  (function initSession(){
+    if (!sessionStorage.getItem('nwat_sid')) {
+      sessionStorage.setItem('nwat_sid', Math.random().toString(36).slice(2) + Date.now().toString(36));
+    }
+    // populate hidden field if present
+    var sidEl = document.getElementById('sid'); if (sidEl) sidEl.value = sessionStorage.getItem('nwat_sid');
+  })();
+  function sid(){ return sessionStorage.getItem('nwat_sid'); }
+  function track(name, params){
+    window.dataLayer.push(Object.assign({ event: name, session_id: sid() }, params||{}));
+  }
+
+  // page context
+  track('page_context', { path: location.pathname + location.hash, title: document.title });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const priceBox = document.getElementById('priceBox');
+    const bookingForm = document.getElementById('bookingForm');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const waBtn = document.querySelector('.float-whatsapp');
+    const callHeaderLink = document.getElementById('callUsLink');
+    const floatCall = document.getElementById('floatCall');
+
+    // price_shown (observe changes to priceBox)
+    let lastPriceSent = null;
+    const priceObserver = new MutationObserver(() => {
+      const txt = (priceBox && priceBox.textContent) || '';
+      const m = txt.match(/£\s?(\d+(?:\.\d{1,2})?)/);
+      if (m) {
+        const price = Number(m[1]);
+        if (!Number.isNaN(price) && price !== lastPriceSent) {
+          lastPriceSent = price;
+          const journeyType = document.getElementById('journeyType')?.value || '';
+          const oneWayDir   = document.getElementById('oneWayDirection')?.value || '';
+          const pax         = document.getElementById('passengers')?.value || '';
+          const pickup      = document.getElementById('pickup')?.value || document.getElementById('pickupAirport')?.value || '';
+          const dropoffSel  = document.getElementById('dropoff');
+          const dropoff     = dropoffSel ? (dropoffSel.options[dropoffSel.selectedIndex]?.text || '') : (document.getElementById('dropoffAddress')?.value || '');
+          track('price_shown', {
+            value: price, currency: 'GBP',
+            journey_type: journeyType, one_way_direction: oneWayDir, passengers: pax,
+            pickup: pickup, dropoff: dropoff
+          });
+        }
+      }
+    });
+    if (priceBox) priceObserver.observe(priceBox, { childList:true, subtree:true });
+
+    // step events
+    function currentStepIndex(){
+      const steps = Array.from(document.querySelectorAll('.form-step'));
+      return steps.findIndex(s => s.classList.contains('active'));
+    }
+    function sendStepEvent(){
+      const idx = currentStepIndex();
+      if (idx >= 0) track('booking_step', { step_index: idx });
+    }
+    if (nextBtn) nextBtn.addEventListener('click', () => { setTimeout(sendStepEvent, 200); track('booking_continue_click', {}); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { setTimeout(sendStepEvent, 200); track('booking_back_click', {}); });
+
+    // intercept fetch for booking_submit (Apps Script endpoint)
+    const origFetch = window.fetch;
+    window.fetch = async function(input, init){
+      const isBookingPost = typeof input === 'string' && input.includes('/macros/s/');
+      if (isBookingPost) {
+        try {
+          const priceTxt = (document.getElementById('reviewPrice')?.textContent || '').replace(/[^\d.]/g,'');
+          track('booking_submit', {
+            quoted_value: Number(priceTxt || 0) || undefined,
+            currency: 'GBP'
+          });
+          const res = await origFetch(input, init);
+          track('booking_request_sent', {});
+          track('booking_request_client_received', {});
+          return res;
+        } catch (e) {
+          track('booking_submit_error', { message: String(e && e.message || e) });
+          throw e;
+        }
+      }
+      return origFetch(input, init);
+    };
+
+    // micro-conversions
+    if (waBtn) waBtn.addEventListener('click', () => track('contact_click', { medium: 'whatsapp', location: 'floating_button' }));
+    if (floatCall) floatCall.addEventListener('click', () => track('contact_click', { medium: 'phone', location: 'floating_button' }));
+    if (callHeaderLink) callHeaderLink.addEventListener('click', () => track('contact_click', { medium: 'phone', location: 'header' }));
+
+    // out-of-area notice
+    const outBanner = document.getElementById('outOfAreaNotice');
+    if (outBanner) {
+      const obs = new MutationObserver(() => {
+        const visible = outBanner.style.display !== 'none';
+        if (visible) track('out_of_area_notice_shown', {});
+      });
+      obs.observe(outBanner, { attributes:true, attributeFilter:['style'] });
+    }
+  });
+  </script>
+  <!-- === [/ADD Analytics helper] === -->
+
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places" async defer></script>
   <script>
@@ -482,6 +608,9 @@
       const pickupText=(jt==='oneway'&&dir==='from')?(pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'').trim():val('pickup');
       const formData=new FormData();
       formData.append("name",val("name"));formData.append("phone",val("phone"));formData.append("journeyType",jt);formData.append("oneWayDirection",dir);formData.append("passengers",passengersEl.value);formData.append("pickup",pickupText);formData.append("dropoff",dropText);formData.append("pickupDate",val("pickupDate"));formData.append("pickupTime",val("pickupTime"));formData.append("returnDate",val("returnDate"));formData.append("returnTime",val("returnTime"));formData.append("returnFlight",val("returnFlight"));formData.append("childSeat",document.getElementById("childSeat").checked?"Yes":"No");formData.append("boosterSeat",document.getElementById("boosterSeat").checked?"Yes":"No");formData.append("notes",val("notes"));formData.append("recaptchaToken",grecaptcha.getResponse());formData.append("quotedPrice",calculatePrice());
+      // also send session_id for server-side stitching
+      formData.append("session_id", sessionStorage.getItem('nwat_sid') || '');
+
       try{
         await fetch("https://script.google.com/macros/s/AKfycbwiw0Q67JWvbdEFkcGbdxiBxJq9kiMc7_oxBr2LSq45qN6cngm5_iga0oq6EMlygW3u5Q/exec",{method:"POST",mode:"no-cors",body:formData});
         banner.textContent="✅ Thank you for submitting your booking. Once your booking is confirmed, you’ll receive an SMS or WhatsApp message.";
