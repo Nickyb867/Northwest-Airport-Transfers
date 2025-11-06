@@ -138,7 +138,28 @@
   <div class="hero"><h1>Bolton & Wigan Airport Transfers</h1><p>Trusted • Reliable • Professional • Fixed Prices</p></div>
   <section id="booking">
     <div class="booking-container">
-      <div class="booking-left"><div class="card why"><h3>Why Book With Us?</h3><ul><li>Fleet of modern, comfortable vehicles</li><li>DBS-checked, professional drivers</li><li>Corporate travel & business contracts welcomed</li><li>Family friendly – child &amp; booster seats on request</li><li>Flight tracking for delays</li><li>Fixed prices with no hidden fees</li><li>24/7 availability</li></ul></div></div>
+      <div class="booking-left">
+        <div class="card why">
+          <h3>Why Book With Us?</h3>
+          <!-- Short caption added below -->
+          <p style="margin:.1rem 0 .8rem;color:#214361;font-size:.92rem;opacity:.9"><em>(How we beat local taxi firms)</em></p>
+          <ul>
+            <li>Fleet of modern, comfortable vehicles</li>
+            <li>DBS-checked, professional drivers</li>
+            <li>Corporate travel &amp; business contracts welcomed</li>
+            <li>Family friendly – child &amp; booster seats on request</li>
+            <li>Flight tracking for delays</li>
+            <li>Fixed prices with no hidden fees</li>
+            <li>24/7 availability</li>
+            <li>Meet &amp; Greet in the terminal with name board (easier than rank taxis)</li>
+            <li>No surge pricing or meters — fixed airport fares day &amp; night</li>
+            <li>Pre-booked &amp; reliable — driver assigned in advance (not “as-available”)</li>
+            <li>Airport transfer specialists — faster routes &amp; smoother pickups</li>
+            <li>Digital receipts &amp; invoicing available for business travel</li>
+            <li>Larger vehicles &amp; luggage space, including 8-seat minibuses</li>
+          </ul>
+        </div>
+      </div>
       <div class="booking-right">
         <div class="card">
           <div style="text-align:center;margin-bottom:.6rem"></div>
@@ -147,7 +168,7 @@
             <div class="step active" data-step="0"><div class="bubble">1</div><div class="connector"></div><div class="label">Journey</div></div>
             <div class="step" data-step="1"><div class="bubble">2</div><div class="connector"></div><div class="label">Pickup</div></div>
             <div class="step" data-step="2"><div class="bubble">3</div><div class="connector"></div><div class="label">Dates</div></div>
-            <div class="step" data-step="3"><div class="bubble">4</div><div class="connector"></div><div class="label">Extras</div></div>
+            <div class="step" data-step="3"><div class="bubble">4</div><div class="label">Extras</div></div>
             <div class="step" data-step="4"><div class="bubble">5</div><div class="label">Confirm</div></div>
           </div>
           <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)</div>
@@ -343,7 +364,27 @@
     function show(el,on){if(!el)return;el.style.display=on?'block':'none'}
     function toggleReturn(){const isReturn=journeyEl.value==='return';show(returnDateWrap,isReturn);show(returnTimeWrap,isReturn);show(returnFlightWrap,isReturn);if(isReturn){returnFlightEl.setAttribute('required','required')}else{returnFlightEl.removeAttribute('required');returnFlightEl.value=''}updatePrice()}
     function toggleOneWayDirectionVisibility(){const isOneWay=journeyEl.value==='oneway';show(oneWayDirectionWrap,isOneWay);applyPickupDropoffMode()}
-    function applyPickupDropoffMode(){const jt=journeyEl.value;const dir=oneWayDirectionEl.value;if(jt==='oneway'&&dir==='from'){show(pickupAddressWrap,false);setRequired(pickupEl,false);show(pickupAirportWrap,true);setRequired(pickupAirportEl,true);show(dropoffGroup,false);setRequired(dropoffEl,false);show(dropoffAddressWrap,true);setRequired(dropoffAddressEl,true)}else if(jt==='oneway'&&dir==='to'){show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}else{show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);show(pickupAddressWrap,true);setRequired(pickupEl,true);show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);show(dropoffGroup,true);setRequired(dropoffEl,true)}updatePrice(); reevaluateOutOfArea();}
+    function applyPickupDropoffMode(){
+      const jt=journeyEl.value;const dir=oneWayDirectionEl.value;
+      if(jt==='oneway'&&dir==='from'){
+        show(pickupAddressWrap,false);setRequired(pickupEl,false);
+        show(pickupAirportWrap,true);setRequired(pickupAirportEl,true);
+        show(dropoffGroup,false);setRequired(dropoffEl,false);
+        show(dropoffAddressWrap,true);setRequired(dropoffAddressEl,true)
+      }else if(jt==='oneway'&&dir==='to'){
+        show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);
+        show(pickupAddressWrap,true);setRequired(pickupEl,true);
+        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
+        show(dropoffGroup,true);setRequired(dropoffEl,true)
+      }else{
+        /* FIXED: the malformed call here is corrected */
+        show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);
+        show(pickupAddressWrap,true);setRequired(pickupEl,true);
+        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
+        show(dropoffGroup,true);setRequired(dropoffEl,true)
+      }
+      updatePrice(); reevaluateOutOfArea();
+    }
     journeyEl.addEventListener('change',()=>{toggleReturn();toggleOneWayDirectionVisibility()});oneWayDirectionEl.addEventListener('change',applyPickupDropoffMode);
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
