@@ -364,32 +364,26 @@
     function show(el,on){if(!el)return;el.style.display=on?'block':'none'}
     function toggleReturn(){const isReturn=journeyEl.value==='return';show(returnDateWrap,isReturn);show(returnTimeWrap,isReturn);show(returnFlightWrap,isReturn);if(isReturn){returnFlightEl.setAttribute('required','required')}else{returnFlightEl.removeAttribute('required');returnFlightEl.value=''}updatePrice()}
     function toggleOneWayDirectionVisibility(){const isOneWay=journeyEl.value==='oneway';show(oneWayDirectionWrap,isOneWay);applyPickupDropoffMode()}
-   function applyPickupDropoffMode(){
-  const jt = journeyEl.value;
-  const dir = oneWayDirectionEl.value;
-
-  if (jt === 'oneway' && dir === 'from') {
-    show(pickupAddressWrap, false);  setRequired(pickupEl, false);
-    show(pickupAirportWrap, true);   setRequired(pickupAirportEl, true);
-    show(dropoffGroup, false);       setRequired(dropoffEl, false);
-    show(dropoffAddressWrap, true);  setRequired(dropoffAddressEl, true);
-  } else if (jt === 'oneway' && dir === 'to') {
-    show(pickupAirportWrap, false);  setRequired(pickupAirportEl, false);
-    show(pickupAddressWrap, true);   setRequired(pickupEl, true);
-    show(dropoffAddressWrap, false); setRequired(dropoffAddressEl, false);
-    show(dropoffGroup, true);        setRequired(dropoffEl, true);
-  } else {
-    // Return journeys (airport selector + normal address)
-    show(pickupAirportWrap, false);  setRequired(pickupAirportEl, false);
-    show(pickupAddressWrap, true);   setRequired(pickupEl, true);
-    show(dropoffAddressWrap, false); setRequired(dropoffAddressEl, false);
-    show(dropoffGroup, true);        setRequired(dropoffEl, true);
-  }
-
-  updatePrice();
-  reevaluateOutOfArea();
-}
-
+    function applyPickupDropoffMode(){
+      const jt=journeyEl.value;const dir=oneWayDirectionEl.value;
+      if(jt==='oneway'&&dir==='from'){
+        show(pickupAddressWrap,false); setRequired(pickupEl,false);
+        show(pickupAirportWrap,true);  setRequired(pickupAirportEl,true);
+        show(dropoffGroup,false);      setRequired(dropoffEl,false);
+        show(dropoffAddressWrap,true); setRequired(dropoffAddressEl,true);
+      }else if(jt==='oneway'&&dir==='to'){
+        show(pickupAirportWrap,false); setRequired(pickupAirportEl,false);
+        show(pickupAddressWrap,true);  setRequired(pickupEl,true);
+        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
+        show(dropoffGroup,true);       setRequired(dropoffEl,true);
+      }else{
+        show(pickupAirportWrap,false); setRequired(pickupAirportEl,false);
+        show(pickupAddressWrap,true);  setRequired(pickupEl,true);
+        show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
+        show(dropoffGroup,true);       setRequired(dropoffEl,true);
+      }
+      updatePrice(); reevaluateOutOfArea();
+    }
     journeyEl.addEventListener('change',()=>{toggleReturn();toggleOneWayDirectionVisibility()});oneWayDirectionEl.addEventListener('change',applyPickupDropoffMode);
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
@@ -422,17 +416,11 @@
     }
 
     function buildReview(){
-      // Build a tidy DL list from all [data-summary-label]
       reviewList.innerHTML='';
       const addRow=(label,val)=>{ if(!val) return; const dt=document.createElement('dt'); const dd=document.createElement('dd'); dt.textContent=label; dd.textContent=val; dt.style.fontWeight='600'; dt.style.marginTop='8px'; dd.style.margin='2px 0 8px'; reviewList.appendChild(dt); reviewList.appendChild(dd); };
-      // custom mapping for pickup/dropoff depending on mode to show human text
       const jt=journeyEl.value, dir=oneWayDirectionEl.value;
-      const pickupText = (jt==='oneway'&&dir==='from')
-        ? (pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'')
-        : (pickupEl.value||'');
-      const dropText = (jt==='oneway'&&dir==='from')
-        ? (dropoffAddressEl.value||'')
-        : (dropoffEl.options[dropoffEl.selectedIndex]?.text||'');
+      const pickupText = (jt==='oneway'&&dir==='from') ? (pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'') : (pickupEl.value||'');
+      const dropText   = (jt==='oneway'&&dir==='from') ? (dropoffAddressEl.value||'') : (dropoffEl.options[dropoffEl.selectedIndex]?.text||'');
 
       addRow('Journey type', journeyEl.options[journeyEl.selectedIndex]?.text||'');
       if(jt==='oneway') addRow('One-way direction', oneWayDirectionEl.options[oneWayDirectionEl.selectedIndex]?.text||'');
@@ -464,7 +452,6 @@
       if(currentStep < steps.length-1){
         setStep(currentStep+1)
       }else{
-        // Final submit from review step; block if clearly out of area
         const inArea=reevaluateOutOfArea();
         if(inArea===false){
           banner.textContent="This postcode is outside Bolton/Wigan. Please call us to complete your booking: 07520 664 620.";
@@ -481,7 +468,7 @@
 
     function val(id){return(document.getElementById(id)?.value||'').trim()}
 
-    // UPDATED: email the booking via FormSubmit (no server needed)
+    // UPDATED: email the booking via FormSubmit
     async function submitBooking(){
       nextBtn.disabled=true;prevBtn.disabled=true;
       const jt=journeyEl.value;const dir=oneWayDirectionEl.value;
@@ -524,9 +511,16 @@
         const data=await res.json();
         if(data?.success!=="true") throw new Error("Email service did not confirm success");
 
-        banner.textContent="✅ Thank you for submitting your booking. We’ll confirm by SMS or WhatsApp shortly.";
+        banner.innerHTML = "<strong>✅ Booking submitted successfully!</strong><br/>Thank you for your request. One of our team will contact you shortly to confirm your booking details.";
         banner.className="banner success";banner.style.display="block";
-        document.getElementById("bookingForm").reset();grecaptcha.reset();setStep(0);toggleReturn();toggleOneWayDirectionVisibility();applyPickupDropoffMode();updatePrice();
+
+        document.getElementById("bookingForm").reset();
+        grecaptcha.reset();
+        setStep(0);toggleReturn();toggleOneWayDirectionVisibility();applyPickupDropoffMode();updatePrice();
+
+        // show thank-you overlay
+        const overlay=document.getElementById("thankYouOverlay");
+        if(overlay){ overlay.style.display="flex"; }
       }catch(err){
         console.error("Submission error:",err);
         banner.textContent="❌ Sorry, we couldn’t send your booking just now. Please try again or call us.";
@@ -547,38 +541,71 @@
     });
   </script>
   <!-- Desktop number reveal for "Call Us" -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
-  const callLink = document.getElementById('callUsLink');
-  const header = document.querySelector('header');
-  let banner;
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    const callLink = document.getElementById('callUsLink');
+    const header = document.querySelector('header');
+    let bannerEl;
 
-  if (!isMobile && callLink) {
-    // Desktop: show phone number below header instead of opening dialer
-    callLink.removeAttribute('href');
-    callLink.style.cursor = 'pointer';
-    callLink.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (!banner) {
-        banner = document.createElement('div');
-        banner.textContent = '📞 07520 664 620';
-        banner.style.background = '#1E90FF';
-        banner.style.color = '#fff';
-        banner.style.fontWeight = '700';
-        banner.style.padding = '0.9rem 1.2rem';
-        banner.style.textAlign = 'center';
-        banner.style.fontSize = '1.1rem';
-        banner.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-        header.insertAdjacentElement('afterend', banner);
-      }
-      banner.style.display = banner.style.display === 'block' ? 'none' : 'block';
-    });
-  } else if (callLink) {
-    // Mobile: normal tel: behaviour
-    callLink.setAttribute('href', 'tel:+447520664620');
-  }
-});
-</script>
+    if (!isMobile && callLink) {
+      callLink.removeAttribute('href');
+      callLink.style.cursor = 'pointer';
+      callLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!bannerEl) {
+          bannerEl = document.createElement('div');
+          bannerEl.textContent = '📞 07520 664 620';
+          bannerEl.style.background = '#1E90FF';
+          bannerEl.style.color = '#fff';
+          bannerEl.style.fontWeight = '700';
+          bannerEl.style.padding = '0.9rem 1.2rem';
+          bannerEl.style.textAlign = 'center';
+          bannerEl.style.fontSize = '1.1rem';
+          bannerEl.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+          header.insertAdjacentElement('afterend', bannerEl);
+        }
+        bannerEl.style.display = bannerEl.style.display === 'block' ? 'none' : 'block';
+      });
+    } else if (callLink) {
+      callLink.setAttribute('href', 'tel:+447520664620');
+    }
+
+    // close overlay handler
+    const closeBtn = document.getElementById('closeOverlayBtn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const ov = document.getElementById('thankYouOverlay');
+        if (ov) ov.style.display = 'none';
+      });
+    }
+  });
+  </script>
+
+  <!-- THANK-YOU OVERLAY (added) -->
+  <div id="thankYouOverlay" role="dialog" aria-modal="true" aria-labelledby="tyTitle" style="
+    display:none; position:fixed; inset:0; z-index:3000;
+    background:rgba(10,34,57,0.85);
+    align-items:center; justify-content:center;
+    padding:3rem 1rem;
+  ">
+    <div style="
+      background:#fff; color:#0A2239;
+      padding:2rem 2.2rem; border-radius:14px;
+      max-width:520px; width:100%;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25); text-align:center;
+    ">
+      <h2 id="tyTitle" style="margin-top:0;">✅ Booking Submitted</h2>
+      <p style="margin:0 0 1rem;">
+        Thank you for your request.<br/>
+        We’ll contact you shortly to confirm your booking details.
+      </p>
+      <button id="closeOverlayBtn" style="
+        background:#1E90FF; color:#fff; border:none;
+        padding:.85rem 1.2rem; border-radius:10px;
+        font-weight:700; cursor:pointer;
+      ">Close</button>
+    </div>
+  </div>
 </body>
 </html>
