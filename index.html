@@ -269,10 +269,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Out-of-area banner appears if postcode not BL/WN -->
                 <div class="full">
                   <div id="outOfAreaNotice" class="banner error" role="alert" aria-live="polite" style="display:none">
-                    <strong>Outside our standard area.</strong>
+                    <strong>Pickup outside Bolton / Wigan.</strong>
                     Please call us to book: <a href="tel:+447520664620">07520&nbsp;664&nbsp;620</a>
                   </div>
                 </div>
+
+                <!-- NEW: Other-airport banner (for non MAN / LPL / LHR) -->
+                <div class="full">
+                  <div id="otherAirportNotice" class="banner error" role="alert" aria-live="polite" style="display:none">
+                    <strong>Airport not supported in online booking.</strong>
+                    Please call us to book: <a href="tel:+447520664620">07520&nbsp;664&nbsp;620</a>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -487,6 +496,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const reviewList=document.getElementById('reviewList');
     const reviewPrice=document.getElementById('reviewPrice');
     const outNotice=document.getElementById('outOfAreaNotice');
+    const otherAirportNotice=document.getElementById('otherAirportNotice');
 
     function setStep(i){
       currentStep=i;
@@ -532,9 +542,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     journeyEl.addEventListener('change',()=>{toggleReturn();toggleOneWayDirectionVisibility()});oneWayDirectionEl.addEventListener('change',applyPickupDropoffMode);
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
-    function calculatePrice(){const jt=journeyEl.value;const dir=oneWayDirectionEl.value;const pax=passengersEl.value;let townSource=pickupEl.value;if(jt==='oneway'&&dir==='from'){townSource=dropoffAddressEl.value}const town=detectTown(townSource);let ap=dropoffEl.value;if(jt==='oneway'&&dir==='from'){ap=pickupAirportEl.value||ap}if(!town||!ap||!jt||!pax)return null;let price=baseOneWay(pax);if(town==='wigan')price+=5;if(ap==='liverpool')price+=10;if(jt==='return')price*=2;return Math.round(price)}
-    function updatePrice(){const price=calculatePrice();if(price!=null){priceBox.innerHTML="<strong>Estimated Price:</strong> £"+price;priceBox.style.display='block'}else{priceBox.innerHTML="<strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)";priceBox.style.display='block'}}
-    [passengersEl,pickupEl,pickupAirportEl,dropoffEl,dropoffAddressEl].forEach(el=>{el&&el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>{updatePrice(); if(el===pickupEl||el===dropoffAddressEl) reevaluateOutOfArea();})});
+
+    // UPDATED: calculatePrice with Heathrow + CALL handling
+    function calculatePrice(){
+      const jt=journeyEl.value;
+      const dir=oneWayDirectionEl.value;
+      const pax=passengersEl.value;
+
+      let townSource=pickupEl.value;
+      if(jt==='oneway'&&dir==='from'){townSource=dropoffAddressEl.value}
+      const town=detectTown(townSource);
+
+      let ap=dropoffEl.value;
+      if(jt==='oneway'&&dir==='from'){ap=pickupAirportEl.value||ap}
+
+      if(!town||!ap||!jt||!pax)return null;
+
+      // Heathrow fixed pricing: £400 single, £600 return
+      if(ap==='heathrow'){
+        return (jt==='return') ? 600 : 400;
+      }
+
+      // For all airports except MAN / LPL / LHR → call us
+      if(!['manchester','liverpool'].includes(ap)){
+        return "CALL";
+      }
+
+      // Existing MAN/LPL pricing
+      let price=baseOneWay(pax);
+      if(town==='wigan')price+=5;
+      if(ap==='liverpool')price+=10;
+      if(jt==='return')price*=2;
+      return Math.round(price);
+    }
 
     // NEW: UK postcode -> BL/WN check pulled from whichever address field applies
     const UK_PC_REGEX=/\b([A-Z]{1,2}\d[A-Z\d]?[\s]?\d[A-Z]{2})\b/i;
@@ -548,6 +588,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(flag===false){ outNotice.style.display='block'; } else { outNotice.style.display='none'; }
       return flag; // true=in area, false=out, null=unknown
     }
+
+    // NEW: check for unsupported airports (anything not MAN/LPL/LHR)
+    function checkUnsupportedAirport(){
+      let ap=dropoffEl.value;
+      const jt=journeyEl.value;
+      const dir=oneWayDirectionEl.value;
+      if(jt==='oneway' && dir==='from'){
+        ap=pickupAirportEl.value || ap;
+      }
+      if(!ap){
+        if(otherAirportNotice) otherAirportNotice.style.display='none';
+        return true;
+      }
+      const supported=['manchester','liverpool','heathrow'];
+      const isSupported=supported.includes(ap);
+      if(!isSupported){
+        if(otherAirportNotice) otherAirportNotice.style.display='block';
+      }else{
+        if(otherAirportNotice) otherAirportNotice.style.display='none';
+      }
+      return isSupported;
+    }
+
+    // UPDATED: updatePrice now handles CALL + Heathrow + unsupported message
+    function updatePrice(){
+      const result=calculatePrice();
+
+      if(result==="CALL"){
+        priceBox.innerHTML="<strong>Estimated Price:</strong> Please call us for a quote.";
+        priceBox.style.display='block';
+      }else if(result!=null){
+        priceBox.innerHTML="<strong>Estimated Price:</strong> £"+result;
+        priceBox.style.display='block';
+      }else{
+        priceBox.innerHTML="<strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool/Heathrow Airport dropoff)";
+        priceBox.style.display='block';
+      }
+
+      checkUnsupportedAirport();
+    }
+
+    [passengersEl,pickupEl,pickupAirportEl,dropoffEl,dropoffAddressEl].forEach(el=>{el&&el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>{updatePrice(); if(el===pickupEl||el===dropoffAddressEl) reevaluateOutOfArea();})});
 
     function stepValid(){
       const req=steps[currentStep].querySelectorAll('[required]');
@@ -592,7 +674,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       addRow('Phone', document.getElementById('phone').value);
 
       const p=calculatePrice();
-      reviewPrice.textContent = (p!=null) ? ('£'+p) : '—';
+      reviewPrice.textContent = (p!=null && p!=="CALL") ? ('£'+p) : '—';
     }
 
     const next=async()=>{
@@ -603,7 +685,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(currentStep < steps.length-1){
         setStep(currentStep+1)
       }else{
-        // Final submit from review step; block if clearly out of area
+        // Final submit from review step; block if unsupported airport
+        const airportOk=checkUnsupportedAirport();
+        if(!airportOk){
+          banner.textContent="We can’t quote online for this airport. Please call 07520 664 620 to get a price and complete your booking.";
+          banner.className='banner error';banner.style.display='block';
+          return;
+        }
+        // Block if clearly out of area
         const inArea=reevaluateOutOfArea();
         if(inArea===false){
           banner.textContent="This postcode is outside Bolton/Wigan. Please call us to complete your booking: 07520 664 620.";
