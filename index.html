@@ -8,6 +8,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KH7XMF22');</script>
 <!-- End Google Tag Manager -->
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6XPMET8VP"></script>
 <script>
@@ -16,6 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtag('js', new Date());
  gtag('config', 'G-L6XPMET8VP');
 </script>
+
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Northwest Airport Transfers | Bolton & Wigan Taxis to Manchester & Liverpool Airports</title>
   <meta name="description" content="Reliable Bolton & Wigan airport transfers to Manchester (MAN) & Liverpool (LPL). Fixed prices, DBS-checked drivers, modern vehicles, corporate travel, child & booster seats."/>
@@ -30,16 +32,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:url" content="https://northwest-airport-transfers.co.uk/"/>
   <meta property="og:image" content="https://northwest-airport-transfers.co.uk/mercedes-minibus.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
-
-  <!-- === [ADD] Google Tag Manager (place before any other <script>) === -->
-  <!-- Replace GTM-XXXXXXX with your container ID -->
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true;
-    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KH7XMF22');
-  </script>
-  <!-- === [/ADD GTM] === -->
 
   <script type="application/ld+json">{
     "@context":"https://schema.org",
@@ -164,9 +156,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH7XMF22"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-  <!-- === [ADD] Google Tag Manager (noscript) – first thing inside <body> === -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-G-L6XPMET8VP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- === [/ADD GTM noscript] === -->
+
  <header><img src="A_logo_for_Northwest_Airport_Transfers.png" alt="Northwest Airport Transfers Logo"/><nav><a href="#booking">Book Transfer</a><a href="#about">About Us</a><a href="#services">Our Services</a><a href="#corporate">Corporate Travel</a><a href="#vehicles">Modern Vehicles</a><a href="#gallery">Fleet Gallery</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="tel:+447520664620" id="callUsLink">Call Us</a></nav></header>
   <div class="hero"><h1>Bolton & Wigan Airport Transfers</h1><p>Trusted • Reliable • Professional • Fixed Prices</p></div>
   <section id="booking">
@@ -206,6 +196,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)</div>
 
+          <!-- Step 6: Heathrow blurb near the booking form -->
+          <p id="heathrowNote" style="margin-top:0.4rem;font-size:0.9rem;color:#214361;">
+            Heathrow transfers from Bolton &amp; Wigan from <strong>£400 one way</strong> or <strong>£600 return</strong>. Prices include motorway tolls and airport drop-off charges.
+          </p>
+
           <form id="bookingForm" novalidate>
             <!-- === [ADD] Hidden session_id field to stitch client & server events === -->
             <input type="hidden" id="sid" name="session_id" value="">
@@ -243,10 +238,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <label for="pickupAirport">Pickup (Airport)</label>
                   <select id="pickupAirport" name="pickupAirport" data-summary-label="Pickup airport">
                     <option value="">-- Select airport --</option>
+                    <option disabled>────────── Online pricing available ──────────</option>
                     <option value="manchester">Manchester Airport (MAN)</option>
                     <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
-                    <option disabled>──────────</option>
-                    <option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option>
+                    <option value="heathrow">London Heathrow Airport (LHR)</option>
+                    <option disabled>────────── Other airports – please call ───────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ) – call for quote</option>
+                    <option value="birmingham">Birmingham Airport (BHX) – call for quote</option>
+                    <option value="bristol">Bristol Airport (BRS) – call for quote</option>
+                    <option value="cardiff">Cardiff Airport (CWL) – call for quote</option>
+                    <option value="east">East Midlands Airport (EMA) – call for quote</option>
+                    <option value="edinburgh">Edinburgh Airport (EDI) – call for quote</option>
+                    <option value="glasgow">Glasgow Airport (GLA) – call for quote</option>
+                    <option value="leeds">Leeds Bradford Airport (LBA) – call for quote</option>
+                    <option value="londoncity">London City Airport (LCY) – call for quote</option>
+                    <option value="gatwick">London Gatwick Airport (LGW) – call for quote</option>
+                    <option value="luton">London Luton Airport (LTN) – call for quote</option>
+                    <option value="stansted">London Stansted Airport (STN) – call for quote</option>
+                    <option value="newcastle">Newcastle Airport (NCL) – call for quote</option>
+                    <option value="southampton">Southampton Airport (SOU) – call for quote</option>
                   </select>
                 </div>
 
@@ -254,10 +264,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <label for="dropoff">Dropoff (Airport)</label>
                   <select id="dropoff" name="dropoff" data-summary-label="Dropoff airport">
                     <option value="">-- Select airport --</option>
+                    <option disabled>────────── Online pricing available ──────────</option>
                     <option value="manchester">Manchester Airport (MAN)</option>
                     <option value="liverpool">Liverpool John Lennon Airport (LPL)</option>
-                    <option disabled>──────────</option>
-                    <option value="aberdeen">Aberdeen Airport (ABZ)</option><option value="birmingham">Birmingham Airport (BHX)</option><option value="bristol">Bristol Airport (BRS)</option><option value="cardiff">Cardiff Airport (CWL)</option><option value="east">East Midlands Airport (EMA)</option><option value="edinburgh">Edinburgh Airport (EDI)</option><option value="glasgow">Glasgow Airport (GLA)</option><option value="leeds">Leeds Bradford Airport (LBA)</option><option value="londoncity">London City Airport (LCY)</option><option value="gatwick">London Gatwick Airport (LGW)</option><option value="heathrow">London Heathrow Airport (LHR)</option><option value="luton">London Luton Airport (LTN)</option><option value="stansted">London Stansted Airport (STN)</option><option value="newcastle">Newcastle Airport (NCL)</option><option value="southampton">Southampton Airport (SOU)</option>
+                    <option value="heathrow">London Heathrow Airport (LHR)</option>
+                    <option disabled>────────── Other airports – please call ───────</option>
+                    <option value="aberdeen">Aberdeen Airport (ABZ) – call for quote</option>
+                    <option value="birmingham">Birmingham Airport (BHX) – call for quote</option>
+                    <option value="bristol">Bristol Airport (BRS) – call for quote</option>
+                    <option value="cardiff">Cardiff Airport (CWL) – call for quote</option>
+                    <option value="east">East Midlands Airport (EMA) – call for quote</option>
+                    <option value="edinburgh">Edinburgh Airport (EDI) – call for quote</option>
+                    <option value="glasgow">Glasgow Airport (GLA) – call for quote</option>
+                    <option value="leeds">Leeds Bradford Airport (LBA) – call for quote</option>
+                    <option value="londoncity">London City Airport (LCY) – call for quote</option>
+                    <option value="gatwick">London Gatwick Airport (LGW) – call for quote</option>
+                    <option value="luton">London Luton Airport (LTN) – call for quote</option>
+                    <option value="stansted">London Stansted Airport (STN) – call for quote</option>
+                    <option value="newcastle">Newcastle Airport (NCL) – call for quote</option>
+                    <option value="southampton">Southampton Airport (SOU) – call for quote</option>
                   </select>
                 </div>
 
@@ -270,15 +295,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="full">
                   <div id="outOfAreaNotice" class="banner error" role="alert" aria-live="polite" style="display:none">
                     <strong>Pickup outside Bolton / Wigan.</strong>
-                    Please call us to book: <a href="tel:+447520664620">07520&nbsp;664&nbsp;620</a>
+                    We can’t quote this journey online. Please call 07520 664 620 and we’ll confirm your price and availability.
                   </div>
                 </div>
 
-                <!-- NEW: Other-airport banner (for non MAN / LPL / LHR) -->
+                <!-- Other-airport banner (for non MAN / LPL / LHR) -->
                 <div class="full">
                   <div id="otherAirportNotice" class="banner error" role="alert" aria-live="polite" style="display:none">
                     <strong>Airport not supported in online booking.</strong>
-                    Please call us to book: <a href="tel:+447520664620">07520&nbsp;664&nbsp;620</a>
+                    We can’t quote this journey online for this airport. Please call 07520 664 620 and we’ll confirm your price and availability.
                   </div>
                 </div>
 
@@ -316,7 +341,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
 
-            <!-- NEW: Review & Confirm step (shown before final submit) -->
+            <!-- Review & Confirm step -->
             <div class="form-step" data-step="5" id="step-review">
               <div class="form-grid">
                 <div class="full">
@@ -373,15 +398,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="phoneNumberReveal">07520&nbsp;664&nbsp;620</div>
   </div>
 
-  <!-- === [ADD] Analytics helper (wires your UI → dataLayer events for GTM/GA4) === -->
+  <!-- Analytics helper (GA4 via GTM) -->
   <script>
-  /* ==== NWAT Analytics Wiring (GA4 via GTM) ==== */
   window.dataLayer = window.dataLayer || [];
   (function initSession(){
     if (!sessionStorage.getItem('nwat_sid')) {
       sessionStorage.setItem('nwat_sid', Math.random().toString(36).slice(2) + Date.now().toString(36));
     }
-    // populate hidden field if present
     var sidEl = document.getElementById('sid'); if (sidEl) sidEl.value = sessionStorage.getItem('nwat_sid');
   })();
   function sid(){ return sessionStorage.getItem('nwat_sid'); }
@@ -389,7 +412,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.dataLayer.push(Object.assign({ event: name, session_id: sid() }, params||{}));
   }
 
-  // page context
   track('page_context', { path: location.pathname + location.hash, title: document.title });
 
   document.addEventListener('DOMContentLoaded', function(){
@@ -401,7 +423,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const callHeaderLink = document.getElementById('callUsLink');
     const floatCall = document.getElementById('floatCall');
 
-    // price_shown (observe changes to priceBox)
     let lastPriceSent = null;
     const priceObserver = new MutationObserver(() => {
       const txt = (priceBox && priceBox.textContent) || '';
@@ -426,7 +447,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
     if (priceBox) priceObserver.observe(priceBox, { childList:true, subtree:true });
 
-    // step events
     function currentStepIndex(){
       const steps = Array.from(document.querySelectorAll('.form-step'));
       return steps.findIndex(s => s.classList.contains('active'));
@@ -438,7 +458,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (nextBtn) nextBtn.addEventListener('click', () => { setTimeout(sendStepEvent, 200); track('booking_continue_click', {}); });
     if (prevBtn) prevBtn.addEventListener('click', () => { setTimeout(sendStepEvent, 200); track('booking_back_click', {}); });
 
-    // intercept fetch for booking_submit (Apps Script endpoint)
     const origFetch = window.fetch;
     window.fetch = async function(input, init){
       const isBookingPost = typeof input === 'string' && input.includes('/macros/s/');
@@ -461,12 +480,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return origFetch(input, init);
     };
 
-    // micro-conversions
     if (waBtn) waBtn.addEventListener('click', () => track('contact_click', { medium: 'whatsapp', location: 'floating_button' }));
     if (floatCall) floatCall.addEventListener('click', () => track('contact_click', { medium: 'phone', location: 'floating_button' }));
     if (callHeaderLink) callHeaderLink.addEventListener('click', () => track('contact_click', { medium: 'phone', location: 'header' }));
 
-    // out-of-area notice
     const outBanner = document.getElementById('outOfAreaNotice');
     if (outBanner) {
       const obs = new MutationObserver(() => {
@@ -475,9 +492,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
       obs.observe(outBanner, { attributes:true, attributeFilter:['style'] });
     }
+
+    // Step 4: analytics for other-airport banner
+    const otherAirportBanner = document.getElementById('otherAirportNotice');
+    if (otherAirportBanner) {
+      const obs2 = new MutationObserver(() => {
+        const visible = otherAirportBanner.style.display !== 'none';
+        if (visible) track('other_airport_notice_shown', {});
+      });
+      obs2.observe(otherAirportBanner, { attributes:true, attributeFilter:['style'] });
+    }
   });
   </script>
-  <!-- === [/ADD Analytics helper] === -->
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIVJYCGVnJ35KCUtQt7GeINx8CaaB8x6o&libraries=places" async defer></script>
@@ -492,7 +518,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const returnDateWrap=document.getElementById('returnDateWrap');const returnTimeWrap=document.getElementById('returnTimeWrap');const returnFlightWrap=document.getElementById('returnFlightWrap');const returnFlightEl=document.getElementById('returnFlight');
     const priceBox=document.getElementById('priceBox');let currentStep=0;
 
-    // NEW: review + out-of-area refs
     const reviewList=document.getElementById('reviewList');
     const reviewPrice=document.getElementById('reviewPrice');
     const outNotice=document.getElementById('outOfAreaNotice');
@@ -501,7 +526,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function setStep(i){
       currentStep=i;
       steps.forEach((s,idx)=>s.classList.toggle('active',idx===i));
-      // Clamp markers so the last bubble stays active on the review step
       const activeIdx = Math.min(i, markers.length-1);
       markers.forEach((m,idx)=>{
         m.classList.toggle('active', idx===activeIdx);
@@ -510,7 +534,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       prevBtn.disabled=(i===0);
       nextBtn.textContent=(i===steps.length-1)?'Submit Booking':'Next';
       banner.style.display='none';
-      // Build review when entering final step
       if(i===steps.length-1){ buildReview(); reevaluateOutOfArea(); }
       window.scrollTo({top:document.getElementById('booking').offsetTop-20,behavior:'smooth'})
     }
@@ -531,7 +554,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
         show(dropoffGroup,true);setRequired(dropoffEl,true)
       }else{
-        /* FIXED: the malformed call here is corrected */
         show(pickupAirportWrap,false);setRequired(pickupAirportEl,false);
         show(pickupAddressWrap,true);setRequired(pickupEl,true);
         show(dropoffAddressWrap,false);setRequired(dropoffAddressEl,false);
@@ -543,7 +565,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function normalise(s){return(s||'').toLowerCase()}function detectTown(pickup){const p=normalise(pickup);if(p.includes('wigan'))return 'wigan';if(p.includes('bolton'))return 'bolton';return null}
     function baseOneWay(pax){const n=(pax==='4+')?4:parseInt(pax||'1',10);if(n<=2)return 40;if(n===3)return 45;return 60}
 
-    // UPDATED: calculatePrice with Heathrow + CALL handling
+    // Heathrow + CALL logic
     function calculatePrice(){
       const jt=journeyEl.value;
       const dir=oneWayDirectionEl.value;
@@ -558,17 +580,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       if(!town||!ap||!jt||!pax)return null;
 
-      // Heathrow fixed pricing: £400 single, £600 return
       if(ap==='heathrow'){
         return (jt==='return') ? 600 : 400;
       }
 
-      // For all airports except MAN / LPL / LHR → call us
       if(!['manchester','liverpool'].includes(ap)){
         return "CALL";
       }
 
-      // Existing MAN/LPL pricing
       let price=baseOneWay(pax);
       if(town==='wigan')price+=5;
       if(ap==='liverpool')price+=10;
@@ -576,7 +595,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return Math.round(price);
     }
 
-    // NEW: UK postcode -> BL/WN check pulled from whichever address field applies
     const UK_PC_REGEX=/\b([A-Z]{1,2}\d[A-Z\d]?[\s]?\d[A-Z]{2})\b/i;
     function extractPostcode(text){if(!text) return null; const m=String(text).toUpperCase().match(UK_PC_REGEX); return m?m[1].replace(/\s+/,' ').trim():null;}
     function postcodeArea(pc){ if(!pc) return null; const m=pc.match(/^([A-Z]{1,2})/); return m?m[1]:null; }
@@ -586,10 +604,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const txt=currentAddressText();
       const flag=isInBoltonWiganByText(txt);
       if(flag===false){ outNotice.style.display='block'; } else { outNotice.style.display='none'; }
-      return flag; // true=in area, false=out, null=unknown
+      return flag;
     }
 
-    // NEW: check for unsupported airports (anything not MAN/LPL/LHR)
     function checkUnsupportedAirport(){
       let ap=dropoffEl.value;
       const jt=journeyEl.value;
@@ -611,7 +628,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return isSupported;
     }
 
-    // UPDATED: updatePrice now handles CALL + Heathrow + unsupported message
     function updatePrice(){
       const result=calculatePrice();
 
@@ -643,10 +659,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     function buildReview(){
-      // Build a tidy DL list from all [data-summary-label]
       reviewList.innerHTML='';
       const addRow=(label,val)=>{ if(!val) return; const dt=document.createElement('dt'); const dd=document.createElement('dd'); dt.textContent=label; dd.textContent=val; dt.style.fontWeight='600'; dt.style.marginTop='8px'; dd.style.margin='2px 0 8px'; reviewList.appendChild(dt); reviewList.appendChild(dd); };
-      // custom mapping for pickup/dropoff depending on mode to show human text
       const jt=journeyEl.value, dir=oneWayDirectionEl.value;
       const pickupText = (jt==='oneway'&&dir==='from')
         ? (pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'')
@@ -677,26 +691,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       reviewPrice.textContent = (p!=null && p!=="CALL") ? ('£'+p) : '—';
     }
 
+    // Step 3: helper to show error + scroll into view
+    function showError(message){
+      banner.textContent = message;
+      banner.className = 'banner error';
+      banner.style.display = 'block';
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     const next=async()=>{
       if(!stepValid()){
-        banner.textContent=(currentStep===4&&grecaptcha.getResponse()==="")?"Please complete the reCAPTCHA.":"Please complete the required fields on this step.";
-        banner.className='banner error';banner.style.display='block';return
+        const msg = (currentStep===4&&grecaptcha.getResponse()==="")
+          ? "Please complete the reCAPTCHA."
+          : "Please complete the required fields on this step.";
+        showError(msg);
+        return;
       }
       if(currentStep < steps.length-1){
         setStep(currentStep+1)
       }else{
-        // Final submit from review step; block if unsupported airport
         const airportOk=checkUnsupportedAirport();
         if(!airportOk){
-          banner.textContent="We can’t quote online for this airport. Please call 07520 664 620 to get a price and complete your booking.";
-          banner.className='banner error';banner.style.display='block';
+          showError("We can’t quote this journey online for this airport. Please call 07520 664 620 and we’ll confirm your price and availability.");
           return;
         }
-        // Block if clearly out of area
         const inArea=reevaluateOutOfArea();
         if(inArea===false){
-          banner.textContent="This postcode is outside Bolton/Wigan. Please call us to complete your booking: 07520 664 620.";
-          banner.className='banner error';banner.style.display='block';
+          showError("This pickup is outside Bolton/Wigan. We can’t quote this journey online. Please call 07520 664 620 and we’ll confirm your price and availability.");
           return;
         }
         await submitBooking()
@@ -715,18 +736,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const pickupText=(jt==='oneway'&&dir==='from')?(pickupAirportEl.options[pickupAirportEl.selectedIndex]?.text||'').trim():val('pickup');
       const formData=new FormData();
       formData.append("name",val("name"));formData.append("phone",val("phone"));formData.append("journeyType",jt);formData.append("oneWayDirection",dir);formData.append("passengers",passengersEl.value);formData.append("pickup",pickupText);formData.append("dropoff",dropText);formData.append("pickupDate",val("pickupDate"));formData.append("pickupTime",val("pickupTime"));formData.append("returnDate",val("returnDate"));formData.append("returnTime",val("returnTime"));formData.append("returnFlight",val("returnFlight"));formData.append("childSeat",document.getElementById("childSeat").checked?"Yes":"No");formData.append("boosterSeat",document.getElementById("boosterSeat").checked?"Yes":"No");formData.append("notes",val("notes"));formData.append("recaptchaToken",grecaptcha.getResponse());formData.append("quotedPrice",calculatePrice());
-      // also send session_id for server-side stitching
       formData.append("session_id", sessionStorage.getItem('nwat_sid') || '');
 
       try{
-        await fetch("https://script.google.com/macros/s/AKfycbwiw0Q67JWvbdEFkcGbdxiBxJq9kiMc7_oxBr2LSq45qN6cngm5_iga0oq6EMlygW3u5Q/exec",{method:"POST",mode:"no-cors",body:formData});
+        await fetch(GAS_URL,{method:"POST",mode:"no-cors",body:formData});
         banner.textContent="✅ Thank you for submitting your booking. Once your booking is confirmed, you’ll receive an SMS or WhatsApp message.";
         banner.className="banner success";banner.style.display="block";
         document.getElementById("bookingForm").reset();grecaptcha.reset();setStep(0);toggleReturn();toggleOneWayDirectionVisibility();applyPickupDropoffMode();updatePrice();
       }catch(err){
         console.error("Submission error:",err);
-        banner.textContent="❌ Sorry, something went wrong sending your booking. Please try again or call us.";
-        banner.className="banner error";banner.style.display="block";
+        showError("❌ Sorry, something went wrong sending your booking. Please try again or call 07520 664 620.");
       }finally{nextBtn.disabled=false;prevBtn.disabled=false}
     }
     document.getElementById('callUsLink').setAttribute('href','tel:+447520664620');
@@ -751,7 +770,6 @@ document.addEventListener('DOMContentLoaded', function () {
   let banner;
 
   if (!isMobile && callLink) {
-    // Desktop: show phone number below header instead of opening dialer
     callLink.removeAttribute('href');
     callLink.style.cursor = 'pointer';
     callLink.addEventListener('click', function (e) {
@@ -771,7 +789,6 @@ document.addEventListener('DOMContentLoaded', function () {
       banner.style.display = banner.style.display === 'block' ? 'none' : 'block';
     });
   } else if (callLink) {
-    // Mobile: normal tel: behaviour
     callLink.setAttribute('href', 'tel:+447520664620');
   }
 });
