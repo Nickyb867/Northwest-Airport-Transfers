@@ -172,12 +172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="step" data-step="3"><div class="bubble">4</div><div class="label">Extras</div></div>
             <div class="step" data-step="4"><div class="bubble">5</div><div class="label">Confirm</div></div>
           </div>
-          <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool Airport dropoff)</div>
-
-          <!-- Step 6: Heathrow blurb near the booking form -->
-          <p id="heathrowNote" style="margin-top:0.4rem;font-size:0.9rem;color:#214361;">
-            Heathrow transfers from Bolton &amp; Wigan from <strong>£400 one way</strong> or <strong>£600 return</strong>. Prices include motorway tolls and airport drop-off charges.
-          </p>
+          <div id="priceBox" class="price-box" aria-live="polite"><strong>Estimated Price:</strong> —</div>
 
           <form id="bookingForm" novalidate>
             <!-- === [ADD] Hidden session_id field to stitch client & server events === -->
@@ -640,7 +635,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         priceBox.innerHTML="<strong>Estimated Price:</strong> £"+result;
         priceBox.style.display='block';
       }else{
-        priceBox.innerHTML="<strong>Estimated Price:</strong> — (enter a Bolton/Wigan pickup and Manchester/Liverpool/Heathrow Airport dropoff)";
+        priceBox.innerHTML="<strong>Estimated Price:</strong> —";
         priceBox.style.display='block';
       }
 
